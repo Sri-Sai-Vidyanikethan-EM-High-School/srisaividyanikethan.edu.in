@@ -1,244 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sri Sai Vidyanikethan EM High School</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
-            color: #333;
-            transition: background-color 0.3s, color 0.3s;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            justify-content: space-between; /* Push content and footer apart */
-            text-align: center;
-        }
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="carousel.css" />
+    <link rel="icon" type="image/x-icon" href="SSVN_Logo.png" />
+    <!-- <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="SSVN" />
+    <link rel="manifest" href="/site.webmanifest" /> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://storage.googleapis.com/feednami-static/js/feednami-client-v1.0.1.js"></script>
+  </head>
 
-        body.dark-mode {
-            background-color: #121212;
-            color: #eee;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-grow: 1;
-            justify-content: center;
-        }
-
-        .header-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .logo {
-            width: 150px;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            margin-bottom: 10px;
-        }
-
-        p {
-            margin-bottom: 0;
-        }
-
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 30px;
-            width: 100%;
-        }
-
-        .button {
-            display: block;
-            width: 100%;
-            padding: 15px 20px;
-            margin-bottom: 15px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
-            box-sizing: border-box;
-            transition: background-color 0.3s ease;
-        }
-
-        .button:hover {
-            background-color: #45a049;
-        }
-
-        .toggle-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-        }
-
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #2196F3;
-        }
-
-        input:focus + .slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
-
-        input:checked + .slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-        }
-
-        .slider.round {
-            border-radius: 34px;
-        }
-
-        .slider.round:before {
-            border-radius: 50%;
-        }
-
-        .social-icons {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding-bottom: 20px;
-        }
-
-        .social-icon {
-            color: #333;
-            font-size: 24px;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .social-icon:hover {
-            color: #007bff;
-        }
-
-        .social-icon.dark-mode {
-            color: #eee;
-        }
-
-        .social-icon:hover.dark-mode {
-            color: #007bff;
-        }
-
-        /* Styles for larger screens */
-        @media (min-width: 600px) {
-            .container {
-                max-width: 800px;
-            }
-
-            .button {
-                width: 400px;
-                margin-right: auto;
-                margin-left: auto;
-            }
-
-            .button-group {
-                width: auto;
-            }
-        }
-
-        /* Responsive adjustments for taller screens */
-        @media (min-height: 800px) {
-            .container {
-                justify-content: space-evenly;
-            }
-        }
-    </style>
-</head>
-<body>
+  <body class="">
+    <header class="header">
+      <div class="header-content">
+        <i
+          class="fas fa-map-marker-alt"
+          style="margin-right: 5px; margin-left: 5px"
+        ></i>
+        <a href="https://maps.app.goo.gl/MsZDZmqnbsYUYasp7" target="_blank">
+          2-59 Pothapi Rd, Adapur, Nandalur, Andhra Pradesh 516150
+        </a>
+      </div>
+    </header>
     <div class="container">
-        <div class="header-group">
-            <img src="SSVN_Logo.png" alt="Sri Sai Vidyanikethan School Logo" class="logo">
-            <h1>Sri Sai Vidyanikethan EM High School</h1>
-            <p>సర్వే విద్యార్థీనాం విజ్ఞానోభవంతు!</p>
+      <div class="header-group">
+        <img
+          src="SSVN_Logo.png"
+          alt="Sri Sai Vidyanikethan School Logo"
+          class="logo"
+        />
+        <h1>Sri Sai Vidyanikethan EM High School</h1>
+        <div class="search-box">
+          <p>సర్వే విద్యార్థీనాం విజ్ఞానోభవంతు!</p>
+          <a href="https://g.co/kgs/JXnsSuD" target="_blank">
+            <i class="fas fa-search search-icon"></i>
+          </a>
         </div>
+      </div>
 
-        <div class="button-group">
-            <a href="admissions.html" class="button" target="_blank">Admissions</a>
-            <a href="https://eskooly.com/bb/signin.php" class="button" target="_blank">School Login</a>
-            <a href="contact-us.html" class="button" target="_blank">Contact Us</a>
+      <div class="button-group">
+        <a
+          href="https://forms.zohopublic.in/saraswathisrisaivid1/form/SchoolApplicationForm/formperma/IXE6B0iOm47B0Pxl-jmMol8H3Dm8GVB2bOSbJ1lvuDs"
+          class="button"
+          target="_blank"
+          >Admissions</a
+        >
+        <a
+          href="https://eskooly.com/bb/signin.php"
+          class="button"
+          target="_blank"
+          >Student Information System</a
+        >
+      </div>
+
+      <div class="wrapper">
+        <div class="slider">
+          <span class="left-arrow">
+            <i class="material-icons">keyboard_arrow_left</i>
+          </span>
+          <span class="right-arrow">
+            <i class="material-icons">keyboard_arrow_right</i>
+          </span>
+          <ul class="carousel"></ul>
         </div>
+      </div>
 
-        <div class="toggle-container">
-            <label class="toggle-switch">
-                <input type="checkbox" id="darkModeToggle">
-                <span class="slider round"></span>
-            </label>
-        </div>
-
+      <div class="toggle-container">
+        <button id="darkModeToggle" class="dark-mode-button">
+          <i class="fa-regular fa-moon"></i>
+        </button>
+      </div>
     </div>
+
     <div class="social-icons">
-        <a href="#" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="tel:+91-967-685-9202" class="social-icon" target="_blank"
+        ><i class="fab fa-solid fa-phone"></i
+      ></a>
+      <!-- <a href="https://wa.me/+919676859202/" class="social-icon" target="_blank"><i
+                class="fab fa-brands fa-whatsapp"></i></a> -->
+      <a
+        href="mailto:mail@srisaividyanikethan.edu.in"
+        class="social-icon"
+        target="_blank"
+        ><i class="fab fa-solid fa-envelope"></i
+      ></a>
+      <a
+        href="https://www.facebook.com/ssvnschool/"
+        class="social-icon"
+        target="_blank"
+        ><i class="fab fa-facebook-f"></i
+      ></a>
+      <a
+        href="https://www.instagram.com/ssvn.school/"
+        class="social-icon"
+        target="_blank"
+        ><i class="fab fa-instagram"></i
+      ></a>
+      <a href="https://x.com/srisaividya/" class="social-icon" target="_blank"
+        ><i class="fab fa-twitter"></i
+      ></a>
+      <a
+        href="https://www.youtube.com/@srisaividyanikethan"
+        class="social-icon"
+        target="_blank"
+        ><i class="fab fa-youtube"></i
+      ></a>
+      <a href="#" class="social-icon" target="_blank"
+        ><i class="fab fa-brands fa-linkedin-in"></i
+      ></a>
     </div>
+
+    <a
+      href="https://wa.me/+919676859202/"
+      class="btn-whatsapp-pulse btn-whatsapp-pulse-border"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer class="footer">
+      <div>© Sri Sai Vidyanikethan EM High School. All rights reserved.</div>
+    </footer>
 
     <script>
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const body = document.body;
-        const socialIcons = document.querySelectorAll('.social-icon');
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const socialIcons = document.querySelectorAll(".social-icon");
+      const header = document.querySelector(".header");
+      const footer = document.querySelector(".footer");
+      const darkModeButton = document.getElementById("darkModeToggle");
+      const moonIcon = "fa-regular fa-moon";
+      const sunIcon = "fa-regular fa-sun";
+      const searchBox = document.querySelector(".search-box");
+      const searchBoxParagraph = document.querySelector(".search-box p");
 
-        darkModeToggle.addEventListener('change', () => {
-            body.classList.toggle('dark-mode');
-            socialIcons.forEach(icon => icon.classList.toggle('dark-mode'));
+      const savedTheme = localStorage.getItem("darkMode");
+      if (savedTheme === "dark") {
+        body.classList.add("dark-mode");
+        socialIcons.forEach((icon) => icon.classList.add("dark-mode"));
+        header.classList.add("dark-mode");
+        footer.classList.add("dark-mode");
+        darkModeButton.classList.add("dark-mode");
+        darkModeButton.querySelector("i").className = sunIcon;
+        searchBox.classList.add("dark-mode");
+        searchBoxParagraph.classList.add("dark-mode");
+      } else {
+        darkModeButton.querySelector("i").className = moonIcon;
+      }
+
+      darkModeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        socialIcons.forEach((icon) => icon.classList.toggle("dark-mode"));
+        header.classList.toggle("dark-mode");
+        footer.classList.toggle("dark-mode");
+        darkModeButton.classList.toggle("dark-mode");
+        searchBox.classList.toggle("dark-mode");
+        searchBoxParagraph.classList.toggle("dark-mode");
+
+        if (body.classList.contains("dark-mode")) {
+          localStorage.setItem("darkMode", "dark");
+          darkModeButton.querySelector("i").className = sunIcon;
+        } else {
+          localStorage.setItem("darkMode", "light");
+          darkModeButton.querySelector("i").className = moonIcon;
+        }
+      });
+
+      var slideCount;
+      var slideWidth;
+      var slideHeight;
+      var sliderUlWidth;
+
+      $(function () {
+        getRssFeed(
+          "https://nsaraswathi.github.io/srisaividyanikethan-updates/feed.xml",
+          mapFeed
+        );
+
+        $(".left-arrow").on("click", function () {
+          moveLeft();
         });
+
+        $(".right-arrow").on("click", function () {
+          moveRight();
+        });
+
+        $(window).on("resize", function () {
+          returnCarouselList();
+        });
+      });
+
+      function moveLeft() {
+        $(".carousel").animate(
+          {
+            left: +slideWidth,
+          },
+          200,
+          function () {
+            $(".carousel li:last-child").prependTo(".carousel");
+            $(".carousel").css("left", "");
+          }
+        );
+      }
+
+      function moveRight() {
+        $(".carousel").animate(
+          {
+            left: -slideWidth,
+          },
+          200,
+          function () {
+            $(".carousel li:first-child").appendTo(".carousel");
+            $(".carousel").css("left", "");
+          }
+        );
+      }
+
+      function getRssFeed(url, callback) {
+        return feednami.loadGoogleFormat(encodeURI(url), callback);
+      }
+
+      function mapFeed(result) {
+        if (result.error) {
+          console.log(result.error);
+        } else {
+          createCarouselList(result.feed.entries.slice(0, 5));
+          createFeedList(result.feed.entries.slice(0, 20));
+        }
+      }
+
+      function createCarouselList(elements) {
+        var list = [];
+        $(elements).each(function (index, element) {
+          list.push(
+            "<li><h3><a href='" +
+              element.link +
+              "'>" +
+              element.title +
+              "</a></h3><p>" +
+              new Date(element.publishedDate).toLocaleDateString("pt-BR") +
+              "</p><span class='carousel-footer'>" +
+              (index + 1) +
+              " out of 5</span></li>"
+          );
+        });
+
+        $(".carousel").append(list);
+      }
+
+      function createFeedList(elements) {
+        var list = [];
+        $(elements).each(function (index, element) {
+          list.push(
+            "<li><a href='" + element.link + "'>" + element.title + "</a></li>"
+          );
+        });
+        $(".list").append(list);
+        returnCarouselList();
+      }
+
+      function returnCarouselList() {
+        slideCount = $(".carousel li").length;
+        slideWidth = $(".carousel li").width();
+        slideHeight = $(".carousel li").height();
+        sliderUlWidth = slideCount * slideWidth;
+        $(".slider").css({ width: slideWidth, height: slideHeight });
+        $(".carousel").css({ width: sliderUlWidth, marginLeft: -slideWidth });
+        $(".carousel li:last-child").prependTo(".carousel");
+      }
     </script>
-</body>
+  </body>
 </html>
