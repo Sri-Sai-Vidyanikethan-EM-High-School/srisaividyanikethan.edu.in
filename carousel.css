@@ -28,7 +28,7 @@ span.right-arrow {
   top: 80%;
   transition: all 0.3s ease;
   width: auto;
-  z-index: 999;
+  z-index: 11;
 }
 
 /* span.left-arrow:hover,
