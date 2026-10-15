@@ -29,7 +29,7 @@ Open http://127.0.0.1:4000. The extra config and `--unpublished` show the **samp
 | Header and footer menus | `_data/navigation.yml` |
 | Home-page text, facts, programmes, quick links, values, gallery | `_data/home.yml` |
 | School calendar (holidays, exams, events, meetings) | `_data/events.yml` |
-| Notices | one Markdown file per notice in `_notices/` (see `docs/website-plan.md` §5) |
+| Notices | one Markdown file per notice in `_notices/`. The headmistress posts them by email ([docs/how-to-post-a-notice.md](docs/how-to-post-a-notice.md)); the script and its setup are in [tools/email-to-notice/](tools/email-to-notice/README.md) |
 | Page frame (head, utility bar, header, footer) | `_includes/frame/` |
 | Udaya components | `_includes/sv/` — one file per component, cut from the design system's kit |
 | Udaya styles | `assets/css/ssvn.css` — an unedited copy of the kit; replace it, never edit it |

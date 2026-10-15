@@ -2,7 +2,7 @@
 
 A plan to replace the current one-page site with a responsive, modular website built on the **Sri Sai Vidyanikethan (Udaya) design system**, still hosted free on GitHub Pages.
 
-Status: revised with decisions · 15 October 2026
+Status: revised with decisions · 15 October 2026 · phases 0–5 built on the `redesign` branch (email script: `tools/email-to-notice/`)
 
 ---
 
@@ -217,7 +217,7 @@ Within about 5 minutes she gets a reply in the same email thread: *"Published: S
 
 **How it works (for the maintainer):**
 - A **Google Apps Script** project owned by `ssvn.em.high.school@gmail.com` (free) runs every 5 minutes.
-- It searches `in:sent to:ssvn.em.high.school+notice@gmail.com` for threads it hasn't handled yet. Using **`in:sent`** means only email actually sent from that account counts. Outsiders can email the `+notice` address, but they can't put mail in its Sent folder, so a forged sender address doesn't work.
+- It searches `in:sent to:ssvn.em.high.school+notice@gmail.com` for threads with messages it hasn't handled yet, and checks **every message** for Gmail's `SENT` label. Outsiders can email the `+notice` address (and a forged reply can even land in a real notice's thread), but they can't put mail in the account's Sent folder, so forged emails are ignored.
 - It writes the notice file (and any attachments) to this repo through the GitHub API, in one commit, and labels the thread `website/published`. The thread → file mapping is kept in the script's private storage, not in the public repo.
 - Access: a **fine-grained GitHub token** limited to this one repository with *Contents: read and write* only, stored in the script's Script Properties (never in the repo).
 - Pushes made with a personal token trigger the normal GitHub Pages build, so no GitHub Actions workflow is needed.

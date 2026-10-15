@@ -15,7 +15,7 @@ layout: default
       {%- for file in page.attachments %}
       {%- assign file_name = file | split: "/" | last %}
       {%- assign file_ext = file_name | split: "." | last | upcase %}
-      <a class="sv-info sv-info--marigold is-link" href="{{ file | relative_url }}"><span class="sv-info__icon">{% include sv/icon.html name="download" px=24 %}</span><span class="sv-info__eyebrow">{{ file_ext }}</span><span class="sv-info__title heading-3">{{ file_name }}</span><span class="sv-info__more"><span>Download</span>{% include sv/icon.html name="arrow-right" px=16 %}</span></a>
+      <a class="sv-info sv-info--marigold is-link" href="{{ file | relative_url }}"><span class="sv-info__icon">{% include sv/icon.html name="download" px=24 %}</span><span class="sv-info__eyebrow">{{ file_ext | escape }}</span><span class="sv-info__title heading-3">{{ file_name | escape }}</span><span class="sv-info__more"><span>Download</span>{% include sv/icon.html name="arrow-right" px=16 %}</span></a>
       {%- endfor %}
     </div>
     {%- endif %}

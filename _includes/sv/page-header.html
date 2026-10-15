@@ -1,5 +1,6 @@
 {%- comment -%}
   PageHeader — opens every page except Home: breadcrumbs, eyebrow, display title, Telugu line, lede.
+  Text params are HTML-escaped: notice titles arrive by email or Pages CMS and must never become markup.
   Params: eyebrow, title, title_te, lede, parent_title + parent_url (optional middle breadcrumb), crumb (current page label).
 {%- endcomment -%}
 <section class="sv-pagehead sv-muggu">
@@ -9,15 +10,15 @@
       {%- if include.parent_title %}
       <li><a href="{{ include.parent_url | relative_url }}">{{ include.parent_title }}</a>{% include sv/icon.html name="chevron-right" px=14 %}</li>
       {%- endif %}
-      <li><span aria-current="page">{{ include.crumb | default: include.title }}</span></li>
+      <li><span aria-current="page">{{ include.crumb | default: include.title | escape }}</span></li>
     </ol></nav>
-    <p class="sv-eyebrow">{% include sv/sun.html %}<span>{{ include.eyebrow }}</span></p>
-    <h1 class="sv-pagehead__title display-l">{{ include.title }}</h1>
+    <p class="sv-eyebrow">{% include sv/sun.html %}<span>{{ include.eyebrow | escape }}</span></p>
+    <h1 class="sv-pagehead__title display-l">{{ include.title | escape }}</h1>
     {%- if include.title_te %}
-    <p class="sv-pagehead__te telugu-heading" lang="te">{{ include.title_te }}</p>
+    <p class="sv-pagehead__te telugu-heading" lang="te">{{ include.title_te | escape }}</p>
     {%- endif %}
     {%- if include.lede %}
-    <p class="sv-pagehead__lede body-l">{{ include.lede }}</p>
+    <p class="sv-pagehead__lede body-l">{{ include.lede | escape }}</p>
     {%- endif %}
   </div>
   <div class="sv-hero__horizon" aria-hidden="true"></div>
