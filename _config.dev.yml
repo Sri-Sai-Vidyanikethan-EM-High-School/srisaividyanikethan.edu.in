@@ -1,0 +1,3 @@
+# Local preview only — shows the sample notices and events so every component can be checked.
+#   bundle exec jekyll serve --config _config.yml,_config.dev.yml --unpublished
+show_samples: true

@@ -1,0 +1,8 @@
+{%- comment -%}
+  Icon — a Lucide icon from the sprite, drawn in currentColor.
+  Params: name (required), px (size, default 20; not `size`, which Liquid reads as the number of params), class.
+  Note: variables assigned in an include are visible to the page that includes it, so every include
+  prefixes its own variables (here `icon_`) to avoid overwriting the page's variables.
+{%- endcomment -%}
+{%- assign icon_size = include.px | default: 20 -%}
+<svg class="sv-icon{% if include.class %} {{ include.class }}{% endif %}" width="{{ icon_size }}" height="{{ icon_size }}" aria-hidden="true" focusable="false"><use href="#i-{{ include.name }}"/></svg>

@@ -1,0 +1,20 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  /* Apply the visitor's saved theme before the page paints (no flash). Default: follow the device. */
+  (function () { try { var t = localStorage.getItem('ssvn-theme'); if (t === 'dawn' || t === 'dhuni') document.documentElement.setAttribute('data-theme', t); } catch (e) {} })();
+</script>
+{% seo %}
+<link rel="icon" type="image/png" href="{{ '/favicon-96x96.png' | relative_url }}" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}">
+<link rel="shortcut icon" href="{{ '/favicon.ico' | relative_url }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
+<meta name="apple-mobile-web-app-title" content="SSVN">
+<link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+<meta name="theme-color" content="#fff9ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a120c" media="(prefers-color-scheme: dark)">
+{% feed_meta %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="{{ '/assets/css/ssvn.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">

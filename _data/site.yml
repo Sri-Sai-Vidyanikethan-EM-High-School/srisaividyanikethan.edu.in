@@ -1,0 +1,45 @@
+# Every contact detail and link the site uses, in one place (Udaya README → "Calls to action").
+# Change a value here and every page picks it up.
+
+name: Sri Sai Vidyanikethan
+name_full: Sri Sai Vidyanikethan E.M. High School
+name_te: శ్రీ సాయి విద్యానికేతన్
+place_te: ఆడపూరు
+since: 1996
+
+motto_te: సర్వే విద్యార్థీనాం విజ్ఞానోభవంతు!
+motto_tr: Sarve vidyārthīnām vijñānō bhavantu
+motto_en: May every student be blessed with true knowledge.
+
+address: 2-59 Pothapi Road, Adapur, Nandalur, Andhra Pradesh 516150
+address_short: 2-59 Pothapi Road, Adapur, Nandalur 516150
+area: Adapur, Nandalur
+maps_url: https://maps.google.com/?q=Sri+Sai+Vidyanikethan+EM+High+School+Adapur+Nandalur
+
+phone: "+91 96768 59202"
+phone_href: "tel:+919676859202"
+whatsapp_url: https://wa.me/919676859202
+email: mail@srisaividyanikethan.edu.in
+
+booking_url: https://calendar.app.google/d6eZnhDmRZiM9wBv6
+portal_url: https://eskooly.com/bb/StudentPortal/signin.php
+application_url: https://forms.zohopublic.in/saraswathisrisaivid1/form/SchoolApplicationForm/formperma/IXE6B0iOm47B0Pxl-jmMol8H3Dm8GVB2bOSbJ1lvuDs
+youtube_channel: https://www.youtube.com/@srisaividyanikethan
+
+office_hours_short: "Mon – Sat, 9:00 am – 5:00 pm"
+office_hours:
+  - { day: Monday, time: "9:00 am – 5:00 pm" }
+  - { day: Tuesday, time: "9:00 am – 5:00 pm" }
+  - { day: Wednesday, time: "9:00 am – 5:00 pm" }
+  - { day: Thursday, time: "9:00 am – 5:00 pm" }
+  - { day: Friday, time: "9:00 am – 5:00 pm" }
+  - { day: Saturday, time: "9:00 am – 5:00 pm" }
+  - { day: Sunday, time: Closed, closed: true }
+office_hours_note: Closed on public holidays.
+
+social:
+  - { name: Facebook, url: "https://www.facebook.com/ssvnschool", icon: facebook }
+  - { name: Instagram, url: "https://www.instagram.com/ssvn.school/", icon: instagram }
+  - { name: YouTube, url: "https://www.youtube.com/@srisaividyanikethan", icon: youtube }
+  - { name: X (Twitter), url: "https://x.com/srisaividya", glyph: X }
+  - { name: Pinterest, url: "https://in.pinterest.com/srisaividya/", glyph: P }

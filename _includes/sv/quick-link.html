@@ -1,0 +1,8 @@
+{%- comment -%}
+  QuickLink — one tappable shortcut card. Param: item { tone, icon, title, text, link }.
+  Links to other websites open in a new tab and show the external-link mark (WhatsApp shows an arrow, as in the Udaya kit).
+{%- endcomment -%}
+{%- assign ql_item = include.item -%}
+{%- include resolve-link.html link=ql_item.link -%}
+{%- if link_ext and ql_item.link != "whatsapp" -%}{%- assign ql_go = "external-link" -%}{%- else -%}{%- assign ql_go = "arrow-right" -%}{%- endif -%}
+<a class="sv-quick sv-quick--{{ ql_item.tone }}" href="{{ link_href }}"{% if link_ext %} target="_blank" rel="noopener"{% endif %}><span class="sv-quick__icon">{% include sv/icon.html name=ql_item.icon px=24 %}</span><span class="sv-quick__txt"><span class="sv-quick__title">{{ ql_item.title }}</span><span class="sv-quick__text small">{{ ql_item.text }}</span></span>{% include sv/icon.html name=ql_go class="sv-quick__go" %}</a>

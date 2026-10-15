@@ -1,0 +1,21 @@
+{%- comment -%}
+  Prepares the school calendar from _data/events.yml. Sets:
+    cal_events — every event, oldest first (samples only when site.show_samples is true)
+    upcoming_events — the next `limit` events that haven't ended yet (default 5)
+  Dates in events.yml are quoted "YYYY-MM-DD" strings, so they sort and compare as text.
+{%- endcomment -%}
+{%- assign ev_today = site.time | date: "%Y-%m-%d" -%}
+{%- assign cal_events = "" | split: "" -%}
+{%- assign ev_sorted = site.data.events | sort: "start" -%}
+{%- for ev in ev_sorted -%}
+  {%- if ev.sample and site.show_samples != true -%}{%- continue -%}{%- endif -%}
+  {%- assign cal_events = cal_events | push: ev -%}
+{%- endfor -%}
+{%- assign ev_limit = include.limit | default: 5 -%}
+{%- assign upcoming_events = "" | split: "" -%}
+{%- for ev in cal_events -%}
+  {%- assign ev_end = ev.end | default: ev.start -%}
+  {%- if ev_end >= ev_today and upcoming_events.size < ev_limit -%}
+    {%- assign upcoming_events = upcoming_events | push: ev -%}
+  {%- endif -%}
+{%- endfor -%}

@@ -1,0 +1,14 @@
+{%- comment -%}
+  SectionHeading — eyebrow with sun mark, heading-1 title, optional Telugu line and lede.
+  Params: eyebrow, title, title_te, lede, center (true to centre).
+{%- endcomment -%}
+<header class="sv-sh{% if include.center %} sv-sh--center{% endif %}">
+  <p class="sv-eyebrow">{% include sv/sun.html %}<span>{{ include.eyebrow }}</span></p>
+  <h2 class="sv-sh__title heading-1">{{ include.title }}</h2>
+  {%- if include.title_te %}
+  <p class="sv-sh__telugu telugu-heading" lang="te">{{ include.title_te }}</p>
+  {%- endif %}
+  {%- if include.lede %}
+  <p class="sv-sh__lede body-l">{{ include.lede }}</p>
+  {%- endif %}
+</header>

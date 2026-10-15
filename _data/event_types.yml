@@ -1,0 +1,5 @@
+# Event types for the school calendar (Udaya EventSchedule): a word, an icon and a colour — never colour alone.
+holiday: { label: Holiday, tone: marigold, icon: sun }
+exam: { label: Exam, tone: neem, icon: clipboard-list }
+event: { label: Event, tone: saffron, icon: star }
+meeting: { label: Meeting, tone: neutral, icon: users }

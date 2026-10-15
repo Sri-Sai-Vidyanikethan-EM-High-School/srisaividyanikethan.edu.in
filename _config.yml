@@ -1,0 +1,51 @@
+# Sri Sai Vidyanikethan — site settings.
+# GitHub Pages builds this site with Jekyll on every push to main.
+# After editing this file, restart `bundle exec jekyll serve` to see changes locally.
+
+title: Sri Sai Vidyanikethan E.M. High School, Adapur
+short_name: Sri Sai Vidyanikethan
+description: An English-medium school in Adapur, near Nandalur, Andhra Pradesh — LKG to Class X.
+url: https://srisaividyanikethan.edu.in
+baseurl: ""
+lang: en_IN
+timezone: Asia/Kolkata
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Notices: one Markdown file per notice in _notices/ (see docs/website-plan.md §5).
+collections:
+  notices:
+    output: true
+    permalink: /notices/:year-:month-:day-:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: notices
+    values:
+      layout: notice
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+feed:
+  collections:
+    notices:
+      path: /notices/feed.xml
+
+# Sample notices and events only appear in local previews (see _config.dev.yml).
+show_samples: false
+
+exclude:
+  - docs/
+  - tools/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/
+  - .pages.yml
+  - _config.dev.yml

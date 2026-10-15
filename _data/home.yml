@@ -1,0 +1,60 @@
+# Home-page content. Text comes from the Udaya design system's home page; edit freely.
+# Links written as a key (booking, portal, phone, whatsapp, application) use the addresses in site.yml.
+
+hero:
+  eyebrow: Admissions open · 2027–28
+  title: Where every child greets the dawn
+  title_te: ప్రతి బిడ్డకూ జ్ఞానోదయం
+  lede: An English-medium school in Adapur, near Nandalur. Faith, patience and steady practice — taught with care from LKG to Class X.
+  image: /assets/images/campus/campus-flag-assembly.jpg
+  image_alt: Students and teachers on the school balcony around the national flag, above the Telugu signboard
+
+facts:
+  - { icon: graduation-cap, tone: saffron, title: LKG to Class X, text: "English medium, one campus" }
+  - { icon: users, tone: neem, title: "Caring, experienced teachers", text: Every child known by name }
+  - { icon: bus, tone: marigold, title: Safe school buses, text: Adapur and Nandalur routes }
+  - { icon: log-in, tone: kumkum, title: Online student portal, text: Marks and notices for parents }
+
+programmes:
+  eyebrow: Our programmes
+  title: Learning from LKG to Class X
+  title_te: ఎల్‌కేజీ నుండి పదవ తరగతి వరకు
+  lede: English-medium classes, with Telugu taught as a language, in small sections where every teacher knows every child by name.
+  items:
+    - { tone: marigold, icon: baby, grades: LKG – UKG, title: Pre-primary, ages: "Ages 3½ – 5", points: ["Phonics, rhymes and play", "Telugu and English side by side"] }
+    - { tone: saffron, icon: book-open, grades: Classes I – V, title: Primary, ages: "Ages 6 – 10", points: ["Strong reading and number sense", "Drawing, music and games"] }
+    - { tone: neem, icon: graduation-cap, grades: Classes VI – X, title: High School, ages: "Ages 11 – 15", points: ["Science and maths with practicals", "Preparation for the Class X board exams"] }
+
+quick_links:
+  - { tone: saffron, icon: calendar-check, title: Book an admission visit, text: Pick a time to meet the headmistress, link: booking }
+  - { tone: neem, icon: log-in, title: Student portal, text: "Marks, attendance and notices", link: portal }
+  - { tone: marigold, icon: phone, title: Call the office, text: "+91 96768 59202", link: phone }
+  - { tone: kumkum, icon: message-circle, title: WhatsApp us, text: "Quick questions, quick replies", link: whatsapp }
+
+values:
+  eyebrow: Our values
+  title: Guru Krupaya Sadhanena Siddhi
+  lede: By the Guru's grace, through practice, attainment — the three words on our emblem.
+  items:
+    - { tone: saffron, te: గురు కృప, word: Guru Krupa, meaning: Grace — teachers who guide each child with patience and care. }
+    - { tone: neem, te: సాధన, word: Sadhana, meaning: "Practice — daily, steady effort in class and at home." }
+    - { tone: marigold, te: సిద్ధి, word: Siddhi, meaning: "Attainment — knowledge, character and confidence that last." }
+
+gallery:
+  eyebrow: Life at school
+  title: Stages, trips and celebrations
+  items:
+    - { image: /assets/images/campus/stage-dance-girls.jpg, alt: Girls in traditional langa voni performing a group dance on the decorated annual-day stage, category: Cultural arts, title: Annual Day dances, text: Students perform traditional dances on the school stage. }
+    - { image: /assets/images/campus/temple-trip.jpg, alt: Students and teachers gathered for a group photo in a carved stone temple mandapam, category: Trips and outings, title: Temple visit, text: "Learning our heritage, together, on a school trip." }
+    - { image: /assets/images/campus/water-park.jpg, alt: Children playing in the pool with rubber rings on a supervised water-park outing, category: Trips and outings, title: A day at the water park, text: Supervised summer outings for every class. }
+  video:
+    id: yf1P7pAKJz8
+    category: Trips and outings
+    title: A day out with our students
+    text: Teachers and children on one of our school trips.
+
+cta:
+  eyebrow: Admissions 2027–28
+  title: Come and see a school day for yourself
+  title_te: మా పాఠశాలను సందర్శించండి
+  body: Book a visit, meet our teachers and walk the campus with your child.

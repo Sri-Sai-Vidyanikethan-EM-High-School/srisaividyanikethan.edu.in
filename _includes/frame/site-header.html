@@ -1,0 +1,21 @@
+{%- comment -%} SiteHeader — the same on every page; the current page's link is marked active. {%- endcomment -%}
+<header class="sv-header">
+  <div class="sv-header__bar">
+    <a class="sv-brand" href="{{ '/' | relative_url }}">
+      <img class="sv-brand__mark" src="{{ '/assets/images/emblem/ssvn-emblem-on-chalk.png' | relative_url }}" alt="" width="56" height="56">
+      <span class="sv-brand__words">
+        <span class="sv-brand__name">{{ site.data.site.name }}</span>
+        <span class="sv-brand__te" lang="te">{{ site.data.site.name_te }} · {{ site.data.site.place_te }}</span>
+      </span>
+    </a>
+    <nav class="sv-nav" id="site-nav" aria-label="Main">
+      {%- for link in site.data.navigation.main %}
+      {%- assign nav_active = false %}
+      {%- if link.match and page.url contains link.match %}{% assign nav_active = true %}{% endif %}
+      <a class="sv-nav__link{% if nav_active %} is-active{% endif %}"{% if nav_active %} aria-current="page"{% endif %} href="{{ link.url | relative_url }}">{{ link.title }}</a>
+      {%- endfor %}
+    </nav>
+    <a class="sv-btn sv-btn--primary sv-btn--md sv-header__cta" href="{{ site.data.site.booking_url }}" target="_blank" rel="noopener">{% include sv/icon.html name="calendar-check" px=18 %}<span>Book a visit</span></a>
+    <button type="button" class="sv-header__menu" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">{% include sv/icon.html name="menu" px=22 class="sv-header__menu-open" %}{% include sv/icon.html name="x" px=22 class="sv-header__menu-close" %}</button>
+  </div>
+</header>
