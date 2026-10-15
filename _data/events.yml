@@ -1,31 +1,10 @@
-# The school calendar. One entry per holiday, exam, event or meeting; order doesn't matter.
+# The school calendar — edit it in Pages CMS ("School calendar"), or by hand:
 #
-#   - start: "2026-12-05"        # YYYY-MM-DD
-#     end: "2026-12-05"          # optional, for ranges
+#   - start: 2026-12-05          # YYYY-MM-DD
+#     end: 2026-12-05            # optional, for ranges
 #     title: Parent–teacher meeting
 #     type: meeting              # holiday · exam · event · meeting
 #     note: 9:30 am              # optional: times, reopening dates
 #
-# Entries marked `sample: true` are examples from the design system; they only show in local previews.
-# Delete them once the real 2026–27 calendar is added.
-
-- start: "2026-10-19"
-  end: "2026-10-24"
-  title: Dasara holidays
-  type: holiday
-  note: school reopens 26 October
-  sample: true
-- start: "2026-11-14"
-  title: Children's Day celebrations
-  type: event
-  sample: true
-- start: "2026-11-23"
-  end: "2026-11-28"
-  title: Formative assessment 2 · Classes I – X
-  type: exam
-  sample: true
-- start: "2026-12-05"
-  title: Parent–teacher meeting
-  type: meeting
-  note: 9:30 am
-  sample: true
+# Order doesn't matter. Pages CMS rewrites this file when it saves, so these comments may disappear.
+[]

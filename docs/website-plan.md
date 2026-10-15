@@ -2,7 +2,7 @@
 
 A plan to replace the current one-page site with a responsive, modular website built on the **Sri Sai Vidyanikethan (Udaya) design system**, still hosted free on GitHub Pages.
 
-Status: revised with decisions · 15 October 2026 · phases 0–5 built on the `redesign` branch (email script: `tools/email-to-notice/`)
+Status: revised with decisions · 15 October 2026 · phases 0–6 built on the `redesign` branch (email script: `tools/email-to-notice/`; Pages CMS: `.pages.yml`, `docs/pages-cms.md`)
 
 ---
 

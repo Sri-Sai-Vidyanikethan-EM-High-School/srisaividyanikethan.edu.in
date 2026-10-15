@@ -85,6 +85,7 @@ function makeWorld() {
       Charset: { UTF_8: 'utf8' },
       base64Encode: (v) => Buffer.from(typeof v === 'string' ? Buffer.from(v, 'utf8') : Buffer.from(v.map((b) => b & 0xff))).toString('base64'),
       formatDate(d, tz, fmt) {
+        if (fmt === 'yyyy-MM-dd HH:mm') return this.formatDate(d, tz, 'yyyy-MM-dd HH:mm:ss Z').slice(0, 16);
         const ist = new Date(d.getTime() + 5.5 * 3600000); const pad = (n) => String(n).padStart(2, '0');
         const ymd = `${ist.getUTCFullYear()}-${pad(ist.getUTCMonth() + 1)}-${pad(ist.getUTCDate())}`;
         if (fmt === 'yyyy-MM-dd') return ymd;
@@ -164,11 +165,12 @@ test('slugs and attachment names are short and URL-safe', () => {
 
 test('notice text cannot inject HTML or Liquid', () => {
   const { ctx } = makeWorld();
-  const md = ctx.buildNoticeMarkdown_({ title: 'He said "hi": {{ site.title }}', date: '2026-10-14 09:30:00 +0530', category: 'General',
+  const md = ctx.buildNoticeMarkdown_({ title: 'He said "hi": {{ site.title }}', date: '2026-10-14 09:30', category: 'General',
     text: '<script>alert(1)</script> {% endraw %}{{ x }} Q&A', attachments: [] });
   assert.match(md, /^title: "He said \\"hi\\": \{\{ site\.title \}\}"$/m);
-  assert.match(md, /&lt;script&gt;alert\(1\)&lt;\/script&gt; \{\{ x \}\} Q&amp;A/);
-  assert.equal(md.match(/endraw/g).length, 1);
+  const body = md.split('---\n')[2];
+  assert.equal(body, '&lt;script&gt;alert(1)&lt;/script&gt; &#123;% endraw %&#125;&#123;&#123; x &#125;&#125; Q&amp;A\n');
+  assert.ok(!/[{}]/.test(body), 'no braces left in the body');
 });
 
 /* ---------- The whole flow ---------- */
@@ -185,7 +187,7 @@ test('publish → run again → forged email → update by reply → remove by r
   assert.match(md, /^urgent: true$/m);
   assert.match(md, /^expires: 2026-10-21$/m);
   assert.match(md, /^title_te: "విజయదశమి సెలవు"$/m);
-  assert.match(md, /^date: 2026-10-14 09:30:00 \+0530$/m);
+  assert.match(md, /^date: 2026-10-14 09:30$/m);
   assert.ok(w.files()['assets/notices/2026-10-14-school-closed-on-20-october-for-vijayadashami-holiday-circular-1.pdf'], 'PDF committed');
   assert.ok(!Object.keys(w.files()).some((f) => f.endsWith('.exe')), 'exe not committed');
   assert.match(lastReply(t), /Published: "School closed on 20 October for Vijayadashami"/);
@@ -212,7 +214,7 @@ test('publish → run again → forged email → update by reply → remove by r
   w.run();
   const updated = w.file(PATH);
   assert.match(updated, /Classes resume on Thursday 22 October\./);
-  assert.match(updated, /^date: 2026-10-14 09:30:00 \+0530$/m, 'keeps the original date');
+  assert.match(updated, /^date: 2026-10-14 09:30$/m, 'keeps the original date');
   assert.match(updated, /holiday-circular-1\.pdf/, 'keeps attachments when the reply has none');
   assert.match(lastReply(t), /^Updated: /);
 

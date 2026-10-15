@@ -48,6 +48,10 @@ Reply in the **same email thread** (to the "Published" email or to your own):
 
 You get a reply each time to confirm. You can change a notice this way for 30 days after first sending it; after that, ask the website maintainer.
 
+## Prefer a browser?
+
+You can also add, edit and delete notices, and update the school calendar, at **https://app.pagescms.org**. Sign in with the school email address. Step-by-step: [pages-cms.md](pages-cms.md).
+
 ## Good to know
 
 - Notices are **public**. Never include students' names, phone numbers or marks.

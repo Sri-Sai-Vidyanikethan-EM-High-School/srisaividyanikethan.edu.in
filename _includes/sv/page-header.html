@@ -14,10 +14,10 @@
     </ol></nav>
     <p class="sv-eyebrow">{% include sv/sun.html %}<span>{{ include.eyebrow | escape }}</span></p>
     <h1 class="sv-pagehead__title display-l">{{ include.title | escape }}</h1>
-    {%- if include.title_te %}
+    {%- if include.title_te and include.title_te != "" %}
     <p class="sv-pagehead__te telugu-heading" lang="te">{{ include.title_te | escape }}</p>
     {%- endif %}
-    {%- if include.lede %}
+    {%- if include.lede and include.lede != "" %}
     <p class="sv-pagehead__lede body-l">{{ include.lede | escape }}</p>
     {%- endif %}
   </div>

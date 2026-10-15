@@ -14,7 +14,7 @@ Gmail (Sent folder) ──every 5 min──► Code.gs ──GitHub API, one com
 | `appsscript.json` | The project manifest: time zone, Gmail advanced service, permissions. |
 | `test.js` | Tests with stand-ins for Gmail and GitHub: `node --test tools/email-to-notice/test.js` |
 
-**Safety.** Only email the account *sent* counts (Gmail's Sent label). Anyone can write to the `+notice` address, but nobody else can put mail in the account's Sent folder, so forged emails, including forged replies threaded into a real notice, are ignored. Notice text is published as plain text (no HTML, no Liquid), and titles are escaped on the page. The GitHub token can only change the contents of this one repository.
+**Safety.** Only email the account *sent* counts (Gmail's Sent label). Anyone can write to the `+notice` address, but nobody else can put mail in the account's Sent folder, so forged emails, including forged replies threaded into a real notice, are ignored. Notice text is published as plain text (no HTML, no Jekyll template code), and titles are escaped on the page. The GitHub token can only change the contents of this one repository.
 
 ## One-time setup (about 15 minutes)
 
@@ -78,18 +78,18 @@ Change `Code.gs` in this repository, run the tests, commit, then paste the new `
 
 - **No reply after 10 minutes:** in the Apps Script project, open **Executions** to see each run and any error. Check that the email was sent *from* the school account *to* the `+notice` address.
 - **A notice failed three times:** the reply says so and shows the error. Usually GitHub was down; sending the email again is enough.
-- **Fix a notice without email:** edit or delete its file in `_notices/` on github.com (or in Pages CMS, when it's set up). The script only touches notices that arrived by email, and only when a new email arrives in that notice's thread.
+- **Fix a notice without email:** edit or delete it in Pages CMS, or edit its file in `_notices/` on github.com. The script only touches notices that arrived by email, and only when a new email arrives in that notice's thread.
 - **Stop the script:** in **Triggers**, delete both triggers. Run `setup` again to restart.
 
 ## What the script writes
 
-`_notices/2026-10-14-school-closed-on-20-october.md`:
+`_notices/2026-10-14-school-closed-on-20-october.md`, with the same fields Pages CMS edits (see `.pages.yml` and [docs/pages-cms.md](../../docs/pages-cms.md)):
 
 ```markdown
 ---
 title: "School closed on 20 October"
 title_te: "విజయదశమి సెలవు"
-date: 2026-10-14 09:30:00 +0530
+date: 2026-10-14 09:30
 category: Holiday
 urgent: true
 expires: 2026-10-21
@@ -97,9 +97,7 @@ attachments:
   - "/assets/notices/2026-10-14-school-closed-on-20-october-holiday-circular.pdf"
 source: email
 ---
-{% raw %}
 School will be closed on Tuesday 20 October for Vijayadashami.
-{% endraw %}
 ```
 
-The `{% raw %}` lines stop Jekyll from treating anything in the email as template code.
+The email text is written with `<`, `>`, `&`, `{` and `}` as HTML character codes, so nothing in an email can become HTML or Jekyll template code; they display as normal characters on the page and in Pages CMS.

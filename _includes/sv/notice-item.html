@@ -4,16 +4,16 @@
   even if the site hasn't been rebuilt.
 {%- endcomment -%}
 {%- assign ni = include.notice -%}
-{%- assign ni_category = ni.category | default: "General" -%}
+{%- assign ni_category = ni.category | default: "General" -%}{%- comment -%} `default` also replaces "" (Pages CMS saves empty fields as ""). {%- endcomment -%}
 {%- assign ni_tone = site.data.notice_categories[ni_category] | default: "neutral" -%}
 {%- assign ni_today = site.time | date: "%Y-%m-%d" -%}
 {%- assign ni_urgent = false -%}
 {%- assign ni_expires = nil -%}
 {%- if ni.urgent -%}
   {%- assign ni_urgent = true -%}
-  {%- if ni.expires -%}
+  {%- if ni.expires and ni.expires != "" -%}
     {%- assign ni_expires = ni.expires | date: "%Y-%m-%d" -%}
     {%- if ni_expires < ni_today -%}{%- assign ni_urgent = false -%}{%- endif -%}
   {%- endif -%}
 {%- endif -%}
-<li class="sv-notice{% if ni_urgent %} sv-notice--urgent{% endif %}"{% if ni_urgent and ni_expires %} data-expires="{{ ni_expires }}" data-tone="{{ ni_tone }}"{% endif %}><a class="sv-notice__inner" href="{{ ni.url | relative_url }}"><time class="sv-date" datetime="{{ ni.date | date: '%Y-%m-%d' }}"><span class="sv-date__d">{{ ni.date | date: "%-d" }}</span><span class="sv-date__m">{{ ni.date | date: "%b" }}</span></time><div class="sv-notice__body"><span class="sv-badge{% if ni_urgent %} sv-badge--kumkum{% elsif ni_tone != 'neutral' %} sv-badge--{{ ni_tone }}{% endif %}">{% if ni_urgent %}{% include sv/icon.html name="circle-alert" px=14 %}{% endif %}<span>{{ ni_category | escape }}</span></span><p class="sv-notice__title">{{ ni.title | escape }}</p>{% if ni.title_te %}<p class="sv-notice__te" lang="te">{{ ni.title_te | escape }}</p>{% endif %}<p class="sv-notice__meta small">Posted {{ ni.date | date: "%-d %B %Y" }}</p></div>{% include sv/icon.html name="chevron-right" class="sv-notice__chev" %}</a></li>
+<li class="sv-notice{% if ni_urgent %} sv-notice--urgent{% endif %}"{% if ni_urgent and ni_expires %} data-expires="{{ ni_expires }}" data-tone="{{ ni_tone }}"{% endif %}><a class="sv-notice__inner" href="{{ ni.url | relative_url }}"><time class="sv-date" datetime="{{ ni.date | date: '%Y-%m-%d' }}"><span class="sv-date__d">{{ ni.date | date: "%-d" }}</span><span class="sv-date__m">{{ ni.date | date: "%b" }}</span></time><div class="sv-notice__body"><span class="sv-badge{% if ni_urgent %} sv-badge--kumkum{% elsif ni_tone != 'neutral' %} sv-badge--{{ ni_tone }}{% endif %}">{% if ni_urgent %}{% include sv/icon.html name="circle-alert" px=14 %}{% endif %}<span>{{ ni_category | escape }}</span></span><p class="sv-notice__title">{{ ni.title | escape }}</p>{% if ni.title_te and ni.title_te != "" %}<p class="sv-notice__te" lang="te">{{ ni.title_te | escape }}</p>{% endif %}<p class="sv-notice__meta small">Posted {{ ni.date | date: "%-d %B %Y" }}</p></div>{% include sv/icon.html name="chevron-right" class="sv-notice__chev" %}</a></li>

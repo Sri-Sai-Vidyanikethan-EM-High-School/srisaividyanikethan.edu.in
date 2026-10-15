@@ -170,7 +170,8 @@ function handleMessage_(msg, parsed, state) {
     return files.saved.length && !files.saved.some(function (f) { return f.path === p; });
   });
 
-  var noticeDate = isNew ? Utilities.formatDate(sent, TIME_ZONE, 'yyyy-MM-dd HH:mm:ss Z') : state.date;
+  // Same format as the Pages CMS date field ("yyyy-MM-dd HH:mm", India time; _config.yml sets the time zone).
+  var noticeDate = isNew ? Utilities.formatDate(sent, TIME_ZONE, 'yyyy-MM-dd HH:mm') : state.date;
   var expires = parsed.urgent ? Utilities.formatDate(new Date(sent.getTime() + URGENT_DAYS * 86400000), TIME_ZONE, 'yyyy-MM-dd') : '';
   var markdown = buildNoticeMarkdown_({
     title: parsed.title, titleTe: parsed.titleTe, date: noticeDate, category: parsed.category,
@@ -253,14 +254,17 @@ function slugify_(title) {
   return slug || 'notice';
 }
 
-/** Email text → safe Markdown: no HTML, and nothing Jekyll's Liquid templating would try to run. */
+/**
+ * Email text → safe Markdown: no HTML, and no braces, so Jekyll's Liquid templating never sees {{ or {%.
+ * (The entities show as normal characters on the page and in the Pages CMS editor.)
+ */
 function escapeText_(text) {
   return String(text || '')
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/\{%-?\s*endraw\s*-?%\}/g, '');
+    .replace(/\{/g, '&#123;').replace(/\}/g, '&#125;');
 }
 
-/** The notice file: YAML front matter + the text inside {% raw %} so Liquid never runs on it. */
+/** The notice file: YAML front matter (the same fields Pages CMS edits, see .pages.yml) + the escaped text. */
 function buildNoticeMarkdown_(n) {
   var q = function (s) { return JSON.stringify(String(s)); }; // a JSON string is a valid YAML double-quoted string
   var lines = ['---', 'title: ' + q(n.title)];
@@ -271,7 +275,7 @@ function buildNoticeMarkdown_(n) {
     lines.push('attachments:');
     n.attachments.forEach(function (p) { lines.push('  - ' + q(p)); });
   }
-  lines.push('source: email', '---', '{% raw %}', escapeText_(n.text), '{% endraw %}', '');
+  lines.push('source: email', '---', escapeText_(n.text), '');
   return lines.join('\n');
 }
 

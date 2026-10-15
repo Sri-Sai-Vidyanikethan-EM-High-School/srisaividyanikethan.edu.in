@@ -9,6 +9,8 @@ url: https://srisaividyanikethan.edu.in
 baseurl: ""
 lang: en_IN
 timezone: Asia/Kolkata
+# Publish notices even if their date is later than the build time (a typo'd date must not hide a notice).
+future: true
 
 plugins:
   - jekyll-feed
@@ -27,7 +29,6 @@ defaults:
       type: notices
     values:
       layout: notice
-      excerpt_separator: ""   # no excerpts: notice text sits in a {% raw %} block that an excerpt would cut
   - scope:
       path: ""
     values:
