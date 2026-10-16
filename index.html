@@ -17,8 +17,10 @@ schema_school: true
       <p class="sv-hero__motto-en">{{ s.motto_en }}</p>
       <p class="sv-hero__lede body-l">{{ h.hero.lede }}</p>
       <div class="sv-hero__actions">
-        <a class="sv-btn sv-btn--primary sv-btn--lg" href="{{ s.booking_url }}" target="_blank" rel="noopener">{% include sv/icon.html name="calendar-check" %}<span>{{ s.booking_label }}</span></a>
-        <a class="sv-btn sv-btn--secondary sv-btn--lg" href="#academics"><span>Explore classes</span>{% include sv/icon.html name="arrow-right" class="sv-btn__end" %}</a>
+        {%- for act in h.hero.actions %}
+        {%- include resolve-link.html link=act.link %}
+        <a class="sv-btn {% if act.primary %}sv-btn--primary{% else %}sv-btn--secondary{% endif %} sv-btn--lg" href="{{ link_href }}"{% if link_ext %} target="_blank" rel="noopener"{% endif %}{% if act.aria %} aria-label="{{ act.aria }}"{% elsif link_ext %} aria-label="{{ act.label }} (opens in a new tab)"{% endif %}>{% include sv/icon.html name=act.icon %}<span>{{ act.label }}</span></a>
+        {%- endfor %}
       </div>
     </div>
     <div class="sv-hero__art">

@@ -25,7 +25,7 @@ Open http://127.0.0.1:4000. The extra config and `--unpublished` show the **samp
 
 | To change | Edit |
 | --- | --- |
-| Phone, email, address, office hours, links (booking, portal, Zoho form), social channels | `_data/site.yml` |
+| Phone, email, address, office hours, links (booking, portal, admission form), social channels | `_data/site.yml` |
 | Header and footer menus | `_data/navigation.yml` |
 | Home-page text, facts, programmes, quick links, values, gallery | `_data/home.yml` |
 | School calendar (holidays, exams, events, meetings) | `_data/events.yml`, or in Pages CMS ([docs/pages-cms.md](docs/pages-cms.md)) |

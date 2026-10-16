@@ -251,7 +251,9 @@ The maintainer installs Pages CMS on the repo once and **invites the headmistres
 
 ---
 
-## 6. Admissions and forms (Zoho)
+## 6. Admissions and forms
+
+**Update, 16 October 2026:** the admission form is now a **Google Form** (https://forms.gle/fUD2fsfQXaqXvpwZ7), linked from the home hero ("Admission form") and the Admissions page ("Apply online"), opening in a new tab. `application_url` in `_data/site.yml`. The Zoho notes below are kept for the record.
 
 The school is on Zoho's **Free** plan. Custom themes and the "redirect after submit" option need a paid plan, and the HTML embed loses captcha. So **no embedding: links only.**
 
@@ -302,7 +304,7 @@ Phases 0–5 give a launch-ready core. Phases 6–7 can launch together or follo
 | 2 | Missing content | Added later; pages launch with what we have. |
 | 3 | Student portal | `https://eskooly.com/bb/StudentPortal/signin.php` |
 | 4 | Parents' consent for photos | Collected offline. |
-| 5 | Zoho | Free plan → link to the form in a new tab, no embedding. |
+| 5 | Admission form | Google Form, linked in a new tab (replaced the Zoho form on 16 October 2026). |
 | 6 | Old updates blog | Left untouched; not imported. |
 | 7 | Repo visibility | Public is fine. |
 

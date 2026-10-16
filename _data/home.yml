@@ -9,6 +9,12 @@ hero:
   image: /assets/images/devotional/sai-baba-abhaya-seated.jpg
   image_alt: Shirdi Sai Baba seated, right hand raised in blessing
   image_caption: Our inspiration — Shirdi Sai Baba
+  # The hero's buttons, in order. Only one may be `primary` (Udaya: one saffron button per view).
+  # `link` uses the keys in site.yml (phone, whatsapp, application, booking …); other sites open in a new tab.
+  actions:
+    - { label: Contact us, icon: phone, link: phone, primary: true, aria: "Contact us: call +91 96768 59202" }
+    - { label: WhatsApp, icon: message-circle, link: whatsapp }
+    - { label: Admission form, icon: clipboard-list, link: application }
 
 facts:
   - { icon: graduation-cap, tone: saffron, title: LKG to Class X, text: "English medium, one campus" }
