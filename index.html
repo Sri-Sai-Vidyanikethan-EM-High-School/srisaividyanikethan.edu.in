@@ -1,145 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sri Sai Vidyanikethan EM High School</title>
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="carousel.css" />
-    <link rel="icon" type="image/x-icon" href="SSVN_Logo.png" />
-    <!-- <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="SSVN" />
-    <link rel="manifest" href="/site.webmanifest" /> -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://storage.googleapis.com/feednami-static/js/feednami-client-v1.0.1.js"></script>
-  </head>
+---
+title: Sri Sai Vidyanikethan E.M School, Adapur
+description: Co-educational English-medium school in Adapur, near Nandalur, YSR Kadapa. AP State Board, LKG to Class X, since 1996. School buses to 20+ villages.
+schema_school: true
+---
+{%- assign h = site.data.home -%}
+{%- assign s = site.data.site -%}
+{%- include data/events.html limit=5 -%}
+{%- assign latest_notices = site.notices | sort: "date" | reverse -%}
 
-  <body class="">
-    <header class="header">
-      <div class="header-content">
-        <i
-          class="fas fa-map-marker-alt"
-          style="margin-right: 5px; margin-left: 5px"
-        ></i>
-        <a href="https://maps.app.goo.gl/MsZDZmqnbsYUYasp7" target="_blank">
-          2-59 Pothapi Rd, Adapur, Nandalur, Andhra Pradesh 516150
-        </a>
-      </div>
-    </header>
-    <div class="container">
-      <div class="header-group">
-        <img
-          src="SSVN_Logo.png"
-          alt="Sri Sai Vidyanikethan School Logo"
-          class="logo"
-        />
-        <h1>Sri Sai Vidyanikethan EM High School</h1>
-        <div class="search-box">
-          <p>సర్వే విద్యార్థీనాం విజ్ఞానోభవంతు!</p>
-          <a href="https://g.co/kgs/JXnsSuD" target="_blank">
-            <i class="fas fa-search search-icon"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="button-group">
-        <a
-          href="https://forms.zohopublic.in/saraswathisrisaivid1/form/SchoolApplicationForm/formperma/IXE6B0iOm47B0Pxl-jmMol8H3Dm8GVB2bOSbJ1lvuDs"
-          class="button"
-          target="_blank"
-          >Admissions</a
-        >
-        <a
-          href="https://eskooly.com/bb/signin.php"
-          class="button"
-          target="_blank"
-          >Student Information System</a
-        >
-      </div>
-
-      <div class="wrapper">
-        <div class="slider">
-          <span class="left-arrow">
-            <i class="material-icons">keyboard_arrow_left</i>
-          </span>
-          <span class="right-arrow">
-            <i class="material-icons">keyboard_arrow_right</i>
-          </span>
-          <ul class="carousel"></ul>
-        </div>
-      </div>
-
-      <div class="toggle-container">
-        <button id="darkModeToggle" class="dark-mode-button">
-          <i class="fa-regular fa-moon"></i>
-        </button>
+<!-- Hero — home page only: the school motto beside Shirdi Sai Baba (the page's one devotional image, in a Sannidhi arch) -->
+<section class="sv-hero sv-muggu" id="about">
+  <div class="sv-container sv-hero__grid">
+    <div class="sv-hero__text">
+      <p class="sv-eyebrow">{% include sv/sun.html %}<span>{{ h.hero.eyebrow }}</span></p>
+      <h1 class="sv-hero__motto"><span class="sv-visually-hidden">{{ s.name_full }} — </span><span lang="te">{{ s.motto_te }}</span></h1>
+      <p class="sv-hero__motto-en">{{ s.motto_en }}</p>
+      <p class="sv-hero__lede body-l">{{ h.hero.lede }}</p>
+      <div class="sv-hero__actions">
+        {%- for act in h.hero.actions %}
+        {%- include resolve-link.html link=act.link %}
+        <a class="sv-btn {% if act.primary %}sv-btn--primary{% else %}sv-btn--secondary{% endif %}{% if act.tint %} sv-btn--tint-{{ act.tint }}{% endif %} sv-btn--lg" href="{{ link_href }}"{% if link_ext %} target="_blank" rel="noopener"{% endif %}{% if act.aria %} aria-label="{{ act.aria }}"{% elsif link_ext %} aria-label="{{ act.label }} (opens in a new tab)"{% endif %}>{% include sv/icon.html name=act.icon %}<span>{{ act.label }}</span></a>
+        {%- endfor %}
       </div>
     </div>
-
-    <div class="social-icons">
-      <a href="tel:+91-967-685-9202" class="social-icon" target="_blank"
-        ><i class="fab fa-solid fa-phone"></i
-      ></a>
-      <!-- <a href="https://wa.me/+919676859202/" class="social-icon" target="_blank"><i
-                class="fab fa-brands fa-whatsapp"></i></a> -->
-      <a
-        href="mailto:mail@srisaividyanikethan.edu.in"
-        class="social-icon"
-        target="_blank"
-        ><i class="fab fa-solid fa-envelope"></i
-      ></a>
-      <a
-        href="https://www.facebook.com/ssvnschool/"
-        class="social-icon"
-        target="_blank"
-        ><i class="fab fa-facebook-f"></i
-      ></a>
-      <a
-        href="https://www.instagram.com/ssvn.school/"
-        class="social-icon"
-        target="_blank"
-        ><i class="fab fa-instagram"></i
-      ></a>
-      <a href="https://x.com/srisaividya/" class="social-icon" target="_blank"
-        ><i class="fab fa-twitter"></i
-      ></a>
-      <a
-        href="https://www.youtube.com/@srisaividyanikethan"
-        class="social-icon"
-        target="_blank"
-        ><i class="fab fa-youtube"></i
-      ></a>
-      <a href="#" class="social-icon" target="_blank"
-        ><i class="fab fa-brands fa-linkedin-in"></i
-      ></a>
+    <div class="sv-hero__art">
+      <div class="sv-hero__sun" aria-hidden="true"></div>
+      <figure class="sv-arch sv-arch--sannidhi">
+        <div class="sv-arch__door" style="aspect-ratio: 4 / 5"><img src="{{ h.hero.image | relative_url }}" alt="{{ h.hero.image_alt }}" width="941" height="1380" fetchpriority="high" style="object-fit: contain"></div>
+        <figcaption class="sv-arch__cap small">{{ h.hero.image_caption }}</figcaption>
+      </figure>
     </div>
+  </div>
+  <div class="sv-hero__horizon" aria-hidden="true"></div>
+</section>
 
-    <a
-      href="https://wa.me/+919676859202/"
-      class="btn-whatsapp-pulse btn-whatsapp-pulse-border"
-    >
-      <i class="fab fa-whatsapp"></i>
-    </a>
+<!-- FactStrip, flat: its own quiet band under the hero (site.css: sv-facts-wrap--flat) -->
+<div class="sv-container sv-facts-wrap sv-facts-wrap--flat">
+  <ul class="sv-facts">
+    {%- for f in h.facts %}
+    <li class="sv-fact"><span class="sv-fact__icon sv-fact__icon--{{ f.tone }}">{% include sv/icon.html name=f.icon px=24 %}</span><span class="sv-fact__txt"><span class="sv-fact__title">{{ f.title }}</span><span class="sv-fact__text small">{{ f.text }}</span></span></li>
+    {%- endfor %}
+  </ul>
+</div>
 
-    <footer class="footer">
-      <div>© Sri Sai Vidyanikethan EM High School. All rights reserved.</div>
-    </footer>
+<!-- Programmes + QuickLinks (sandal) -->
+<section class="sv-section sv-section--sandal" id="academics">
+  <div class="sv-container">
+    {% include sv/section-heading.html eyebrow=h.programmes.eyebrow title=h.programmes.title title_te=h.programmes.title_te lede=h.programmes.lede %}
+    <div class="sv-grid">
+      {%- for p in h.programmes.items %}
+      <article class="sv-program sv-program--{{ p.tone }}"><span class="sv-program__icon">{% include sv/icon.html name=p.icon px=26 %}</span><p class="sv-program__grades">{{ p.grades }}</p><h3 class="sv-program__title heading-3">{{ p.title }}</h3><p class="sv-program__ages small">{{ p.ages }}</p><ul class="sv-program__points">{% for point in p.points %}<li>{% include sv/icon.html name="check" px=16 %}<span>{{ point }}</span></li>{% endfor %}</ul></article>
+      {%- endfor %}
+    </div>
+    <div class="sv-grid sv-grid--2 sv-quick-grid">
+      {%- for q in h.quick_links %}
+      {% include sv/quick-link.html item=q %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
 
-    <script src="script.js"></script>
-  </body>
-</html>
+<!-- Notices + Coming up (paper) -->
+<section class="sv-section sv-section--paper" id="notices">
+  <div class="sv-container">
+    {% include sv/section-heading.html eyebrow="Notices" title="What's happening at school" %}
+    <div class="sv-split">
+      {% include sv/notice-board.html notices=latest_notices limit=4 more_url="/notices/" %}
+      {% include sv/event-schedule.html events=upcoming_events title="Coming up" more_url="/notices/#calendar" upcoming=true %}
+    </div>
+  </div>
+</section>
+
+<!-- Values (sandal) -->
+<section class="sv-section sv-section--sandal" id="values">
+  <div class="sv-container">
+    {% include sv/section-heading.html eyebrow=h.values.eyebrow title=h.values.title lede=h.values.lede center=true %}
+    <div class="sv-grid">
+      {%- for v in h.values.items %}
+      <article class="sv-pillar sv-pillar--{{ v.tone }}"><span class="sv-pillar__num" aria-hidden="true">{{ forloop.index }}</span><p class="sv-pillar__te" lang="te">{{ v.te }}</p><h3 class="sv-pillar__word heading-2">{{ v.word }}</h3><p class="sv-pillar__meaning">{{ v.meaning }}</p></article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Life at school (paper + muggu) -->
+<section class="sv-section sv-section--paper sv-muggu" id="life">
+  <div class="sv-container">
+    {% include sv/section-heading.html eyebrow=h.gallery.eyebrow title=h.gallery.title %}
+    <div class="sv-grid">
+      {%- for g in h.gallery.items %}
+      <figure class="sv-gallery"><div class="sv-arch sv-arch--paper"><div class="sv-arch__door" style="aspect-ratio: 4 / 3"><img src="{{ g.image | relative_url }}" alt="{{ g.alt }}" width="{{ g.width }}" height="{{ g.height }}" loading="lazy" decoding="async" style="object-fit: cover"></div></div><figcaption class="sv-gallery__cap"><span class="sv-gallery__cat">{{ g.category }}</span><span class="sv-gallery__title heading-3">{{ g.title }}</span><span class="sv-gallery__text small">{{ g.text }}</span></figcaption></figure>
+      {%- endfor %}
+    </div>
+    {%- assign v = h.gallery.video %}
+    <div class="sv-split sv-split--center sv-video-row">
+      <figure class="sv-video">
+        <div class="sv-video__stage">
+          <button type="button" class="sv-video__btn" data-video="{{ v.id }}" aria-label="Play video: {{ v.title }}">
+            <span class="sv-video__poster"><img src="https://i.ytimg.com/vi/{{ v.id }}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async"><span class="sv-video__play" aria-hidden="true"><svg viewBox="0 0 100 100" width="112" height="112"><g class="sv-video__rays"><line x1="84.0" y1="50.0" x2="96.0" y2="50.0"/><line x1="79.4" y1="67.0" x2="86.4" y2="71.0"/><line x1="67.0" y1="79.4" x2="73.0" y2="89.8"/><line x1="50.0" y1="84.0" x2="50.0" y2="92.0"/><line x1="33.0" y1="79.4" x2="27.0" y2="89.8"/><line x1="20.6" y1="67.0" x2="13.6" y2="71.0"/><line x1="16.0" y1="50.0" x2="4.0" y2="50.0"/><line x1="20.6" y1="33.0" x2="13.6" y2="29.0"/><line x1="33.0" y1="20.6" x2="27.0" y2="10.2"/><line x1="50.0" y1="16.0" x2="50.0" y2="8.0"/><line x1="67.0" y1="20.6" x2="73.0" y2="10.2"/><line x1="79.4" y1="33.0" x2="86.4" y2="29.0"/></g><circle class="sv-video__disc" cx="50" cy="50" r="28"/><path class="sv-video__tri" d="M44 38 L64 50 L44 62 Z"/></svg></span><span class="sv-video__label">{% include sv/icon.html name="youtube" px=18 %}<span>Watch on YouTube</span></span></span>
+          </button>
+        </div>
+      </figure>
+      <div>
+        <p class="sv-gallery__cat">{{ v.category }}</p>
+        <h3 class="sv-gallery__title heading-2 sv-video-row__title">{{ v.title }}</h3>
+        <p class="sv-muted sv-video-row__text">{{ v.text }}</p>
+        <a class="sv-link label sv-video__more" href="{{ s.youtube_channel }}" target="_blank" rel="noopener">More films on our YouTube channel{% include sv/icon.html name="external-link" px=14 %}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include sv/cta-band.html id="admissions" %}
+
+<!-- Contact (paper) -->
+<section class="sv-section sv-section--paper" id="contact">
+  <div class="sv-container">
+    {% include sv/section-heading.html eyebrow="Contact" title="Ask us anything" lede="Call, WhatsApp or email the office — or visit us in Adapur." %}
+    <div class="sv-split">
+      {% include sv/contact-strip.html stack=true %}
+      {% include sv/office-hours.html %}
+    </div>
+  </div>
+</section>

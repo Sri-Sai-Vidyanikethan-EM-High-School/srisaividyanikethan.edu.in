@@ -1,0 +1,68 @@
+# Home-page content. Text comes from the Udaya design system's home page; edit freely.
+# Links written as a key (booking, portal, phone, whatsapp, application) use the addresses in site.yml.
+
+# The hero's headline is the school motto (motto_te / motto_en in site.yml), beside Shirdi Sai Baba in a Sannidhi arch.
+# Udaya's Sannidhi rule: one devotional image per page, dark ground, never cropped, never with text over it.
+hero:
+  eyebrow: Admissions open · 2027–28
+  lede: An English-medium school in Adapur, near Nandalur. Faith, patience and steady practice — taught with care from LKG to Class X.
+  image: /assets/images/devotional/sai-baba-abhaya-seated.jpg
+  image_alt: Shirdi Sai Baba seated, right hand raised in blessing
+  image_caption: Our inspiration — Shirdi Sai Baba
+  # The hero's buttons, in order. Only one may be `primary` (Udaya: one saffron button per view).
+  # `tint` (neem or saffron) colours a secondary button's outline and text by meaning.
+  # `link` uses the keys in site.yml (phone, whatsapp, application, booking …); other sites open in a new tab.
+  actions:
+    - { label: Contact us, icon: phone, link: phone, primary: true, aria: "Contact us: call +91 96768 59202" }
+    - { label: WhatsApp, icon: message-circle, link: whatsapp, tint: neem }
+    - { label: Admission form, icon: clipboard-list, link: application, tint: saffron }
+
+facts:
+  - { icon: graduation-cap, tone: saffron, title: LKG to Class X, text: "English medium, AP State Board" }
+  - { icon: users, tone: neem, title: "Caring, experienced teachers", text: Every child known by name }
+  - { icon: bus, tone: marigold, title: Safe school buses, text: To 20+ villages and towns }
+  - { icon: log-in, tone: kumkum, title: Online student portal, text: Marks and notices for parents }
+
+programmes:
+  eyebrow: Our programmes
+  title: Learning from LKG to Class X
+  title_te: LKG నుండి పదవ తరగతి వరకు
+  lede: Co-educational, English-medium classes on the Andhra Pradesh State Board syllabus, with Telugu taught as a language, in small sections where every teacher knows every child by name.
+  items:
+    - { tone: marigold, icon: baby, grades: LKG – UKG, title: Pre-primary, ages: "Ages 3 – 5", points: ["Phonics, rhymes and play", "Telugu and English side by side"] }
+    - { tone: saffron, icon: book-open, grades: Classes I – VII, title: Primary, ages: "Ages 6 – 12", points: ["Strong reading and number sense", "Drawing, music and games"] }
+    - { tone: neem, icon: graduation-cap, grades: Classes VIII – X, title: High School, ages: "Ages 13 – 15", points: ["Science and maths with practicals", "Preparation for the Class X board exams"] }
+
+quick_links:
+  - { tone: saffron, icon: calendar-check, title: Plan a visit, text: Pick a time to meet the headmistress, link: booking }
+  - { tone: neem, icon: log-in, title: Student portal, text: "Marks, attendance and notices", link: portal }
+  - { tone: marigold, icon: phone, title: Call the office, text: "+91 96768 59202", link: phone }
+  - { tone: kumkum, icon: message-circle, title: WhatsApp us, text: "Quick questions, quick replies", link: whatsapp }
+
+values:
+  eyebrow: Our values
+  title: Guru Krupaya Sadhanena Siddhi
+  lede: By the Guru's grace, through practice, attainment — the three words on our emblem.
+  items:
+    - { tone: saffron, te: గురు కృప, word: Guru Krupa, meaning: Grace — teachers who guide each child with patience and care. }
+    - { tone: neem, te: సాధన, word: Sadhana, meaning: "Practice — daily, steady effort in class and at home." }
+    - { tone: marigold, te: సిద్ధి, word: Siddhi, meaning: "Attainment — knowledge, character and confidence that last." }
+
+gallery:
+  eyebrow: Life at school
+  title: Stages, trips and celebrations
+  items:
+    - { image: /assets/images/campus/stage-dance-girls.jpg, width: 1200, height: 900, alt: Girls in traditional langa voni performing a group dance on the decorated annual-day stage, category: Cultural arts, title: Annual Day dances, text: Students perform traditional dances on the school stage. }
+    - { image: /assets/images/campus/temple-trip.jpg, width: 1200, height: 540, alt: Students and teachers gathered for a group photo in a carved stone temple mandapam, category: Trips and outings, title: Temple visit, text: "Learning our heritage, together, on a school trip." }
+    - { image: /assets/images/campus/water-park.jpg, width: 1200, height: 900, alt: Children playing in the pool with rubber rings on a supervised water-park outing, category: Trips and outings, title: A day at the water park, text: Supervised summer outings for every class. }
+  video:
+    id: yf1P7pAKJz8
+    category: Trips and outings
+    title: A day out with our students
+    text: Teachers and children on one of our school trips.
+
+cta:
+  eyebrow: Admissions 2027–28
+  title: Come and see a school day for yourself
+  title_te: మా పాఠశాలను సందర్శించండి
+  body: Plan a visit, meet our teachers and walk the campus with your child.

@@ -1,0 +1,17 @@
+{%- comment -%}
+  NoticeBoard — dated notices, newest first.
+  Params: notices (list, already sorted), limit (optional), title (default "Notice board"), more_url (adds "All notices").
+{%- endcomment -%}
+{%- assign nb_limit = include.limit | default: include.notices.size -%}
+<div class="sv-board">
+  <div class="sv-board__head"><h3 class="heading-2">{% include sv/icon.html name="bell" px=24 %}<span>{{ include.title | default: "Notice board" }}</span></h3>{% if include.more_url %}<a class="sv-link label" href="{{ include.more_url | relative_url }}">All notices</a>{% endif %}</div>
+  {%- if include.notices.size > 0 %}
+  <ul class="sv-board__list">
+    {%- for nb_notice in include.notices limit: nb_limit %}
+    {% include sv/notice-item.html notice=nb_notice %}
+    {%- endfor %}
+  </ul>
+  {%- else %}
+  <p class="sv-empty">No notices right now. New notices from the school will appear here.</p>
+  {%- endif %}
+</div>

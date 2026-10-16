@@ -1,0 +1,33 @@
+{%- comment -%}
+  Prepares the school calendar from _data/events.yml (plus _data/sample_events.yml when site.show_samples is true). Sets:
+    cal_events — every event, oldest first
+    upcoming_events — the next `limit` events that haven't ended yet (default 5)
+  Dates may be quoted strings or YAML dates (Pages CMS may write either), so every comparison goes through
+  `date: "%Y-%m-%d"` and events are sorted by a "YYYY-MM-DD|index" text key.
+{%- endcomment -%}
+{%- assign ev_today = site.time | date: "%Y-%m-%d" -%}
+{%- assign ev_none = "" | split: "" -%}
+{%- assign ev_all = site.data.events | default: ev_none -%}
+{%- if site.show_samples -%}{%- assign ev_all = ev_all | concat: site.data.sample_events -%}{%- endif -%}
+
+{%- assign ev_keys = ev_none -%}
+{%- for ev in ev_all -%}
+  {%- if ev.start -%}
+    {%- assign ev_key = ev.start | date: "%Y-%m-%d" | append: "|" | append: forloop.index0 -%}
+    {%- assign ev_keys = ev_keys | push: ev_key -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign ev_keys = ev_keys | sort -%}
+
+{%- assign ev_limit = include.limit | default: 5 -%}
+{%- assign cal_events = ev_none -%}
+{%- assign upcoming_events = ev_none -%}
+{%- for ev_key in ev_keys -%}
+  {%- assign ev_index = ev_key | split: "|" | last | plus: 0 -%}
+  {%- assign ev = ev_all[ev_index] -%}
+  {%- assign cal_events = cal_events | push: ev -%}
+  {%- assign ev_end = ev.end | default: ev.start | date: "%Y-%m-%d" -%}
+  {%- if ev_end >= ev_today and upcoming_events.size < ev_limit -%}
+    {%- assign upcoming_events = upcoming_events | push: ev -%}
+  {%- endif -%}
+{%- endfor -%}

@@ -1,0 +1,22 @@
+# Header menu: six links at most (Udaya). `match` marks the link active on pages whose URL starts with it.
+# About, Academics and School life point at home-page sections until their own pages exist.
+main:
+  - { title: About, url: "/#about" }
+  - { title: Academics, url: "/#academics" }
+  - { title: School life, url: "/#life" }
+  - { title: Admissions, url: "/admissions/", match: "/admissions/" }
+  - { title: Notices, url: "/notices/", match: "/notices" }
+  - { title: Contact, url: "/contact/", match: "/contact/" }
+
+footer:
+  - heading: School
+    links:
+      - { title: About us, url: "/#about" }
+      - { title: Our values, url: "/#values" }
+      - { title: School life, url: "/#life" }
+  - heading: Parents
+    links:
+      - { title: Admissions, url: "/admissions/" }
+      - { title: Notice board, url: "/notices/" }
+      - { title: School calendar, url: "/notices/#calendar" }
+      - { title: Student portal, url: portal }

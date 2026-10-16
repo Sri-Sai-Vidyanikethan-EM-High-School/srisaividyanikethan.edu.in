@@ -1,0 +1,31 @@
+---
+layout: page
+permalink: /notices/
+title: Notices and school calendar
+description: Latest notices, circulars, holidays and exam dates from Sri Sai Vidyanikethan E.M School, Adapur, near Nandalur, YSR Kadapa district.
+eyebrow: Notices
+heading: Notices and school calendar
+lede: News and circulars from the school, newest first, and the year's holidays, exams and events.
+crumb: Notices
+---
+{%- include data/events.html -%}
+{%- assign all_notices = site.notices | sort: "date" | reverse -%}
+
+<section class="sv-section sv-section--paper" id="board">
+  <div class="sv-container">
+    {% include sv/section-heading.html eyebrow="Notice board" title="News and circulars" %}
+    <div class="sv-narrow">
+      {% include sv/notice-board.html notices=all_notices title="All notices" %}
+      <p class="sv-feed-link small"><a class="sv-link" href="{{ '/notices/feed.xml' | relative_url }}">{% include sv/icon.html name="rss" px=16 %}<span>Follow notices by RSS</span></a></p>
+    </div>
+  </div>
+</section>
+
+<section class="sv-section sv-section--sandal" id="calendar">
+  <div class="sv-container">
+    {% include sv/section-heading.html eyebrow="School calendar" title="Holidays, exams and events" %}
+    <div class="sv-narrow">
+      {% include sv/event-schedule.html events=cal_events title="2026–27" %}
+    </div>
+  </div>
+</section>

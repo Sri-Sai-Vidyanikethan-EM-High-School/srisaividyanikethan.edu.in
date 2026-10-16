@@ -1,0 +1,71 @@
+# Sri Sai Vidyanikethan — site settings.
+# GitHub Pages builds this site with Jekyll on every push to main.
+# After editing this file, restart `bundle exec jekyll serve` to see changes locally.
+
+title: Sri Sai Vidyanikethan E.M School, Adapur
+short_name: Sri Sai Vidyanikethan
+# Shown after the school's name in the home page's title, and as the fallback meta description.
+description: English-medium school, LKG to Class X
+url: https://srisaividyanikethan.edu.in
+baseurl: ""
+lang: en_IN
+timezone: Asia/Kolkata
+# Publish notices even if their date is later than the build time (a typo'd date must not hide a notice).
+future: true
+
+# jekyll-seo-tag: logo for Google, Twitter/X card, default share image (set per page with `image:`).
+logo: /assets/images/emblem/ssvn-emblem-on-chalk.png
+twitter:
+  username: srisaividya
+  card: summary_large_image
+# Google Search Console: paste the HTML-tag verification code here (or verify the domain by DNS instead).
+# webmaster_verifications:
+#   google: CODE
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Notices: one Markdown file per notice in _notices/ (see docs/website-plan.md §5).
+collections:
+  notices:
+    output: true
+    permalink: /notices/:year-:month-:day-:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: notices
+    values:
+      layout: notice
+      seo:
+        type: Article
+  - scope:
+      path: ""
+    values:
+      layout: default
+      image: /assets/images/share/ssvn-share.jpg
+  # Verification files are not pages for people: keep them out of the sitemap.
+  - scope:
+      path: "pinterest-6e078.html"
+    values:
+      sitemap: false
+
+feed:
+  collections:
+    notices:
+      path: /notices/feed.xml
+
+# Sample notices and events only appear in local previews (see _config.dev.yml).
+show_samples: false
+
+exclude:
+  - docs/
+  - tools/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/
+  - .pages.yml
+  - _config.dev.yml

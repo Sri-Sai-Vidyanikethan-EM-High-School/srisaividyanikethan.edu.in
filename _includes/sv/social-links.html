@@ -1,0 +1,6 @@
+{%- comment -%} SocialLinks — the school's official channels. Params: labels (true to show names), class (extra classes). {%- endcomment -%}
+<ul class="sv-social{% if include.labels %} sv-social--labels{% endif %}{% if include.class %} {{ include.class }}{% endif %}">
+  {%- for c in site.data.site.social %}
+  <li><a class="sv-social__link" href="{{ c.url }}" target="_blank" rel="noopener"{% unless include.labels %} aria-label="{{ c.name }}"{% endunless %}><span class="sv-social__mark">{% if c.icon %}{% include sv/icon.html name=c.icon %}{% else %}<span class="sv-social__glyph" aria-hidden="true">{{ c.glyph }}</span>{% endif %}</span>{% if include.labels %}<span>{{ c.name }}</span>{% endif %}</a></li>
+  {%- endfor %}
+</ul>

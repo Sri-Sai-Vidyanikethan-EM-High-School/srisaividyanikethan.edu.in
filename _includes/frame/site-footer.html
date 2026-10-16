@@ -1,0 +1,38 @@
+{%- comment -%} SiteFooter — the same on every page. Links: _data/navigation.yml → footer.
+  External links end in a no-wrap span (last word + mark) so the mark never wraps onto a line by itself. {%- endcomment -%}
+{%- assign ft_site = site.data.site -%}
+<footer class="sv-footer sv-muggu">
+  <div class="sv-container">
+    <div class="sv-footer__grid">
+      <div class="sv-footer__brand">
+        <img src="{{ '/assets/images/emblem/ssvn-emblem-on-chalk.png' | relative_url }}" alt="" width="88" height="88" loading="lazy">
+        <p class="sv-footer__name heading-3">{{ ft_site.name_full }}</p>
+        <p class="sv-footer__motto" lang="te">{{ ft_site.motto_te }}</p>
+        <p class="small sv-muted">{{ ft_site.motto_en }}</p>
+        {% include sv/social-links.html class="sv-footer__social" %}
+        <a class="sv-btn sv-btn--secondary sv-btn--md sv-footer__cta" href="{{ ft_site.booking_url }}" target="_blank" rel="noopener">{% include sv/icon.html name="calendar-check" px=18 %}<span>{{ ft_site.booking_label }}</span></a>
+      </div>
+      {%- for col in site.data.navigation.footer %}
+      <nav class="sv-footer__col" aria-label="{{ col.heading }}">
+        <p class="eyebrow sv-footer__h">{{ col.heading }}</p>
+        <ul>
+          {%- for link in col.links %}
+          {%- include resolve-link.html link=link.url %}
+          {%- if link_ext %}{% assign ft_words = link.title | split: " " %}{% assign ft_last = ft_words | last %}{% assign ft_rest = ft_words | pop | join: " " %}{% endif %}
+          <li><a href="{{ link_href }}"{% if link_ext %} target="_blank" rel="noopener"{% endif %}>{% if link_ext %}{% if ft_rest != "" %}{{ ft_rest }} {% endif %}<span class="sv-nowrap">{{ ft_last }}{% include sv/icon.html name="external-link" px=14 class="sv-ext" %}</span>{% else %}{{ link.title }}{% endif %}</a></li>
+          {%- endfor %}
+        </ul>
+      </nav>
+      {%- endfor %}
+      <nav class="sv-footer__col" aria-label="Visit">
+        <p class="eyebrow sv-footer__h">Visit</p>
+        <ul>
+          <li><a href="{{ ft_site.maps_url }}" target="_blank" rel="noopener">{% assign ft_words = ft_site.address_short | split: " " %}{{ ft_words | pop | join: " " }} <span class="sv-nowrap">{{ ft_words | last }}{% include sv/icon.html name="external-link" px=14 class="sv-ext" %}</span></a></li>
+          <li><a href="{{ ft_site.phone_href }}">{{ ft_site.phone }}</a></li>
+          <li><a href="mailto:{{ ft_site.email }}">{{ ft_site.email }}</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="sv-footer__legal small">{% include sv/sun.html w=36 horizon=true %}<span>© {{ site.time | date: "%Y" }} {{ ft_site.name_full }}</span></div>
+  </div>
+</footer>

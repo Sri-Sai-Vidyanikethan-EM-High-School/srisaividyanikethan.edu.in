@@ -1,0 +1,8 @@
+---
+layout: default
+---
+{%- comment -%}
+  An inner page: PageHeader from the page's front matter (eyebrow, title, title_te, lede, crumb), then the page's sections.
+{%- endcomment -%}
+{% include sv/page-header.html eyebrow=page.eyebrow title=page.heading title_te=page.title_te lede=page.lede crumb=page.crumb %}
+{{ content }}

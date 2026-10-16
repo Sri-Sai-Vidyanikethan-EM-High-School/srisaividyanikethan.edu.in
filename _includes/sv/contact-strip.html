@@ -1,0 +1,10 @@
+{%- comment -%}
+  ContactStrip — visit, call, WhatsApp and email. Param: stack (true for one column, e.g. beside office hours).
+{%- endcomment -%}
+{%- assign cs_site = site.data.site -%}
+<ul class="sv-contact"{% if include.stack %} style="grid-template-columns: 1fr"{% endif %}>
+  <li><a class="sv-contact__item" href="{{ cs_site.maps_url }}" target="_blank" rel="noopener"><span class="sv-contact__icon">{% include sv/icon.html name="map-pin" %}</span><span class="sv-contact__txt"><span class="sv-contact__label small">Visit</span><span class="sv-contact__value">{{ cs_site.address_short }}</span></span></a></li>
+  <li><a class="sv-contact__item" href="{{ cs_site.phone_href }}"><span class="sv-contact__icon">{% include sv/icon.html name="phone" %}</span><span class="sv-contact__txt"><span class="sv-contact__label small">Call the office</span><span class="sv-contact__value">{{ cs_site.phone }}</span></span></a></li>
+  <li><a class="sv-contact__item" href="{{ cs_site.whatsapp_url }}" target="_blank" rel="noopener"><span class="sv-contact__icon">{% include sv/icon.html name="message-circle" %}</span><span class="sv-contact__txt"><span class="sv-contact__label small">WhatsApp us</span><span class="sv-contact__value">{{ cs_site.phone }}</span></span></a></li>
+  <li><a class="sv-contact__item" href="mailto:{{ cs_site.email }}"><span class="sv-contact__icon">{% include sv/icon.html name="mail" %}</span><span class="sv-contact__txt"><span class="sv-contact__label small">Email</span><span class="sv-contact__value">{{ cs_site.email }}</span></span></a></li>
+</ul>

@@ -1,0 +1,126 @@
+# Pages CMS (https://pagescms.org) — a browser editor for notices and the school calendar.
+# The headmistress signs in with her email address (no GitHub account); every save is a commit to this repository,
+# and GitHub Pages republishes the site about a minute later. Setup and use: docs/pages-cms.md
+#
+# The fields below match what the site's templates read (_layouts/notice.html, _includes/sv/notice-item.html,
+# _includes/data/events.html) and what the email script writes (tools/email-to-notice/Code.gs). Change them together.
+
+media:
+  - name: notices
+    label: Notice files
+    input: assets/notices
+    output: /assets/notices
+    categories: [document, image]
+    rename: safe
+
+content:
+  - name: notices
+    label: Notices
+    type: collection
+    path: _notices
+    filename:
+      template: "{year}-{month}-{day}-{primary}.md"
+      field: false
+    exclude:
+      - 2026-10-03-sample-quarterly-exams.md
+      - 2026-10-10-sample-admissions-open.md
+      - 2026-10-14-sample-vijayadashami-holiday.md
+    view:
+      fields: [title, date, category]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+        description: Say what happens and when, e.g. "School closed on 20 October for Vijayadashami".
+      - name: title_te
+        label: Telugu title (optional)
+        type: string
+        description: Please have a teacher write it rather than using a translation app.
+      - name: date
+        label: Date posted
+        type: date
+        required: true
+        description: Notices are listed newest first by this date.
+        options:
+          time: true
+          format: "yyyy-MM-dd HH:mm"
+      - name: category
+        label: Category
+        type: select
+        default: General
+        options:
+          values: [Holiday, Admissions, Academics, Event, Celebration, General]
+      - name: urgent
+        label: Urgent
+        type: boolean
+        default: false
+        description: Closures and safety notices only. The notice is shown in red until the "Urgent until" date.
+      - name: expires
+        label: Urgent until
+        type: date
+        default: ""
+        description: For urgent notices. Leave empty to keep it red until you untick Urgent.
+        options:
+          format: "yyyy-MM-dd"
+      - name: attachments
+        label: Downloads (PDFs or photos)
+        type: file
+        options:
+          media: notices
+          multiple:
+            max: 10
+      - name: body
+        label: Notice text
+        type: rich-text
+        options:
+          format: markdown
+          media: notices
+
+  - name: calendar
+    label: School calendar
+    type: file
+    path: _data/events.yml
+    format: yaml
+    list: true
+    fields:
+      - name: title
+        label: What
+        type: string
+        required: true
+        description: e.g. "Dasara holidays", "Parent–teacher meeting".
+      - name: start
+        label: Date (or first day)
+        type: date
+        required: true
+        options:
+          format: "yyyy-MM-dd"
+      - name: end
+        label: Last day (for holidays and exams that run several days)
+        type: date
+        default: ""
+        options:
+          format: "yyyy-MM-dd"
+      - name: type
+        label: Type
+        type: select
+        required: true
+        options:
+          values:
+            - name: holiday
+              label: Holiday
+            - name: exam
+              label: Exam
+            - name: event
+              label: Event
+            - name: meeting
+              label: Meeting
+      - name: note
+        label: Note (optional)
+        type: string
+        description: Times or reopening dates, e.g. "9:30 am" or "school reopens 26 October".

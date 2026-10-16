@@ -1,0 +1,10 @@
+{%- comment -%} OfficeHours — the week's hours; site.js marks today. {%- endcomment -%}
+<div class="sv-hours">
+  <p class="sv-hours__title heading-3">{% include sv/icon.html name="clock" px=22 %}<span>Office hours</span></p>
+  <ul class="sv-hours__list">
+    {%- for row in site.data.site.office_hours %}
+    <li class="sv-hours__row{% if row.closed %} is-closed{% endif %}" data-day="{{ row.day }}"><span class="sv-hours__day">{{ row.day }}</span><span class="sv-hours__time">{{ row.time }}</span></li>
+    {%- endfor %}
+  </ul>
+  <p class="sv-hours__note small">{{ site.data.site.office_hours_note }}</p>
+</div>

@@ -1,0 +1,47 @@
+---
+layout: page
+permalink: /admissions/
+title: Admissions
+description: Admissions to Sri Sai Vidyanikethan E.M School, Adapur — LKG to Class X, AP State Board. School buses along the Nandalur – Pothapi Road. Call +91 96768 59202.
+eyebrow: Admissions
+heading: Join us, from LKG to Class X
+lede: Come and see a school day for yourself, then apply online or at the school office. We are happy to answer your questions on the phone or WhatsApp.
+crumb: Admissions
+---
+{%- assign s = site.data.site -%}
+
+<section class="sv-section sv-section--paper" id="apply">
+  <div class="sv-container">
+    {% include sv/section-heading.html eyebrow="How to join" title="Three simple steps" lede="Most families start with a visit to the school." %}
+    <div class="sv-grid">
+      <a class="sv-info sv-info--saffron is-link" href="{{ s.booking_url }}" target="_blank" rel="noopener"><span class="sv-info__icon">{% include sv/icon.html name="calendar-check" px=24 %}</span><span class="sv-info__eyebrow">Step 1</span><span class="sv-info__title heading-3">Book an admission visit</span><span class="sv-info__text">Pick a time to meet the headmistress and walk the campus with your child.</span><span class="sv-info__more"><span>Choose a time</span>{% include sv/icon.html name="external-link" px=16 %}</span></a>
+      <a class="sv-info sv-info--neem is-link" href="{{ s.application_url }}" target="_blank" rel="noopener"><span class="sv-info__icon">{% include sv/icon.html name="clipboard-list" px=24 %}</span><span class="sv-info__eyebrow">Step 2</span><span class="sv-info__title heading-3">Apply online</span><span class="sv-info__text">Fill in the school application form. It opens in a new tab.</span><span class="sv-info__more"><span>Open the form</span>{% include sv/icon.html name="external-link" px=16 %}</span></a>
+      <a class="sv-info sv-info--marigold is-link" href="{{ s.phone_href }}"><span class="sv-info__icon">{% include sv/icon.html name="phone" px=24 %}</span><span class="sv-info__eyebrow">Step 3</span><span class="sv-info__title heading-3">Talk to the office</span><span class="sv-info__text">Questions about classes, fees or documents? The office is open {{ s.office_hours_short }}.</span><span class="sv-info__more"><span>Call {{ s.phone }}</span>{% include sv/icon.html name="arrow-right" px=16 %}</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sv-section sv-section--sandal" id="buses">
+  <div class="sv-container">
+    {%- capture bus_lede %}Our buses serve these villages and towns along and near the {{ s.bus_road }}, and others nearby. Call the office to check the stop closest to your home.{% endcapture %}
+    {% include sv/section-heading.html eyebrow="School buses" title="Villages and towns on our bus routes" lede=bus_lede %}
+    <div class="sv-places">
+      <p class="sv-places__title heading-3">{% include sv/icon.html name="bus" px=22 %}<span>{{ s.bus_road }}</span></p>
+      <ul class="sv-places__list">
+        {%- for v in s.bus_villages %}
+        <li>{{ v }}</li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sv-section sv-section--paper" id="questions">
+  <div class="sv-container">
+    {% include sv/section-heading.html eyebrow="Questions" title="Ask us before you apply" %}
+    <div class="sv-split">
+      {% include sv/contact-strip.html stack=true %}
+      {% include sv/office-hours.html %}
+    </div>
+  </div>
+</section>

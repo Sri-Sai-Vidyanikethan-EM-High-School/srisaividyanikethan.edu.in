@@ -1,0 +1,85 @@
+# Every contact detail and link the site uses, in one place (Udaya README → "Calls to action").
+# Change a value here and every page picks it up.
+
+name: Sri Sai Vidyanikethan
+# The official name, exactly as on the school's Google Maps listing — keep the two identical (search engines compare them).
+name_full: Sri Sai Vidyanikethan E.M School, Adapur
+former_names: [Sri Sai Vidyanikethan E.M. High School]
+board: Andhra Pradesh State Board
+school_type: Co-educational
+district: YSR Kadapa
+name_te: శ్రీ సాయి విద్యానికేతన్
+place_te: ఆడపూరు
+since: 1996
+
+motto_te: సర్వే విద్యార్థీనాం విజ్ఞానోభవంతు!
+motto_tr: Sarve vidyārthīnām vijñānō bhavantu
+motto_en: May every student be blessed with true knowledge.
+
+address: 2-59 Pothapi Road, Adapur, Nandalur, YSR Kadapa district, Andhra Pradesh 516150
+# The same address in parts, plus the map pin from the school's Google listing — for search engines (schema.org).
+address_parts: { street: 2-59 Pothapi Road, locality: "Adapur, Nandalur", region: Andhra Pradesh, postal_code: "516150", country: IN }
+geo: { latitude: 14.268641, longitude: 79.145593 }
+address_short: 2-59 Pothapi Road, Adapur, Nandalur 516150
+area: Adapur, Nandalur
+maps_url: https://maps.app.goo.gl/9ca2EJzLpjD9KVHt8   # the school on Google Maps: top bar, contact card, footer
+
+phone: "+91 96768 59202"
+phone_href: "tel:+919676859202"
+whatsapp_url: "https://wa.me/919676859202?text=Respected%20Madam%2C%20"   # opens WhatsApp with "Respected Madam, " typed
+email: mail@srisaividyanikethan.edu.in
+
+booking_url: https://calendar.app.google/d6eZnhDmRZiM9wBv6
+booking_label: Plan a visit   # the main action's label: header, hero, call-to-action band, footer
+portal_url: https://eskooly.com/bb/StudentPortal/signin.php
+application_url: https://forms.gle/fUD2fsfQXaqXvpwZ7   # the admission form (Google Form)
+youtube_channel: https://www.youtube.com/@srisaividyanikethan
+
+office_hours_short: "Mon – Sat, 9:00 am – 5:00 pm"
+office_hours:
+  - { day: Monday, time: "9:00 am – 5:00 pm" }
+  - { day: Tuesday, time: "9:00 am – 5:00 pm" }
+  - { day: Wednesday, time: "9:00 am – 5:00 pm" }
+  - { day: Thursday, time: "9:00 am – 5:00 pm" }
+  - { day: Friday, time: "9:00 am – 5:00 pm" }
+  - { day: Saturday, time: "9:00 am – 5:00 pm" }
+  - { day: Sunday, time: Closed, closed: true }
+office_hours_note: Closed on public holidays.
+
+social:
+  - { name: Facebook, url: "https://www.facebook.com/ssvnschool", icon: facebook }
+  - { name: Instagram, url: "https://www.instagram.com/ssvn.school/", icon: instagram }
+  - { name: YouTube, url: "https://www.youtube.com/@srisaividyanikethan", icon: youtube }
+  - { name: X (Twitter), url: "https://x.com/srisaividya", glyph: X }
+  - { name: Pinterest, url: "https://in.pinterest.com/srisaividya/", glyph: P }
+
+# Villages and towns the school buses serve, along and near the Nandalur – Pothapi Road (Admissions page and search engines).
+bus_road: Nandalur – Pothapi Road
+bus_villages:
+  - Adapur
+  - Agraharam
+  - Chintalakunta
+  - Harijanawada
+  - Jangalapalle
+  - Komarunipalle
+  - Kommuru
+  - Konapuram
+  - Kumpinipuram
+  - Kunda Nellore
+  - Lebaka
+  - Lebaka Manga Mamba Puram
+  - Mallelapatnam
+  - Marripalli
+  - Nagireddipalle
+  - Nallathimmayapalle
+  - Nandalur
+  - Nookinenipalle
+  - Patur
+  - Pothapi
+  - Rachapalli
+  - Ramamambapuram
+  - Rangayapalle
+  - Tangutur Vengamambapuram
+  - Tanguturu
+  - Thimmarajupalle
+  - Yellamarajupalle

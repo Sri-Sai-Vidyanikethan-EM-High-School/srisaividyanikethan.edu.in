@@ -1,0 +1,10 @@
+# The school calendar — edit it in Pages CMS ("School calendar"), or by hand:
+#
+#   - start: 2026-12-05          # YYYY-MM-DD
+#     end: 2026-12-05            # optional, for ranges
+#     title: Parent–teacher meeting
+#     type: meeting              # holiday · exam · event · meeting
+#     note: 9:30 am              # optional: times, reopening dates
+#
+# Order doesn't matter. Pages CMS rewrites this file when it saves, so these comments may disappear.
+[]

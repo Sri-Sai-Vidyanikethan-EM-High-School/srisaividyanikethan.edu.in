@@ -1,0 +1,19 @@
+{%- comment -%} CtaBand — the admissions invitation, once per page before the contact section. Content: _data/home.yml → cta. {%- endcomment -%}
+{%- assign cta = site.data.home.cta -%}
+<section class="sv-cta"{% if include.id %} id="{{ include.id }}"{% endif %}>
+  <div class="sv-cta__sun" aria-hidden="true"></div>
+  <div class="sv-container sv-cta__inner">
+    <div class="sv-cta__text">
+      <p class="sv-cta__eyebrow">{{ cta.eyebrow }}</p>
+      <h2 class="sv-cta__title heading-1">{{ cta.title }}</h2>
+      {%- if cta.title_te %}
+      <p class="sv-cta__te" lang="te">{{ cta.title_te }}</p>
+      {%- endif %}
+      <p class="sv-cta__body body-l">{{ cta.body }}</p>
+    </div>
+    <div class="sv-cta__actions">
+      <a class="sv-btn sv-btn--ink sv-btn--lg" href="{{ site.data.site.booking_url }}" target="_blank" rel="noopener">{% include sv/icon.html name="calendar-check" %}<span>{{ site.data.site.booking_label }}</span></a>
+      <a class="sv-btn sv-btn--secondary sv-btn--lg" href="{{ site.data.site.phone_href }}">{% include sv/icon.html name="phone" %}<span>Call the office</span></a>
+    </div>
+  </div>
+</section>

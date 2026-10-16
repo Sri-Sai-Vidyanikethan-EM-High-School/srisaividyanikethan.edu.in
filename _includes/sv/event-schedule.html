@@ -1,0 +1,29 @@
+{%- comment -%}
+  EventSchedule — holidays, exams, events and meetings grouped under month headings.
+  Params: events (list, oldest first), title, more_url + more_label (link in the header), download_url (printable PDF),
+          upcoming (true on Home: site.js hides events that have ended since the last build).
+{%- endcomment -%}
+<div class="sv-sched"{% if include.upcoming %} data-upcoming{% endif %}>
+  <div class="sv-board__head"><h3 class="heading-2">{% include sv/icon.html name="calendar-days" px=24 %}<span>{{ include.title | default: "School calendar" }}</span></h3>
+    {%- if include.download_url %}<a class="sv-link label" href="{{ include.download_url | relative_url }}">{% include sv/icon.html name="download" px=16 %} Download PDF</a>
+    {%- elsif include.more_url %}<a class="sv-link label" href="{{ include.more_url | relative_url }}">{{ include.more_label | default: "Full calendar" }}</a>{% endif %}</div>
+  {%- assign es_months = include.events | group_by_exp: "es_ev", "es_ev.start | date: '%B %Y'" %}
+  {%- for es_month in es_months %}
+  <section class="sv-sched__month"><h4 class="sv-sched__label">{{ es_month.name }}</h4><ul class="sv-sched__list">
+    {%- for es_ev in es_month.items %}
+    {%- assign es_type = site.data.event_types[es_ev.type] | default: site.data.event_types.event %}
+    {%- assign es_start = es_ev.start | date: "%Y-%m-%d" %}
+    {%- assign es_end = es_ev.end | default: es_ev.start | date: "%Y-%m-%d" %}
+    {%- capture es_when -%}
+      {%- if es_end != es_start -%}
+        {%- assign es_sm = es_ev.start | date: "%m" -%}{%- assign es_em = es_ev.end | date: "%m" -%}
+        {%- if es_sm == es_em -%}{{ es_ev.start | date: "%-d" }} – {{ es_ev.end | date: "%-d %B" }}{%- else -%}{{ es_ev.start | date: "%-d %B" }} – {{ es_ev.end | date: "%-d %B" }}{%- endif -%}
+      {%- else -%}{{ es_ev.start | date: "%-d %B" }}{%- endif -%}
+      {%- if es_ev.note and es_ev.note != "" %} · {{ es_ev.note }}{% endif -%}
+    {%- endcapture %}
+    <li class="sv-sched__row" data-end="{{ es_end }}"><time class="sv-date" datetime="{{ es_start }}"><span class="sv-date__d">{{ es_ev.start | date: "%-d" }}</span><span class="sv-date__m">{{ es_ev.start | date: "%b" }}</span></time><div class="sv-sched__body"><p class="sv-sched__title">{{ es_ev.title }}</p><p class="sv-sched__when small">{{ es_when }}</p></div><span class="sv-badge{% unless es_type.tone == 'neutral' %} sv-badge--{{ es_type.tone }}{% endunless %}">{% include sv/icon.html name=es_type.icon px=14 %}<span>{{ es_ev.label | default: es_type.label }}</span></span></li>
+    {%- endfor %}
+  </ul></section>
+  {%- endfor %}
+  <p class="sv-empty"{% if include.events.size > 0 %} hidden{% endif %}>Nothing on the calendar right now. Holidays, exams and events will appear here.</p>
+</div>

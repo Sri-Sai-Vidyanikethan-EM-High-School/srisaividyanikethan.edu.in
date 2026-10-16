@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+{% include frame/head.html %}
+</head>
+<body>
+{% include frame/icon-sprite.html %}
+<a class="sv-skip" href="#main">Skip to content</a>
+{% include frame/utility-bar.html %}
+{% include frame/site-header.html %}
+<main id="main">
+{{ content }}
+</main>
+{% include frame/site-footer.html %}
+<script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
+</body>
+</html>

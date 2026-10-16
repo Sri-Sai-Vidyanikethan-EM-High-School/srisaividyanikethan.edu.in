@@ -1,0 +1,19 @@
+{%- comment -%}
+  Turns a link key from the data files into an address. Sets `link_href` and `link_ext` (true = opens another site in a new tab).
+  Keys: booking, portal, application, whatsapp, phone, email, maps, youtube. Anything else is treated as a site path or full URL.
+  Usage: {% include resolve-link.html link=item.link %}<a href="{{ link_href }}" ...>
+{%- endcomment -%}
+{%- assign link_ext = true -%}
+{%- case include.link -%}
+  {%- when "booking" -%}{%- assign link_href = site.data.site.booking_url -%}
+  {%- when "portal" -%}{%- assign link_href = site.data.site.portal_url -%}
+  {%- when "application" -%}{%- assign link_href = site.data.site.application_url -%}
+  {%- when "whatsapp" -%}{%- assign link_href = site.data.site.whatsapp_url -%}
+  {%- when "maps" -%}{%- assign link_href = site.data.site.maps_url -%}
+  {%- when "youtube" -%}{%- assign link_href = site.data.site.youtube_channel -%}
+  {%- when "phone" -%}{%- assign link_href = site.data.site.phone_href -%}{%- assign link_ext = false -%}
+  {%- when "email" -%}{%- assign link_href = "mailto:" | append: site.data.site.email -%}{%- assign link_ext = false -%}
+  {%- else -%}
+    {%- if include.link contains "://" -%}{%- assign link_href = include.link -%}
+    {%- else -%}{%- assign link_href = include.link | relative_url -%}{%- assign link_ext = false -%}{%- endif -%}
+{%- endcase -%}

@@ -1,5 +1,5 @@
 {
-  "name": "Sri Sai Vidyanikethan EM High School",
+  "name": "Sri Sai Vidyanikethan E.M School, Adapur",
   "short_name": "SSVN",
   "icons": [
     {
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#000000",
+  "theme_color": "#fff9ef",
+  "background_color": "#fff9ef",
   "display": "standalone"
 }

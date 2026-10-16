@@ -1,0 +1,15 @@
+{%- assign ub_site = site.data.site -%}
+<div class="sv-utility">
+  <div class="sv-utility__inner">
+    <ul class="sv-utility__info">
+      <li><a href="{{ ub_site.maps_url }}" target="_blank" rel="noopener">{% include sv/icon.html name="map-pin" px=16 %}<span>{{ ub_site.area }}</span></a></li>
+      <li class="is-keep"><a href="{{ ub_site.phone_href }}">{% include sv/icon.html name="phone" px=16 %}<span>{{ ub_site.phone }}</span></a></li>
+      <li>{% include sv/icon.html name="clock" px=16 %}<span>Office: {{ ub_site.office_hours_short }}</span></li>
+    </ul>
+    <div class="sv-utility__end">
+      <span class="sv-utility__badge">{% include sv/sun.html w=22 %}<span>Since {{ ub_site.since }}</span></span>
+      <a class="sv-utility__link" href="{{ ub_site.portal_url }}" target="_blank" rel="noopener">{% include sv/icon.html name="log-in" px=16 %}<span>Student login</span>{% include sv/icon.html name="external-link" px=14 %}</a>
+      <button type="button" class="sv-theme" data-theme-toggle aria-label="Switch to dark theme">{% include sv/icon.html name="moon" px=16 class="sv-theme__moon" %}{% include sv/icon.html name="sun" px=16 class="sv-theme__sun" %}</button>
+    </div>
+  </div>
+</div>
