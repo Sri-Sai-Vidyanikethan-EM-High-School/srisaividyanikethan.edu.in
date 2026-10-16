@@ -28,13 +28,22 @@
   var sectionLinks = [].filter.call(document.querySelectorAll('.sv-nav__link'), function (a) {
     return a.hash && a.pathname === location.pathname && document.getElementById(a.hash.slice(1));
   });
+  // The first section of the page (the hero, "About") opens at the very top, utility bar included;
+  // any other section stops just below the sticky header.
+  var firstSection = document.querySelector('main > :first-child');
+  function scrollToSection(target) {
+    if (target === firstSection) window.scrollTo({ top: 0 }); else target.scrollIntoView(); // smooth unless reduced motion (site.css)
+  }
+  if (location.hash && firstSection && firstSection.id === location.hash.slice(1)) {
+    window.addEventListener('load', function () { window.scrollTo({ top: 0, behavior: 'instant' }); }); // arriving from another page
+  }
   sectionLinks.forEach(function (a) {
     a.addEventListener('click', function (e) {
       var target = document.getElementById(a.hash.slice(1));
       e.preventDefault();
       // Close the mobile menu first: the header shrinks, and scrolling afterwards lands the section below it.
       if (header && menuBtn) setMenu(false);
-      target.scrollIntoView(); // smooth unless the visitor prefers reduced motion (site.css)
+      scrollToSection(target);
       if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
       target.focus({ preventScroll: true }); // keyboard and screen-reader users continue from the section
       history.pushState(null, '', a.hash);

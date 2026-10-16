@@ -12,7 +12,7 @@ footer:
   - heading: School
     links:
       - { title: About us, url: "/#about" }
-      - { title: Our inspiration, url: "/#inspiration" }
+      - { title: Our values, url: "/#values" }
       - { title: School life, url: "/#life" }
   - heading: Parents
     links:
