@@ -45,9 +45,9 @@ gallery:
   eyebrow: Life at school
   title: Stages, trips and celebrations
   items:
-    - { image: /assets/images/campus/stage-dance-girls.jpg, alt: Girls in traditional langa voni performing a group dance on the decorated annual-day stage, category: Cultural arts, title: Annual Day dances, text: Students perform traditional dances on the school stage. }
-    - { image: /assets/images/campus/temple-trip.jpg, alt: Students and teachers gathered for a group photo in a carved stone temple mandapam, category: Trips and outings, title: Temple visit, text: "Learning our heritage, together, on a school trip." }
-    - { image: /assets/images/campus/water-park.jpg, alt: Children playing in the pool with rubber rings on a supervised water-park outing, category: Trips and outings, title: A day at the water park, text: Supervised summer outings for every class. }
+    - { image: /assets/images/campus/stage-dance-girls.jpg, width: 1200, height: 900, alt: Girls in traditional langa voni performing a group dance on the decorated annual-day stage, category: Cultural arts, title: Annual Day dances, text: Students perform traditional dances on the school stage. }
+    - { image: /assets/images/campus/temple-trip.jpg, width: 1200, height: 540, alt: Students and teachers gathered for a group photo in a carved stone temple mandapam, category: Trips and outings, title: Temple visit, text: "Learning our heritage, together, on a school trip." }
+    - { image: /assets/images/campus/water-park.jpg, width: 1200, height: 900, alt: Children playing in the pool with rubber rings on a supervised water-park outing, category: Trips and outings, title: A day at the water park, text: Supervised summer outings for every class. }
   video:
     id: yf1P7pAKJz8
     category: Trips and outings

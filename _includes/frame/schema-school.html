@@ -1,0 +1,39 @@
+{%- comment -%}
+  The school as schema.org structured data, so Google can show its address, map pin, phone, hours and profiles.
+  Included on pages with `schema_school: true` (Home, Contact). All values come from _data/site.yml.
+  Check it with https://search.google.com/test/rich-results after publishing.
+{%- endcomment -%}
+{%- assign sc = site.data.site -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "School",
+  "@id": {{ "/#school" | absolute_url | jsonify }},
+  "name": {{ sc.name_full | jsonify }},
+  "alternateName": [{{ sc.google_listing_name | jsonify }}, {{ sc.name | jsonify }}, {{ sc.name_te | jsonify }}, "SSVN"],
+  "description": {{ site.data.home.hero.lede | jsonify }},
+  "url": {{ "/" | absolute_url | jsonify }},
+  "logo": {{ site.logo | absolute_url | jsonify }},
+  "image": [{{ "/assets/images/share/ssvn-share.jpg" | absolute_url | jsonify }}, {{ site.logo | absolute_url | jsonify }}],
+  "foundingDate": {{ sc.since | append: "" | jsonify }},
+  "telephone": {{ sc.phone | jsonify }},
+  "email": {{ sc.email | jsonify }},
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": {{ sc.address_parts.street | jsonify }},
+    "addressLocality": {{ sc.address_parts.locality | jsonify }},
+    "addressRegion": {{ sc.address_parts.region | jsonify }},
+    "postalCode": {{ sc.address_parts.postal_code | jsonify }},
+    "addressCountry": {{ sc.address_parts.country | jsonify }}
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": {{ sc.geo.latitude }}, "longitude": {{ sc.geo.longitude }} },
+  "hasMap": {{ sc.maps_url | jsonify }},
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "09:00",{% comment %} keep in step with office_hours in site.yml {% endcomment %}
+    "closes": "17:00"
+  }],
+  "sameAs": [{% for c in sc.social %}{{ c.url | jsonify }}{% unless forloop.last %}, {% endunless %}{% endfor %}]
+}
+</script>

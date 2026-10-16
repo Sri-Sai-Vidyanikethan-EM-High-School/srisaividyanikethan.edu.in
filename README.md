@@ -37,4 +37,6 @@ Open http://127.0.0.1:4000. The extra config and `--unpublished` show the **samp
 
 Writing an include? Variables assigned in an include are visible to the page that uses it, so prefix them (`ni_`, `es_`, …). Don't name a parameter `size`, `first` or `last`: Liquid reads those as properties of the parameter list.
 
+Search engines: [docs/seo.md](docs/seo.md) (what's built in, and the Google steps after launch).
+
 The plan for the rest of the site is in `docs/website-plan.md`.

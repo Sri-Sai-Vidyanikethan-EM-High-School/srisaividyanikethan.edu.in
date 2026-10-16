@@ -12,6 +12,10 @@ motto_tr: Sarve vidyārthīnām vijñānō bhavantu
 motto_en: May every student be blessed with true knowledge.
 
 address: 2-59 Pothapi Road, Adapur, Nandalur, Andhra Pradesh 516150
+# The same address in parts, plus the map pin from the school's Google listing — for search engines (schema.org).
+address_parts: { street: 2-59 Pothapi Road, locality: "Adapur, Nandalur", region: Andhra Pradesh, postal_code: "516150", country: IN }
+geo: { latitude: 14.268641, longitude: 79.145593 }
+google_listing_name: "Sri Sai Vidyanikethan E.M School, Adapur"   # the name on Google Maps; keep the two consistent
 address_short: 2-59 Pothapi Road, Adapur, Nandalur 516150
 area: Adapur, Nandalur
 maps_url: https://maps.app.goo.gl/9ca2EJzLpjD9KVHt8   # the school on Google Maps: top bar, contact card, footer

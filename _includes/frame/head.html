@@ -5,6 +5,12 @@
   (function () { try { var t = localStorage.getItem('ssvn-theme'); if (t === 'dawn' || t === 'dhuni') document.documentElement.setAttribute('data-theme', t); } catch (e) {} })();
 </script>
 {% seo %}
+{%- if page.robots %}
+<meta name="robots" content="{{ page.robots }}">
+{%- endif %}
+{%- if page.schema_school %}
+{% include frame/schema-school.html %}
+{%- endif %}
 <link rel="icon" type="image/png" href="{{ '/favicon-96x96.png' | relative_url }}" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}">
 <link rel="shortcut icon" href="{{ '/favicon.ico' | relative_url }}">
@@ -13,8 +19,10 @@
 <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
 <meta name="theme-color" content="#fff9ef" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1a120c" media="(prefers-color-scheme: dark)">
-{% feed_meta %}
+<link rel="alternate" type="application/atom+xml" title="Notices — {{ site.data.site.name }}" href="{{ '/notices/feed.xml' | absolute_url }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Same font stylesheet ssvn.css @imports: linking it here starts the download in parallel instead of after ssvn.css. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@400;500;600;700&family=Anek+Telugu:wght@400;500;600&family=Tiro+Telugu:ital@0;1&family=Young+Serif&display=swap">
 <link rel="stylesheet" href="{{ '/assets/css/ssvn.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">

@@ -1,6 +1,7 @@
 ---
 title: Sri Sai Vidyanikethan E.M. High School, Adapur
-description: An English-medium school in Adapur, near Nandalur, Andhra Pradesh â€” LKG to Class X.
+description: English-medium school in Adapur, near Nandalur, Andhra Pradesh, since 1996. LKG to Class X, caring teachers and school buses to 20+ villages. Plan a visit.
+schema_school: true
 ---
 {%- assign h = site.data.home -%}
 {%- assign s = site.data.site -%}
@@ -12,7 +13,7 @@ description: An English-medium school in Adapur, near Nandalur, Andhra Pradesh â
   <div class="sv-container sv-hero__grid">
     <div class="sv-hero__text">
       <p class="sv-eyebrow">{% include sv/sun.html %}<span>{{ h.hero.eyebrow }}</span></p>
-      <h1 class="sv-hero__motto" lang="te">{{ s.motto_te }}</h1>
+      <h1 class="sv-hero__motto"><span class="sv-visually-hidden">{{ s.name_full }}, Adapur â€” </span><span lang="te">{{ s.motto_te }}</span></h1>
       <p class="sv-hero__motto-en">{{ s.motto_en }}</p>
       <p class="sv-hero__lede body-l">{{ h.hero.lede }}</p>
       <div class="sv-hero__actions">
@@ -86,7 +87,7 @@ description: An English-medium school in Adapur, near Nandalur, Andhra Pradesh â
     {% include sv/section-heading.html eyebrow=h.gallery.eyebrow title=h.gallery.title %}
     <div class="sv-grid">
       {%- for g in h.gallery.items %}
-      <figure class="sv-gallery"><div class="sv-arch sv-arch--paper"><div class="sv-arch__door" style="aspect-ratio: 4 / 3"><img src="{{ g.image | relative_url }}" alt="{{ g.alt }}" loading="lazy" style="object-fit: cover"></div></div><figcaption class="sv-gallery__cap"><span class="sv-gallery__cat">{{ g.category }}</span><span class="sv-gallery__title heading-3">{{ g.title }}</span><span class="sv-gallery__text small">{{ g.text }}</span></figcaption></figure>
+      <figure class="sv-gallery"><div class="sv-arch sv-arch--paper"><div class="sv-arch__door" style="aspect-ratio: 4 / 3"><img src="{{ g.image | relative_url }}" alt="{{ g.alt }}" width="{{ g.width }}" height="{{ g.height }}" loading="lazy" decoding="async" style="object-fit: cover"></div></div><figcaption class="sv-gallery__cap"><span class="sv-gallery__cat">{{ g.category }}</span><span class="sv-gallery__title heading-3">{{ g.title }}</span><span class="sv-gallery__text small">{{ g.text }}</span></figcaption></figure>
       {%- endfor %}
     </div>
     {%- assign v = h.gallery.video %}
@@ -94,7 +95,7 @@ description: An English-medium school in Adapur, near Nandalur, Andhra Pradesh â
       <figure class="sv-video">
         <div class="sv-video__stage">
           <button type="button" class="sv-video__btn" data-video="{{ v.id }}" aria-label="Play video: {{ v.title }}">
-            <span class="sv-video__poster"><img src="https://i.ytimg.com/vi/{{ v.id }}/hqdefault.jpg" alt="" loading="lazy"><span class="sv-video__play" aria-hidden="true"><svg viewBox="0 0 100 100" width="112" height="112"><g class="sv-video__rays"><line x1="84.0" y1="50.0" x2="96.0" y2="50.0"/><line x1="79.4" y1="67.0" x2="86.4" y2="71.0"/><line x1="67.0" y1="79.4" x2="73.0" y2="89.8"/><line x1="50.0" y1="84.0" x2="50.0" y2="92.0"/><line x1="33.0" y1="79.4" x2="27.0" y2="89.8"/><line x1="20.6" y1="67.0" x2="13.6" y2="71.0"/><line x1="16.0" y1="50.0" x2="4.0" y2="50.0"/><line x1="20.6" y1="33.0" x2="13.6" y2="29.0"/><line x1="33.0" y1="20.6" x2="27.0" y2="10.2"/><line x1="50.0" y1="16.0" x2="50.0" y2="8.0"/><line x1="67.0" y1="20.6" x2="73.0" y2="10.2"/><line x1="79.4" y1="33.0" x2="86.4" y2="29.0"/></g><circle class="sv-video__disc" cx="50" cy="50" r="28"/><path class="sv-video__tri" d="M44 38 L64 50 L44 62 Z"/></svg></span><span class="sv-video__label">{% include sv/icon.html name="youtube" px=18 %}<span>Watch on YouTube</span></span></span>
+            <span class="sv-video__poster"><img src="https://i.ytimg.com/vi/{{ v.id }}/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async"><span class="sv-video__play" aria-hidden="true"><svg viewBox="0 0 100 100" width="112" height="112"><g class="sv-video__rays"><line x1="84.0" y1="50.0" x2="96.0" y2="50.0"/><line x1="79.4" y1="67.0" x2="86.4" y2="71.0"/><line x1="67.0" y1="79.4" x2="73.0" y2="89.8"/><line x1="50.0" y1="84.0" x2="50.0" y2="92.0"/><line x1="33.0" y1="79.4" x2="27.0" y2="89.8"/><line x1="20.6" y1="67.0" x2="13.6" y2="71.0"/><line x1="16.0" y1="50.0" x2="4.0" y2="50.0"/><line x1="20.6" y1="33.0" x2="13.6" y2="29.0"/><line x1="33.0" y1="20.6" x2="27.0" y2="10.2"/><line x1="50.0" y1="16.0" x2="50.0" y2="8.0"/><line x1="67.0" y1="20.6" x2="73.0" y2="10.2"/><line x1="79.4" y1="33.0" x2="86.4" y2="29.0"/></g><circle class="sv-video__disc" cx="50" cy="50" r="28"/><path class="sv-video__tri" d="M44 38 L64 50 L44 62 Z"/></svg></span><span class="sv-video__label">{% include sv/icon.html name="youtube" px=18 %}<span>Watch on YouTube</span></span></span>
           </button>
         </div>
       </figure>

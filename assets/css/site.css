@@ -88,6 +88,9 @@ section[tabindex="-1"]:focus { outline: none; }
   .sv-cta__sun { width: 240px; right: -90px; bottom: -150px; }
 }
 
+/* ===== Text for screen readers and search engines only (e.g. the school's name inside the home page's h1) ===== */
+.sv-visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
 /* ===== Layout helpers that replace the kit's inline styles ===== */
 .sv-nowrap { white-space: nowrap; }
 .sv-quick-grid, .sv-video-row { margin-top: var(--space-7); }

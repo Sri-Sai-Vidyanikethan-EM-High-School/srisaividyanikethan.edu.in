@@ -4,13 +4,23 @@
 
 title: Sri Sai Vidyanikethan E.M. High School, Adapur
 short_name: Sri Sai Vidyanikethan
-description: An English-medium school in Adapur, near Nandalur, Andhra Pradesh — LKG to Class X.
+# Shown after the school's name in the home page's title, and as the fallback meta description.
+description: English-medium school, LKG to Class X
 url: https://srisaividyanikethan.edu.in
 baseurl: ""
 lang: en_IN
 timezone: Asia/Kolkata
 # Publish notices even if their date is later than the build time (a typo'd date must not hide a notice).
 future: true
+
+# jekyll-seo-tag: logo for Google, Twitter/X card, default share image (set per page with `image:`).
+logo: /assets/images/emblem/ssvn-emblem-on-chalk.png
+twitter:
+  username: srisaividya
+  card: summary_large_image
+# Google Search Console: paste the HTML-tag verification code here (or verify the domain by DNS instead).
+# webmaster_verifications:
+#   google: CODE
 
 plugins:
   - jekyll-feed
@@ -29,10 +39,18 @@ defaults:
       type: notices
     values:
       layout: notice
+      seo:
+        type: Article
   - scope:
       path: ""
     values:
       layout: default
+      image: /assets/images/share/ssvn-share.jpg
+  # Verification files are not pages for people: keep them out of the sitemap.
+  - scope:
+      path: "pinterest-6e078.html"
+    values:
+      sitemap: false
 
 feed:
   collections:
