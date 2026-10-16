@@ -27,7 +27,7 @@ programmes:
     - { tone: neem, icon: graduation-cap, grades: Classes VI – X, title: High School, ages: "Ages 11 – 15", points: ["Science and maths with practicals", "Preparation for the Class X board exams"] }
 
 quick_links:
-  - { tone: saffron, icon: calendar-check, title: Book an admission visit, text: Pick a time to meet the headmistress, link: booking }
+  - { tone: saffron, icon: calendar-check, title: Plan a visit, text: Pick a time to meet the headmistress, link: booking }
   - { tone: neem, icon: log-in, title: Student portal, text: "Marks, attendance and notices", link: portal }
   - { tone: marigold, icon: phone, title: Call the office, text: "+91 96768 59202", link: phone }
   - { tone: kumkum, icon: message-circle, title: WhatsApp us, text: "Quick questions, quick replies", link: whatsapp }
@@ -58,4 +58,4 @@ cta:
   eyebrow: Admissions 2027–28
   title: Come and see a school day for yourself
   title_te: మా పాఠశాలను సందర్శించండి
-  body: Book a visit, meet our teachers and walk the campus with your child.
+  body: Plan a visit, meet our teachers and walk the campus with your child.

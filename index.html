@@ -16,7 +16,7 @@ description: An English-medium school in Adapur, near Nandalur, Andhra Pradesh â
       <p class="sv-hero__motto-en">{{ s.motto_en }}</p>
       <p class="sv-hero__lede body-l">{{ h.hero.lede }}</p>
       <div class="sv-hero__actions">
-        <a class="sv-btn sv-btn--primary sv-btn--lg" href="{{ s.booking_url }}" target="_blank" rel="noopener">{% include sv/icon.html name="calendar-check" %}<span>Book an admission visit</span></a>
+        <a class="sv-btn sv-btn--primary sv-btn--lg" href="{{ s.booking_url }}" target="_blank" rel="noopener">{% include sv/icon.html name="calendar-check" %}<span>{{ s.booking_label }}</span></a>
         <a class="sv-btn sv-btn--secondary sv-btn--lg" href="#academics"><span>Explore classes</span>{% include sv/icon.html name="arrow-right" class="sv-btn__end" %}</a>
       </div>
     </div>

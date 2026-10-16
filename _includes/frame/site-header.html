@@ -15,7 +15,7 @@
       <a class="sv-nav__link{% if nav_active %} is-active{% endif %}"{% if nav_active %} aria-current="page"{% endif %} href="{{ link.url | relative_url }}">{{ link.title }}</a>
       {%- endfor %}
     </nav>
-    <a class="sv-btn sv-btn--primary sv-btn--md sv-header__cta" href="{{ site.data.site.booking_url }}" target="_blank" rel="noopener">{% include sv/icon.html name="calendar-check" px=18 %}<span>Book a visit</span></a>
+    <a class="sv-btn sv-btn--primary sv-btn--md sv-header__cta" href="{{ site.data.site.booking_url }}" target="_blank" rel="noopener">{% include sv/icon.html name="calendar-check" px=18 %}<span>{{ site.data.site.booking_label }}</span></a>
     <button type="button" class="sv-header__menu" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">{% include sv/icon.html name="menu" px=22 class="sv-header__menu-open" %}{% include sv/icon.html name="x" px=22 class="sv-header__menu-close" %}</button>
   </div>
 </header>
