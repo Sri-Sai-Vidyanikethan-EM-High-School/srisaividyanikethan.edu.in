@@ -91,6 +91,13 @@ section[tabindex="-1"]:focus { outline: none; }
 /* ===== Text for screen readers and search engines only (e.g. the school's name inside the home page's h1) ===== */
 .sv-visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
+/* ===== Tinted outline buttons (proposed to Udaya): a secondary button whose outline and text carry a meaning colour —
+   neem for WhatsApp and messaging, saffron for admissions. Hover fills with the matching soft tint. ===== */
+.sv-btn--secondary.sv-btn--tint-neem { border-color: var(--neem); color: var(--neem); }
+.sv-btn--secondary.sv-btn--tint-neem:hover { background: var(--neem-soft); }
+.sv-btn--secondary.sv-btn--tint-saffron { border-color: var(--saffron-ink); color: var(--saffron-ink); }
+.sv-btn--secondary.sv-btn--tint-saffron:hover { background: var(--saffron-soft); }
+
 /* ===== Hero buttons (three): slimmer side padding so they fit on one row beside the photo, and when they do wrap
    (narrow columns, phones) they stretch to fill each row instead of leaving one button stranded at the left. ===== */
 .sv-hero__actions .sv-btn { flex: 1 1 auto; }

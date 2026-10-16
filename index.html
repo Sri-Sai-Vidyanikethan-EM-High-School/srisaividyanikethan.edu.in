@@ -19,7 +19,7 @@ schema_school: true
       <div class="sv-hero__actions">
         {%- for act in h.hero.actions %}
         {%- include resolve-link.html link=act.link %}
-        <a class="sv-btn {% if act.primary %}sv-btn--primary{% else %}sv-btn--secondary{% endif %} sv-btn--lg" href="{{ link_href }}"{% if link_ext %} target="_blank" rel="noopener"{% endif %}{% if act.aria %} aria-label="{{ act.aria }}"{% elsif link_ext %} aria-label="{{ act.label }} (opens in a new tab)"{% endif %}>{% include sv/icon.html name=act.icon %}<span>{{ act.label }}</span></a>
+        <a class="sv-btn {% if act.primary %}sv-btn--primary{% else %}sv-btn--secondary{% endif %}{% if act.tint %} sv-btn--tint-{{ act.tint }}{% endif %} sv-btn--lg" href="{{ link_href }}"{% if link_ext %} target="_blank" rel="noopener"{% endif %}{% if act.aria %} aria-label="{{ act.aria }}"{% elsif link_ext %} aria-label="{{ act.label }} (opens in a new tab)"{% endif %}>{% include sv/icon.html name=act.icon %}<span>{{ act.label }}</span></a>
         {%- endfor %}
       </div>
     </div>

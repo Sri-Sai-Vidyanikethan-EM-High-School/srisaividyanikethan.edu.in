@@ -98,6 +98,7 @@ Content not yet available (classes offered, staff, the 2026–27 calendar, facil
 **Changes from Udaya's home-page recipe** (propose them to the design system):
 
 - The FactStrip is flat (`sv-facts-wrap--flat` in `site.css`): no raised card or overlap with the hero, hairline dividers, four across / two across below 1100px / a list on phones (decided 16 October 2026: the raised card read as one big button).
+- The hero's buttons are "Contact us" (primary, calls the office), "WhatsApp" and "Admission form" (decided 16 October 2026). The two secondary buttons use tinted outlines (`sv-btn--tint-neem`, `sv-btn--tint-saffron` in `site.css`): outline and text in the meaning colour, filling with its soft tint on hover.
 - The main action is labelled "Plan a visit" (`booking_label` in `_data/site.yml`) instead of "Book an admission visit" (decided 16 October 2026).
 - The hero's headline is the Telugu school motto with its English meaning, beside Shirdi Sai Baba in a Sannidhi arch (decided 16 October 2026). This replaces the campus photo and the separate night "Our inspiration" band, keeping one devotional image per page.
 -  Udaya puts an enquiry form in the contact section, but GitHub Pages can't receive form submissions (§6). The contact section shows ContactStrip (call, WhatsApp, email, visit) + OfficeHours instead. Propose this change to the design system so its recipe matches.
