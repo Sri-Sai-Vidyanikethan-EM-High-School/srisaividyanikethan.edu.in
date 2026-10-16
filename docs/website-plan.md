@@ -83,7 +83,7 @@ Following Udaya's site map (README → "The home page" and "Site map"):
 
 | URL | Page | Sections (each: Section → SectionHeading → one content block) |
 | --- | --- | --- |
-| `/` | Home | Hero + FactStrip · ProgramCards + QuickLinks (sandal) · NoticeBoard + EventSchedule "Coming up" (paper) · Shloka + Sannidhi ArchFrame (night) · ValuePillars (paper) · Gallery + VideoCard (sandal, muggu) · CtaBand · Contact (paper) |
+| `/` | Home | Hero (school motto + Shirdi Sai Baba in a Sannidhi ArchFrame) + FactStrip · ProgramCards + QuickLinks (sandal) · NoticeBoard + EventSchedule "Coming up" (paper) · ValuePillars (sandal) · Gallery + VideoCard (paper, muggu) · CtaBand · Contact (paper) |
 | `/about/` | About | Our story · Our inspiration (night, Sannidhi) · Values · Our team (PersonCards) |
 | `/academics/` | Academics | Pre-primary · Primary · High School (ProgramCards) · Learning online (InfoCards: Google Classroom, student portal) |
 | `/school-life/` | School life | Gallery · Films · Transport |
@@ -95,7 +95,10 @@ Following Udaya's site map (README → "The home page" and "Site map"):
 
 Content not yet available (classes offered, staff, the 2026–27 calendar, facilities, transport, downloads, Telugu lines) will be added later. Each page launches with the sections we have content for and gains sections as content arrives; the data files make that a content edit, not a code change.
 
-**One change from Udaya's home-page recipe:** Udaya puts an enquiry form in the contact section, but GitHub Pages can't receive form submissions (§6). The contact section shows ContactStrip (call, WhatsApp, email, visit) + OfficeHours instead. Propose this change to the design system so its recipe matches.
+**Changes from Udaya's home-page recipe** (propose both to the design system):
+
+- The hero's headline is the Telugu school motto with its English meaning, beside Shirdi Sai Baba in a Sannidhi arch (decided 16 October 2026). This replaces the campus photo and the separate night "Our inspiration" band, keeping one devotional image per page.
+-  Udaya puts an enquiry form in the contact section, but GitHub Pages can't receive form submissions (§6). The contact section shows ContactStrip (call, WhatsApp, email, visit) + OfficeHours instead. Propose this change to the design system so its recipe matches.
 
 ---
 

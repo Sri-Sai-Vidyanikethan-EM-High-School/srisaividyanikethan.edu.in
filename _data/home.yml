@@ -1,13 +1,14 @@
 # Home-page content. Text comes from the Udaya design system's home page; edit freely.
 # Links written as a key (booking, portal, phone, whatsapp, application) use the addresses in site.yml.
 
+# The hero's headline is the school motto (motto_te / motto_en in site.yml), beside Shirdi Sai Baba in a Sannidhi arch.
+# Udaya's Sannidhi rule: one devotional image per page, dark ground, never cropped, never with text over it.
 hero:
   eyebrow: Admissions open · 2027–28
-  title: Where every child greets the dawn
-  title_te: ప్రతి బిడ్డకూ జ్ఞానోదయం
   lede: An English-medium school in Adapur, near Nandalur. Faith, patience and steady practice — taught with care from LKG to Class X.
-  image: /assets/images/campus/campus-flag-assembly.jpg
-  image_alt: Students and teachers on the school balcony around the national flag, above the Telugu signboard
+  image: /assets/images/devotional/sai-baba-abhaya-seated.jpg
+  image_alt: Shirdi Sai Baba seated, right hand raised in blessing
+  image_caption: Our inspiration — Shirdi Sai Baba
 
 facts:
   - { icon: graduation-cap, tone: saffron, title: LKG to Class X, text: "English medium, one campus" }

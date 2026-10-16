@@ -46,6 +46,18 @@ section[tabindex="-1"]:focus { outline: none; }
 .sv-header.is-open .sv-header__menu-open { display: none; }
 .sv-header.is-open .sv-header__menu-close { display: block; }
 
+/* ===== Hero headline: the school motto in Telugu, in kumkum (Udaya: the motto's colour), with its meaning below.
+   Tiro Telugu needs a line height around 1.6 for its vowel signs. Sizes step down with the hero's width. ===== */
+.sv-hero__motto { margin: 0; font-family: var(--font-telugu); font-weight: 400; font-size: 52px; line-height: 84px; color: var(--kumkum); text-wrap: balance; }
+.sv-hero__motto-en { margin: var(--space-2) 0 0; font-family: var(--font-display); font-size: 22px; line-height: 30px; color: var(--ink); }
+@container (max-width: 820px) {
+  .sv-hero__motto { font-size: 40px; line-height: 64px; }
+  .sv-hero__motto-en { font-size: 19px; line-height: 27px; }
+}
+@container (max-width: 420px) {
+  .sv-hero__motto { font-size: 34px; line-height: 56px; }
+}
+
 /* ===== Hero, stacked (phones/tablets): the sun and its halo rise ~62px above the photo, more than the kit's
    48px gap, so they ran into the buttons. Make room for them. ===== */
 @container (max-width: 820px) {
@@ -62,8 +74,6 @@ section[tabindex="-1"]:focus { outline: none; }
 .sv-quick-grid, .sv-video-row { margin-top: var(--space-7); }
 .sv-split--center { align-items: center; }
 .sv-narrow { max-width: 760px; }
-.sv-section--night .sv-shloka { padding-left: 0; padding-right: 0; }
-.sv-sannidhi { width: 100%; max-width: 360px; justify-self: center; }
 .sv-video-row__title { margin: var(--space-1) 0 0; }
 .sv-video-row__text { margin: var(--space-3) 0; }
 

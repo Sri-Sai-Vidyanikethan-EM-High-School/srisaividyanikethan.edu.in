@@ -7,13 +7,13 @@ description: An English-medium school in Adapur, near Nandalur, Andhra Pradesh â
 {%- include data/events.html limit=5 -%}
 {%- assign latest_notices = site.notices | sort: "date" | reverse -%}
 
-<!-- Hero â€” home page only -->
-<section class="sv-hero sv-muggu">
+<!-- Hero â€” home page only: the school motto beside Shirdi Sai Baba (the page's one devotional image, in a Sannidhi arch) -->
+<section class="sv-hero sv-muggu" id="inspiration">
   <div class="sv-container sv-hero__grid">
     <div class="sv-hero__text">
       <p class="sv-eyebrow">{% include sv/sun.html %}<span>{{ h.hero.eyebrow }}</span></p>
-      <h1 class="sv-hero__title display-xl">{{ h.hero.title }}</h1>
-      <p class="sv-hero__te telugu-heading" lang="te">{{ h.hero.title_te }}</p>
+      <h1 class="sv-hero__motto" lang="te">{{ s.motto_te }}</h1>
+      <p class="sv-hero__motto-en">{{ s.motto_en }}</p>
       <p class="sv-hero__lede body-l">{{ h.hero.lede }}</p>
       <div class="sv-hero__actions">
         <a class="sv-btn sv-btn--primary sv-btn--lg" href="{{ s.booking_url }}" target="_blank" rel="noopener">{% include sv/icon.html name="calendar-check" %}<span>Book an admission visit</span></a>
@@ -22,8 +22,9 @@ description: An English-medium school in Adapur, near Nandalur, Andhra Pradesh â
     </div>
     <div class="sv-hero__art">
       <div class="sv-hero__sun" aria-hidden="true"></div>
-      <figure class="sv-arch sv-arch--paper">
-        <div class="sv-arch__door" style="aspect-ratio: 4 / 5"><img src="{{ h.hero.image | relative_url }}" alt="{{ h.hero.image_alt }}" width="1600" height="1200" fetchpriority="high" style="object-fit: cover; object-position: 50% 30%"></div>
+      <figure class="sv-arch sv-arch--sannidhi">
+        <div class="sv-arch__door" style="aspect-ratio: 4 / 5"><img src="{{ h.hero.image | relative_url }}" alt="{{ h.hero.image_alt }}" width="941" height="1380" fetchpriority="high" style="object-fit: contain"></div>
+        <figcaption class="sv-arch__cap small">{{ h.hero.image_caption }}</figcaption>
       </figure>
     </div>
   </div>
@@ -67,24 +68,8 @@ description: An English-medium school in Adapur, near Nandalur, Andhra Pradesh â
   </div>
 </section>
 
-<!-- Sannidhi â€” motto and inspiration (night, once per page) -->
-<section class="sv-section sv-section--night" id="inspiration">
-  <div class="sv-container sv-split sv-split--center">
-    <blockquote class="sv-shloka sv-shloka--night">
-      {% include sv/sun.html w=72 horizon=true %}
-      <p class="sv-shloka__te telugu-display" lang="te">{{ s.motto_te }}</p>
-      <p class="sv-shloka__tr">{{ s.motto_tr }}</p>
-      <p class="sv-shloka__en body-l">{{ s.motto_en }}</p>
-    </blockquote>
-    <figure class="sv-arch sv-arch--sannidhi sv-sannidhi">
-      <div class="sv-arch__door" style="aspect-ratio: 4 / 5"><img src="{{ '/assets/images/devotional/sai-baba-abhaya-seated.jpg' | relative_url }}" alt="Shirdi Sai Baba seated, right hand raised in blessing" width="941" height="1380" loading="lazy" style="object-fit: contain"></div>
-      <figcaption class="sv-arch__cap small">Our inspiration â€” Shirdi Sai Baba</figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- Values (paper) -->
-<section class="sv-section sv-section--paper" id="about">
+<!-- Values (sandal) -->
+<section class="sv-section sv-section--sandal" id="about">
   <div class="sv-container">
     {% include sv/section-heading.html eyebrow=h.values.eyebrow title=h.values.title lede=h.values.lede center=true %}
     <div class="sv-grid">
@@ -95,8 +80,8 @@ description: An English-medium school in Adapur, near Nandalur, Andhra Pradesh â
   </div>
 </section>
 
-<!-- Life at school (sandal + muggu) -->
-<section class="sv-section sv-section--sandal sv-muggu" id="life">
+<!-- Life at school (paper + muggu) -->
+<section class="sv-section sv-section--paper sv-muggu" id="life">
   <div class="sv-container">
     {% include sv/section-heading.html eyebrow=h.gallery.eyebrow title=h.gallery.title %}
     <div class="sv-grid">
