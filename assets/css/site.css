@@ -32,6 +32,15 @@
   .sv-header.is-open .sv-header__cta { display: inline-flex; order: 4; width: 100%; margin-bottom: var(--space-3); }
 }
 
+/* ===== Sticky header: the menu stays in view while scrolling and after jumping to a section =====
+   (The utility bar above it scrolls away.) Sections stop just below the header instead of under it. */
+.sv-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; }
+.sv-header.is-open .sv-header__bar { max-height: calc(100dvh - env(safe-area-inset-top, 0px) - 4px); overflow-y: auto; }
+[id] { scroll-margin-top: calc(var(--header-height) + 4px); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+/* Sections receive focus after a menu jump (so keyboard users continue from there); they need no focus ring. */
+section[tabindex="-1"]:focus { outline: none; }
+
 /* ===== Header menu: show a close icon while open ===== */
 .sv-header__menu-close { display: none; }
 .sv-header.is-open .sv-header__menu-open { display: none; }

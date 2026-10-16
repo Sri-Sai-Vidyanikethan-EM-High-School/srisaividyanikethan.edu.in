@@ -19,13 +19,40 @@
   }
   if (header && menuBtn) {
     menuBtn.addEventListener('click', function () { setMenu(!header.classList.contains('is-open')); });
-    // Links to sections on the same page: close the menu after jumping.
-    header.querySelectorAll('.sv-nav__link').forEach(function (a) {
-      a.addEventListener('click', function () { setMenu(false); });
-    });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && header.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); }
     });
+  }
+
+  /* ----- Menu links to sections of this page (About, Academics, School life on Home) ----- */
+  var sectionLinks = [].filter.call(document.querySelectorAll('.sv-nav__link'), function (a) {
+    return a.hash && a.pathname === location.pathname && document.getElementById(a.hash.slice(1));
+  });
+  sectionLinks.forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = document.getElementById(a.hash.slice(1));
+      e.preventDefault();
+      // Close the mobile menu first: the header shrinks, and scrolling afterwards lands the section below it.
+      if (header && menuBtn) setMenu(false);
+      target.scrollIntoView(); // smooth unless the visitor prefers reduced motion (site.css)
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true }); // keyboard and screen-reader users continue from the section
+      history.pushState(null, '', a.hash);
+    });
+  });
+
+  // Highlight the section being read, so the menu shows where you are.
+  if (sectionLinks.length && 'IntersectionObserver' in window) {
+    var linkFor = {};
+    sectionLinks.forEach(function (a) { linkFor[a.hash.slice(1)] = a; });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var a = linkFor[entry.target.id];
+        a.classList.toggle('is-active', entry.isIntersecting);
+        if (entry.isIntersecting) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' }); // a section is "current" while it crosses the middle of the screen
+    sectionLinks.forEach(function (a) { spy.observe(document.getElementById(a.hash.slice(1))); });
   }
 
   /* ----- Theme toggle: Dawn (light) / Dhuni (dark); default follows the device ----- */
