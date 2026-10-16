@@ -308,6 +308,8 @@ Phases 0–5 give a launch-ready core. Phases 6–7 can launch together or follo
 | 5 | Admission form | Google Form, linked in a new tab (replaced the Zoho form on 16 October 2026). |
 | 6 | Old updates blog | Left untouched; not imported. |
 | 7 | Repo visibility | Public is fine. |
+| 8 | Official name | "Sri Sai Vidyanikethan E.M School, Adapur", matching Google Maps (16 October 2026). Udaya's naming rule ("…E.M. High School, Adapur" in footers) should be updated to match. |
+| 9 | Board, type, district | Andhra Pradesh State Board; co-educational; YSR Kadapa district. |
 
 **Still to confirm during Phase 5:** that the GitHub organisation (`Sri-Sai-Vidyanikethan-EM-High-School`) allows fine-grained tokens for its repos. An org owner may need to approve the token once.
 

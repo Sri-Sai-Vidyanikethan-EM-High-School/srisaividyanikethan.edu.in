@@ -103,6 +103,15 @@ section[tabindex="-1"]:focus { outline: none; }
 .sv-hero__actions .sv-btn { flex: 1 1 auto; }
 .sv-hero__actions .sv-btn--lg { padding-left: var(--space-5); padding-right: var(--space-5); }
 
+/* ===== Places list (proposed to Udaya): villages on the bus routes, in balanced columns on a raised panel ===== */
+.sv-places { padding: var(--space-5) var(--space-6); background: var(--paper-raised); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+.sv-places__title { display: flex; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-4); font-family: var(--font-display); font-weight: 400; }
+.sv-places__title .sv-icon { color: var(--saffron-ink); }
+.sv-places__list { margin: 0; padding: 0; list-style: none; column-width: 13rem; column-gap: var(--space-6); }
+.sv-places__list li { position: relative; break-inside: avoid; padding: var(--space-1) 0 var(--space-1) var(--space-4); }
+.sv-places__list li::before { content: ""; position: absolute; left: 0; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: var(--radius-round); background: var(--saffron); }
+@media (max-width: 520px) { .sv-places { padding: var(--space-4); } }
+
 /* ===== Layout helpers that replace the kit's inline styles ===== */
 .sv-nowrap { white-space: nowrap; }
 .sv-quick-grid, .sv-video-row { margin-top: var(--space-7); }

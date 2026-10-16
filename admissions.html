@@ -2,7 +2,7 @@
 layout: page
 permalink: /admissions/
 title: Admissions
-description: Admissions to Sri Sai Vidyanikethan E.M. High School, Adapur, near Nandalur — LKG to Class X. Plan a visit, apply online, or call +91 96768 59202.
+description: Admissions to Sri Sai Vidyanikethan E.M School, Adapur — LKG to Class X, AP State Board. School buses along the Nandalur – Pothapi Road. Call +91 96768 59202.
 eyebrow: Admissions
 heading: Join us, from LKG to Class X
 lede: Come and see a school day for yourself, then apply online or at the school office. We are happy to answer your questions on the phone or WhatsApp.
@@ -21,7 +21,22 @@ crumb: Admissions
   </div>
 </section>
 
-<section class="sv-section sv-section--sandal" id="questions">
+<section class="sv-section sv-section--sandal" id="buses">
+  <div class="sv-container">
+    {%- capture bus_lede %}Our buses serve these villages and towns along and near the {{ s.bus_road }}, and others nearby. Call the office to check the stop closest to your home.{% endcapture %}
+    {% include sv/section-heading.html eyebrow="School buses" title="Villages and towns on our bus routes" lede=bus_lede %}
+    <div class="sv-places">
+      <p class="sv-places__title heading-3">{% include sv/icon.html name="bus" px=22 %}<span>{{ s.bus_road }}</span></p>
+      <ul class="sv-places__list">
+        {%- for v in s.bus_villages %}
+        <li>{{ v }}</li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sv-section sv-section--paper" id="questions">
   <div class="sv-container">
     {% include sv/section-heading.html eyebrow="Questions" title="Ask us before you apply" %}
     <div class="sv-split">

@@ -1,6 +1,6 @@
 # srisaividyanikethan.edu.in
 
-The website of Sri Sai Vidyanikethan E.M. High School, Adapur, built with Jekyll on the school's **Udaya** design system and hosted on GitHub Pages. GitHub builds and publishes the site on every push to `main`.
+The website of Sri Sai Vidyanikethan E.M School, Adapur, built with Jekyll on the school's **Udaya** design system and hosted on GitHub Pages. GitHub builds and publishes the site on every push to `main`.
 
 **Never delete** `CNAME` (the custom domain) or `pinterest-6e078.html` (Pinterest verification).
 

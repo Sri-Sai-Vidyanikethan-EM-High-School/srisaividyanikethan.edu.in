@@ -18,7 +18,7 @@ hero:
     - { label: Admission form, icon: clipboard-list, link: application, tint: saffron }
 
 facts:
-  - { icon: graduation-cap, tone: saffron, title: LKG to Class X, text: "English medium, one campus" }
+  - { icon: graduation-cap, tone: saffron, title: LKG to Class X, text: "English medium, AP State Board" }
   - { icon: users, tone: neem, title: "Caring, experienced teachers", text: Every child known by name }
   - { icon: bus, tone: marigold, title: Safe school buses, text: To 20+ villages and towns }
   - { icon: log-in, tone: kumkum, title: Online student portal, text: Marks and notices for parents }
@@ -27,7 +27,7 @@ programmes:
   eyebrow: Our programmes
   title: Learning from LKG to Class X
   title_te: LKG నుండి పదవ తరగతి వరకు
-  lede: English-medium classes, with Telugu taught as a language, in small sections where every teacher knows every child by name.
+  lede: Co-educational, English-medium classes on the Andhra Pradesh State Board syllabus, with Telugu taught as a language, in small sections where every teacher knows every child by name.
   items:
     - { tone: marigold, icon: baby, grades: LKG – UKG, title: Pre-primary, ages: "Ages 3 – 5", points: ["Phonics, rhymes and play", "Telugu and English side by side"] }
     - { tone: saffron, icon: book-open, grades: Classes I – VII, title: Primary, ages: "Ages 6 – 12", points: ["Strong reading and number sense", "Drawing, music and games"] }

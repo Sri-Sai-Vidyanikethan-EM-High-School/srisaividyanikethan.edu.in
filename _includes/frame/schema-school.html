@@ -10,8 +10,10 @@
   "@type": "School",
   "@id": {{ "/#school" | absolute_url | jsonify }},
   "name": {{ sc.name_full | jsonify }},
-  "alternateName": [{{ sc.google_listing_name | jsonify }}, {{ sc.name | jsonify }}, {{ sc.name_te | jsonify }}, "SSVN"],
-  "description": {{ site.data.home.hero.lede | jsonify }},
+  "alternateName": [{% for n in sc.former_names %}{{ n | jsonify }}, {% endfor %}{{ sc.name | jsonify }}, {{ sc.name_te | jsonify }}, "SSVN"],
+  {%- capture sc_description %}{{ sc.school_type }}, English-medium school following the {{ sc.board }}, in Adapur near Nandalur, {{ sc.district }} district, Andhra Pradesh. LKG to Class X, since {{ sc.since }}.{% endcapture %}
+  "description": {{ sc_description | jsonify }},
+  "keywords": {{ sc.school_type | append: ", English medium, " | append: sc.board | append: ", LKG to Class X, " | append: sc.district | jsonify }},
   "url": {{ "/" | absolute_url | jsonify }},
   "logo": {{ site.logo | absolute_url | jsonify }},
   "image": [{{ "/assets/images/share/ssvn-share.jpg" | absolute_url | jsonify }}, {{ site.logo | absolute_url | jsonify }}],
@@ -28,6 +30,12 @@
   },
   "geo": { "@type": "GeoCoordinates", "latitude": {{ sc.geo.latitude }}, "longitude": {{ sc.geo.longitude }} },
   "hasMap": {{ sc.maps_url | jsonify }},
+  "areaServed": [
+    {"@type": "AdministrativeArea", "name": {{ sc.district | append: " district, Andhra Pradesh" | jsonify }}},
+    {%- for v in sc.bus_villages %}
+    {"@type": "Place", "name": {{ v | append: ", " | append: sc.district | jsonify }}}{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ],
   "openingHoursSpecification": [{
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],

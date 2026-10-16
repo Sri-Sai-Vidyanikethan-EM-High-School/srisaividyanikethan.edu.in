@@ -2,7 +2,12 @@
 # Change a value here and every page picks it up.
 
 name: Sri Sai Vidyanikethan
-name_full: Sri Sai Vidyanikethan E.M. High School
+# The official name, exactly as on the school's Google Maps listing — keep the two identical (search engines compare them).
+name_full: Sri Sai Vidyanikethan E.M School, Adapur
+former_names: [Sri Sai Vidyanikethan E.M. High School]
+board: Andhra Pradesh State Board
+school_type: Co-educational
+district: YSR Kadapa
 name_te: శ్రీ సాయి విద్యానికేతన్
 place_te: ఆడపూరు
 since: 1996
@@ -11,11 +16,10 @@ motto_te: సర్వే విద్యార్థీనాం విజ్�
 motto_tr: Sarve vidyārthīnām vijñānō bhavantu
 motto_en: May every student be blessed with true knowledge.
 
-address: 2-59 Pothapi Road, Adapur, Nandalur, Andhra Pradesh 516150
+address: 2-59 Pothapi Road, Adapur, Nandalur, YSR Kadapa district, Andhra Pradesh 516150
 # The same address in parts, plus the map pin from the school's Google listing — for search engines (schema.org).
 address_parts: { street: 2-59 Pothapi Road, locality: "Adapur, Nandalur", region: Andhra Pradesh, postal_code: "516150", country: IN }
 geo: { latitude: 14.268641, longitude: 79.145593 }
-google_listing_name: "Sri Sai Vidyanikethan E.M School, Adapur"   # the name on Google Maps; keep the two consistent
 address_short: 2-59 Pothapi Road, Adapur, Nandalur 516150
 area: Adapur, Nandalur
 maps_url: https://maps.app.goo.gl/9ca2EJzLpjD9KVHt8   # the school on Google Maps: top bar, contact card, footer
@@ -48,3 +52,34 @@ social:
   - { name: YouTube, url: "https://www.youtube.com/@srisaividyanikethan", icon: youtube }
   - { name: X (Twitter), url: "https://x.com/srisaividya", glyph: X }
   - { name: Pinterest, url: "https://in.pinterest.com/srisaividya/", glyph: P }
+
+# Villages and towns the school buses serve, along and near the Nandalur – Pothapi Road (Admissions page and search engines).
+bus_road: Nandalur – Pothapi Road
+bus_villages:
+  - Adapur
+  - Agraharam
+  - Chintalakunta
+  - Harijanawada
+  - Jangalapalle
+  - Komarunipalle
+  - Kommuru
+  - Konapuram
+  - Kumpinipuram
+  - Kunda Nellore
+  - Lebaka
+  - Lebaka Manga Mamba Puram
+  - Mallelapatnam
+  - Marripalli
+  - Nagireddipalle
+  - Nallathimmayapalle
+  - Nandalur
+  - Nookinenipalle
+  - Patur
+  - Pothapi
+  - Rachapalli
+  - Ramamambapuram
+  - Rangayapalle
+  - Tangutur Vengamambapuram
+  - Tanguturu
+  - Thimmarajupalle
+  - Yellamarajupalle
