@@ -95,8 +95,10 @@ Following Udaya's site map (README → "The home page" and "Site map"):
 
 Content not yet available (classes offered, staff, the 2026–27 calendar, facilities, transport, downloads, Telugu lines) will be added later. Each page launches with the sections we have content for and gains sections as content arrives; the data files make that a content edit, not a code change.
 
-**Changes from Udaya's home-page recipe** (propose both to the design system):
+**Changes from Udaya's home-page recipe** (propose them to the design system):
 
+- The FactStrip is flat (`sv-facts-wrap--flat` in `site.css`): no raised card or overlap with the hero, hairline dividers, four across / two across below 1100px / a list on phones (decided 16 October 2026: the raised card read as one big button).
+- The main action is labelled "Plan a visit" (`booking_label` in `_data/site.yml`) instead of "Book an admission visit" (decided 16 October 2026).
 - The hero's headline is the Telugu school motto with its English meaning, beside Shirdi Sai Baba in a Sannidhi arch (decided 16 October 2026). This replaces the campus photo and the separate night "Our inspiration" band, keeping one devotional image per page.
 -  Udaya puts an enquiry form in the contact section, but GitHub Pages can't receive form submissions (§6). The contact section shows ContactStrip (call, WhatsApp, email, visit) + OfficeHours instead. Propose this change to the design system so its recipe matches.
 

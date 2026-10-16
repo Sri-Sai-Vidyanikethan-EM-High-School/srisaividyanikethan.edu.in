@@ -58,6 +58,25 @@ section[tabindex="-1"]:focus { outline: none; }
   .sv-hero__motto { font-size: 34px; line-height: 56px; }
 }
 
+/* ===== FactStrip, flat variant (proposed to Udaya): no raised card or overlap, so it reads as information under the
+   hero rather than one big button. Four across with hairline dividers; two across below 1100px; a list on phones. ===== */
+.sv-facts-wrap--flat { margin-top: 0; padding-top: var(--space-7); padding-bottom: var(--space-7); }
+.sv-facts-wrap--flat .sv-facts { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; padding: 0; background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+.sv-facts-wrap--flat .sv-fact { padding: var(--space-2) var(--space-5); }
+.sv-facts-wrap--flat .sv-fact:first-child { padding-left: 0; }
+.sv-facts-wrap--flat .sv-fact + .sv-fact { border-left: 1px solid var(--line); }
+@media (max-width: 1099px) {
+  .sv-facts-wrap--flat .sv-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--space-5); }
+  .sv-facts-wrap--flat .sv-fact { padding: 0 var(--space-4); }
+  .sv-facts-wrap--flat .sv-fact:nth-child(odd) { padding-left: 0; border-left: 0; }
+}
+@media (max-width: 520px) {
+  .sv-facts-wrap--flat { padding-top: var(--space-5); padding-bottom: var(--space-6); }
+  .sv-facts-wrap--flat .sv-facts { grid-template-columns: 1fr; row-gap: 0; }
+  .sv-facts-wrap--flat .sv-fact { padding: var(--space-4) 0; border-left: 0; }
+  .sv-facts-wrap--flat .sv-fact + .sv-fact { border-left: 0; border-top: 1px solid var(--line); }
+}
+
 /* ===== Hero, stacked (phones/tablets): the sun and its halo rise ~62px above the photo, more than the kit's
    48px gap, so they ran into the buttons. Make room for them. ===== */
 @container (max-width: 820px) {

@@ -31,8 +31,8 @@ description: An English-medium school in Adapur, near Nandalur, Andhra Pradesh â
   <div class="sv-hero__horizon" aria-hidden="true"></div>
 </section>
 
-<!-- FactStrip â€” overlaps the foot of the hero by design -->
-<div class="sv-container sv-facts-wrap">
+<!-- FactStrip, flat: its own quiet band under the hero (site.css: sv-facts-wrap--flat) -->
+<div class="sv-container sv-facts-wrap sv-facts-wrap--flat">
   <ul class="sv-facts">
     {%- for f in h.facts %}
     <li class="sv-fact"><span class="sv-fact__icon sv-fact__icon--{{ f.tone }}">{% include sv/icon.html name=f.icon px=24 %}</span><span class="sv-fact__txt"><span class="sv-fact__title">{{ f.title }}</span><span class="sv-fact__text small">{{ f.text }}</span></span></li>
