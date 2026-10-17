@@ -101,3 +101,82 @@ School will be closed on Tuesday 20 October for Vijayadashami.
 ```
 
 The email text is written with `<`, `>`, `&`, `{` and `}` as HTML character codes, so nothing in an email can become HTML or Jekyll template code; they display as normal characters on the page and in Pages CMS.
+
+```mermaid
+flowchart TD
+
+subgraph group_site["Public website"]
+  node_website["School website"]
+  node_home["Home page<br/>[index.html]"]
+  node_admissions["Admissions page<br/>[admissions.html]"]
+  node_contact["Contact page<br/>[contact.html]"]
+  node_notices_page["Notices page<br/>[notices.html]"]
+end
+
+subgraph group_content["School content"]
+  node_home_content["Home content<br/>[home.yml]"]
+  node_site_details["School details<br/>[site.yml]"]
+  node_events["School events<br/>[events.yml]"]
+  node_notices["Notice records"]
+  node_event_types["Event categories<br/>[event_types.yml]"]
+  node_notice_categories["Notice categories"]
+  node_navigation["Site navigation<br/>[navigation.yml]"]
+end
+
+subgraph group_presentation["Site presentation"]
+  node_page_frame["Page frame"]
+  node_udaya["Udaya components"]
+  node_site_styles["Site styles<br/>[site.css]"]
+  node_udaya_styles["Udaya styles<br/>[ssvn.css]"]
+  node_site_behavior["Site behavior<br/>[site.js]"]
+end
+
+subgraph group_publishing["Content publishing"]
+  node_email_tool["Email-to-notice script<br/>[Code.gs]"]
+end
+
+node_visitor(("Site visitor"))
+node_headmistress(("Headmistress"))
+node_pages_cms["Pages CMS"]
+
+node_visitor -->|"visits"| node_website
+node_home -->|"uses content"| node_home_content
+node_contact -->|"uses details"| node_site_details
+node_events -->|"categorized by"| node_event_types
+node_notices -->|"categorized by"| node_notice_categories
+node_headmistress -->|"submits by email"| node_email_tool
+node_email_tool -->|"creates notices"| node_notices
+node_pages_cms -->|"edits events"| node_events
+node_pages_cms -->|"edits notices"| node_notices
+
+click node_home "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/index.html"
+click node_admissions "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/admissions.html"
+click node_contact "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/contact.html"
+click node_notices_page "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/notices.html"
+click node_home_content "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/_data/home.yml"
+click node_site_details "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/_data/site.yml"
+click node_events "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/_data/events.yml"
+click node_notices "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/tree/main/_notices"
+click node_event_types "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/_data/event_types.yml"
+click node_notice_categories "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/_data/notice_categories.yml"
+click node_navigation "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/_data/navigation.yml"
+click node_page_frame "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/tree/main/_includes/frame"
+click node_udaya "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/tree/main/_includes/sv"
+click node_site_styles "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/assets/css/site.css"
+click node_udaya_styles "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/assets/css/ssvn.css"
+click node_site_behavior "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/assets/js/site.js"
+click node_email_tool "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/tools/email-to-notice/Code.gs"
+
+classDef toneNeutral fill:#f8fafc,stroke:#334155,stroke-width:1.5px,color:#0f172a
+classDef toneBlue fill:#dbeafe,stroke:#2563eb,stroke-width:1.5px,color:#172554
+classDef toneAmber fill:#fef3c7,stroke:#d97706,stroke-width:1.5px,color:#78350f
+classDef toneMint fill:#dcfce7,stroke:#16a34a,stroke-width:1.5px,color:#14532d
+classDef toneRose fill:#ffe4e6,stroke:#e11d48,stroke-width:1.5px,color:#881337
+classDef toneIndigo fill:#e0e7ff,stroke:#4f46e5,stroke-width:1.5px,color:#312e81
+classDef toneTeal fill:#ccfbf1,stroke:#0f766e,stroke-width:1.5px,color:#134e4a
+class node_website,node_home,node_admissions,node_contact,node_notices_page toneBlue
+class node_home_content,node_site_details,node_events,node_notices,node_event_types,node_notice_categories,node_navigation toneAmber
+class node_page_frame,node_udaya,node_site_styles,node_udaya_styles,node_site_behavior toneMint
+class node_email_tool toneRose
+class node_visitor,node_headmistress,node_pages_cms toneIndigo
+```
