@@ -1,4 +1,4 @@
-# Email → website notice (setup and upkeep)
+# Email → website notice, and Google Calendar → school calendar (setup and upkeep)
 
 The headmistress posts a notice by emailing **ssvn.em.high.school+notice@gmail.com** from **ssvn.em.high.school@gmail.com**. A Google Apps Script running in that Gmail account turns the email into a notice file in this repository; GitHub Pages republishes the site about a minute later. Her instructions: [docs/how-to-post-a-notice.md](../../docs/how-to-post-a-notice.md).
 
@@ -8,11 +8,17 @@ Gmail (Sent folder) ──every 5 min──► Code.gs ──GitHub API, one com
         └──── "Published: …" reply ──────┘
 ```
 
+The same script keeps the website's school calendar in step with the school's **Google Calendar** ("Sri Sai Vidyanikethan E.M. High School Events"). Whenever an event there is added, changed or deleted, it rewrites `_data/events.yml`, which feeds the home page's "Coming up" list and the Notices page's calendar. See [How events are read from Google Calendar](#how-events-are-read-from-google-calendar).
+
+```
+Google Calendar (event changed) ──► Code.gs: syncCalendar ──GitHub API, one commit (only if different)──► _data/events.yml ──► GitHub Pages
+```
+
 | File | What it is |
 | --- | --- |
 | `Code.gs` | The script. Paste it into the Apps Script project. |
 | `appsscript.json` | The project manifest: time zone, Gmail advanced service, permissions. |
-| `test.js` | Tests with stand-ins for Gmail and GitHub: `node --test tools/email-to-notice/test.js` |
+| `test.js` | Tests with stand-ins for Gmail, Google Calendar and GitHub: `node --test tools/email-to-notice/test.js` |
 
 **Safety.** Only email the account *sent* counts (Gmail's Sent label). Anyone can write to the `+notice` address, but nobody else can put mail in the account's Sent folder, so forged emails, including forged replies threaded into a real notice, are ignored. Notice text is published as plain text (no HTML, no Jekyll template code), and titles are escaped on the page. The GitHub token can only change the contents of this one repository.
 
@@ -43,21 +49,31 @@ If the organisation requires approval for fine-grained tokens, an organisation o
    | `TOKEN_EXPIRES` | its expiry date, e.g. `2027-10-15` |
    | `GITHUB_BRANCH` | only while testing before launch: `redesign` (default `main`) |
 
-   Optional, with their defaults: `GITHUB_REPO` (`Sri-Sai-Vidyanikethan-EM-High-School/srisaividyanikethan.edu.in`), `NOTICE_ADDRESS` (`ssvn.em.high.school+notice@gmail.com`), `SITE_URL` (`https://srisaividyanikethan.edu.in`).
+   Optional, with their defaults: `GITHUB_REPO` (`Sri-Sai-Vidyanikethan-EM-High-School/srisaividyanikethan.edu.in`), `NOTICE_ADDRESS` (`ssvn.em.high.school+notice@gmail.com`), `SITE_URL` (`https://srisaividyanikethan.edu.in`), `CALENDAR_ID` (the school events calendar, `d3c7c1b0…@group.calendar.google.com`).
 
-### 3. Run setup
+### 3. Give the script the school calendar
+
+The script reads the calendar as **ssvn.em.high.school@gmail.com**, so that account must **own** the calendar or be **subscribed** to it.
+
+- If the school account created the calendar, there's nothing to do.
+- Otherwise, signed in as the school account, open the calendar's link and choose **Add**: https://calendar.google.com/calendar/u/0?cid=ZDNjN2MxYjA0NWQ1ZTM1NDljMmQ5MjJlYTUxZjdlZjZmZWU3YjEyMmFjODE1MGFmMTBkZWE5MzdiZDA3YWNmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t
+- If the calendar ever stops being public, share it with the school account instead (**Settings and sharing → Share with specific people → See all event details**).
+
+### 4. Run setup
 
 1. In the editor, choose the function **setup** and press **Run**.
-2. Google asks for permission (read and send Gmail, connect to GitHub, run on a schedule). Choose the school account → **Advanced → Go to Website notices (unsafe)** → **Allow**. The warning appears because this is a private script, not a published app.
-3. The log should say *"GitHub token works…"* and *"Triggers created…"*. If it says otherwise, the message names the setting to fix.
+2. Google asks for permission (read and send Gmail, see your calendars, connect to GitHub, run on a schedule). Choose the school account → **Advanced → Go to Website notices (unsafe)** → **Allow**. The warning appears because this is a private script, not a published app.
+3. The log should say *"GitHub token works…"*, *"Triggers created…"* and *"Calendar sync set up…"*. If it says otherwise, the message names the setting to fix. If it says the calendar can't be opened, do step 3 and run **setup** again.
 
-### 4. Test it
+### 5. Test it
 
 1. From the school Gmail, send an email to `ssvn.em.high.school+notice@gmail.com` with the subject `[Event] Test notice — please ignore` and one line of text.
 2. Within about 5 minutes, a reply arrives in the same thread: *"Published: …"* with the link. The commit appears in the repository.
 3. Reply to that email with just `remove`. A *"Taken down"* reply follows, and the notice disappears.
 
-While the redesign isn't live yet (`GITHUB_BRANCH` = `redesign`), the notice appears in the branch and in a local preview, not on the live site. **At launch, delete the `GITHUB_BRANCH` property** so notices go to `main`.
+4. In Google Calendar, add an all-day event to the school calendar, e.g. `[Event] Test event — please ignore`. Within about 2 minutes, a commit *"Update the school calendar from Google Calendar"* appears and the event shows on the Notices page. Delete the event, and it's removed the same way.
+
+While the redesign isn't live yet (`GITHUB_BRANCH` = `redesign`), notices and events appear in the branch and in a local preview, not on the live site. **At launch, delete the `GITHUB_BRANCH` property** so they go to `main`.
 
 ## Upkeep
 
@@ -72,14 +88,30 @@ Notices emailed while the token wasn't working are published on the next run (wi
 
 ### Update the script
 
-Change `Code.gs` in this repository, run the tests, commit, then paste the new `Code.gs` into the Apps Script editor and save. Triggers keep working; there's no need to run `setup` again.
+Change `Code.gs` in this repository, run the tests, commit, then paste the new `Code.gs` into the Apps Script editor and save. Triggers keep working; there's no need to run `setup` again, unless `appsscript.json` changed (new permissions or triggers): then paste it too and run **setup** once more.
 
 ### When something goes wrong
 
 - **No reply after 10 minutes:** in the Apps Script project, open **Executions** to see each run and any error. Check that the email was sent *from* the school account *to* the `+notice` address.
 - **A notice failed three times:** the reply says so and shows the error. Usually GitHub was down; sending the email again is enough.
 - **Fix a notice without email:** edit or delete it in Pages CMS, or edit its file in `_notices/` on github.com. The script only touches notices that arrived by email, and only when a new email arrives in that notice's thread.
-- **Stop the script:** in **Triggers**, delete both triggers. Run `setup` again to restart.
+- **An event doesn't appear:** check it is on the school calendar (not a personal one) and inside the window (1 June of this academic year to the end of the next). **Executions** shows each `syncCalendar` run. Running `syncCalendar` by hand forces an update.
+- **Edited `_data/events.yml` by hand?** The next calendar change overwrites it. Make changes in Google Calendar.
+- **Stop the script:** in **Triggers**, delete all the triggers. Run `setup` again to restart.
+
+## How events are read from Google Calendar
+
+| In Google Calendar | On the website |
+| --- | --- |
+| Event title | The event's title, without any `[tag]` |
+| `[Holiday]`, `[Exam]`, `[Event]` or `[Meeting]` in the title | The event type. A tag wins over the colour. |
+| Event colour (when there's no tag): **Banana** (yellow) = Holiday, **Sage** or **Basil** (green) = Exam, **Tangerine** (orange) = Event, **Graphite** (grey) = Meeting | The event type. Any other colour, or none, = Event. |
+| All-day event over several days | A date range, e.g. "19 – 24 October" |
+| Event with a time | The start time in the note, e.g. "9:30 am" |
+| First line of the description | The note, e.g. "school reopens 26 October" (plain text, up to 80 characters) |
+| Repeating events | Each occurrence |
+
+The script reads events from **1 June of the current academic year to the end of the next one**; the daily run moves the window forward. Past events fade on the Notices page and drop off the home page by themselves. `_data/events.yml` is rewritten only when the result differs, so unchanged calendars make no commits.
 
 ## What the script writes
 

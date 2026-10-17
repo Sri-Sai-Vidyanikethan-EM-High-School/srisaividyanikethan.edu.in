@@ -34,6 +34,8 @@ booking_label: Plan a visit   # the main action's label: header, hero, call-to-a
 portal_url: https://eskooly.com/bb/StudentPortal/signin.php
 application_url: https://forms.gle/fUD2fsfQXaqXvpwZ7   # the admission form (Google Form)
 youtube_channel: https://www.youtube.com/@srisaividyanikethan
+# The school's public Google Calendar (events on the site come from it): parents can add it to their own calendar.
+calendar_subscribe_url: https://calendar.google.com/calendar/u/0?cid=ZDNjN2MxYjA0NWQ1ZTM1NDljMmQ5MjJlYTUxZjdlZjZmZWU3YjEyMmFjODE1MGFmMTBkZWE5MzdiZDA3YWNmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t
 
 office_hours_short: "Mon – Sat, 9:00 am – 5:00 pm"
 office_hours:

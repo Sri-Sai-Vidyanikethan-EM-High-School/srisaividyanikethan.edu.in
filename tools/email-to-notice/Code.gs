@@ -1,5 +1,5 @@
 /**
- * Sri Sai Vidyanikethan — email → website notice.
+ * Sri Sai Vidyanikethan — email → website notice, and Google Calendar → school calendar.
  *
  * Runs as a Google Apps Script project owned by ssvn.em.high.school@gmail.com (setup: README.md beside this file).
  * Every 5 minutes it looks for emails that account SENT to ssvn.em.high.school+notice@gmail.com and:
@@ -7,6 +7,9 @@
  *   - a reply with text    → replaces that notice's text (and attachments, if the reply has any)
  *   - a reply "remove"     → takes the notice down
  * and replies in the same email thread to say what happened.
+ *
+ * Whenever an event on the school's Google Calendar changes (and once a day), syncCalendar() rewrites
+ * _data/events.yml from the calendar — the website's "Coming up" list and school calendar.
  *
  * Why "SENT": anyone can email the +notice address, but only the account itself can put mail in its Sent folder,
  * so a forged sender address can't publish anything.
@@ -18,6 +21,7 @@
  *   GITHUB_BRANCH   optional  default main
  *   NOTICE_ADDRESS  optional  default ssvn.em.high.school+notice@gmail.com
  *   SITE_URL        optional  default https://srisaividyanikethan.edu.in
+ *   CALENDAR_ID     optional  default the school events calendar (below); this account must own it or be subscribed to it
  */
 
 var DEFAULTS = {
@@ -27,6 +31,7 @@ var DEFAULTS = {
   SITE_URL: 'https://srisaividyanikethan.edu.in',
   COMMIT_NAME: 'Website notices (email)',
   COMMIT_EMAIL: 'mail@srisaividyanikethan.edu.in',
+  CALENDAR_ID: 'd3c7c1b045d5e3549c2d922ea51f7ef6fee7b122ac8150af10dea937bd07acf1@group.calendar.google.com',
 };
 
 var TIME_ZONE = 'Asia/Kolkata';
@@ -37,12 +42,16 @@ var MAX_TRIES = 3;               // GitHub errors: retry on the next runs, then 
 var ROBOT_MARKER = 'website-notice-robot';
 var CATEGORIES = ['Holiday', 'Admissions', 'Academics', 'Event', 'Celebration', 'General'];
 var ATTACHMENT_TYPES = { 'application/pdf': 'pdf', 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' };
+var EVENTS_PATH = '_data/events.yml';
+var EVENT_TYPES = ['holiday', 'exam', 'event', 'meeting'];
+// Google Calendar event colours (CalendarApp.EventColor values) → website event types. Any other colour = event.
+var COLOUR_TYPES = { '5': 'holiday', '2': 'exam', '10': 'exam', '6': 'event', '8': 'meeting' }; // Banana, Sage, Basil, Tangerine, Graphite
 
 /* =====================================================================================================
  * Entry points (run from the Apps Script editor or by triggers)
  * ===================================================================================================== */
 
-/** One-time setup: checks the settings and the GitHub token, then creates the two triggers. */
+/** One-time setup: checks the settings, the GitHub token and the calendar, then creates the triggers. */
 function setup() {
   var token = setting_('GITHUB_TOKEN');
   if (!token) throw new Error('Add GITHUB_TOKEN in Project settings → Script properties first.');
@@ -55,6 +64,17 @@ function setup() {
   ScriptApp.newTrigger('processNotices').timeBased().everyMinutes(5).create();
   ScriptApp.newTrigger('checkTokenExpiry').timeBased().everyDays(1).atHour(8).create();
   Logger.log('Triggers created. Notices sent to ' + setting_('NOTICE_ADDRESS') + ' will be published within about 5 minutes.');
+
+  var calendarId = setting_('CALENDAR_ID');
+  if (!CalendarApp.getCalendarById(calendarId)) {
+    Logger.log('Calendar sync NOT set up: this account cannot open ' + calendarId + '. Subscribe to the calendar ' +
+      '(or share it with this account), then run setup again.');
+    return;
+  }
+  ScriptApp.newTrigger('syncCalendar').forUserCalendar(calendarId).onEventUpdated().create();
+  ScriptApp.newTrigger('syncCalendar').timeBased().everyDays(1).atHour(5).create(); // safety net, and rolls the date window
+  syncCalendar();
+  Logger.log('Calendar sync set up: changes to the school calendar reach the website within about 2 minutes.');
 }
 
 /** Every 5 minutes: publish, update or remove notices from new emails. */
@@ -349,6 +369,100 @@ function userError_(message) {
 }
 
 /* =====================================================================================================
+ * Google Calendar → _data/events.yml
+ * ===================================================================================================== */
+
+/** On every change to the school calendar (and once a day): rewrite _data/events.yml if the events changed. */
+function syncCalendar() {
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(30000)) return;
+  try {
+    var calendarId = setting_('CALENDAR_ID');
+    var calendar = CalendarApp.getCalendarById(calendarId);
+    if (!calendar) throw new Error('This account cannot open the calendar ' + calendarId + '. Subscribe to it first.');
+    var range = calendarWindow_(new Date());
+    var events = calendar.getEvents(range.from, range.to).map(eventFromCalendar_);
+    var yaml = buildEventsYaml_(events, calendarId);
+    if (readRepoFile_(EVENTS_PATH) === yaml) return; // nothing changed on the website's side
+    commit_(EVENTS_PATH, yaml, [], [], 'Update the school calendar from Google Calendar');
+  } catch (e) {
+    if (e.isAuthError) alertOnce_('auth', 'Website calendar: the GitHub token stopped working',
+      'The school website could not update its calendar because GitHub rejected the access token (' + e.message + ').\n\n' +
+      'How to renew it: tools/email-to-notice/README.md in the website repository, "Renew the GitHub token".');
+    else throw e;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+/** A Google Calendar event → the plain fields the website needs. */
+function eventFromCalendar_(ev) {
+  var allDay = ev.isAllDayEvent();
+  var start = allDay ? ev.getAllDayStartDate() : ev.getStartTime();
+  // An all-day event's end date is exclusive (the day after it ends); a timed event ends on its end time's day.
+  var end = allDay ? new Date(ev.getAllDayEndDate().getTime() - 86400000) : ev.getEndTime();
+  if (end < start) end = start;
+  return {
+    title: ev.getTitle(),
+    colour: String(ev.getColor() || ''),
+    start: Utilities.formatDate(start, TIME_ZONE, 'yyyy-MM-dd'),
+    end: Utilities.formatDate(end, TIME_ZONE, 'yyyy-MM-dd'),
+    time: allDay ? '' : Utilities.formatDate(start, TIME_ZONE, 'h:mm a').toLowerCase(),
+    description: ev.getDescription() || '',
+  };
+}
+
+/** The academic year so far and the next one: 1 June of the current academic year to 31 May two years on. */
+function calendarWindow_(now) {
+  var year = now.getMonth() >= 5 ? now.getFullYear() : now.getFullYear() - 1;
+  return { from: new Date(year, 5, 1), to: new Date(year + 2, 4, 31, 23, 59) };
+}
+
+/** "[Holiday] Dasara holidays" → holiday. A [tag] naming a type wins, then the event colour, then "event". */
+function eventTypeFor_(title, colour) {
+  var tags = (String(title || '').match(/\[[^\]]*\]/g) || []).map(function (t) { return t.slice(1, -1).trim().toLowerCase(); });
+  for (var i = 0; i < tags.length; i++) if (EVENT_TYPES.indexOf(tags[i]) >= 0) return tags[i];
+  return COLOUR_TYPES[String(colour || '')] || 'event';
+}
+
+/** The title without [tags]; an event that was only a tag is named after its type ("Holiday"). */
+function cleanEventTitle_(title, type) {
+  var clean = String(title || '').replace(/\[[^\]]*\]/g, ' ').replace(/\s+/g, ' ').trim();
+  return clean || type.charAt(0).toUpperCase() + type.slice(1);
+}
+
+/** The note under an event: its time (timed events) and the first line of its description, as plain text. */
+function eventNote_(time, description) {
+  var text = String(description || '').replace(/<br\s*\/?>|<\/p>|<\/div>/gi, '\n').replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+  var line = text.split('\n').map(function (l) { return l.trim(); }).filter(Boolean)[0] || '';
+  if (line.length > 80) line = line.slice(0, 77).replace(/\s+\S*$/, '') + '…';
+  return [time, line].filter(Boolean).join(' · ');
+}
+
+/** The events.yml the website reads (see _includes/data/events.html): sorted and quoted, the same text for the same events. */
+function buildEventsYaml_(events, calendarId) {
+  var q = function (s) { return JSON.stringify(String(s)); }; // a JSON string is a valid YAML double-quoted string
+  var rows = events.map(function (e) {
+    var type = eventTypeFor_(e.title, e.colour);
+    return { start: e.start, end: e.end, title: cleanEventTitle_(e.title, type), type: type, note: eventNote_(e.time, e.description) };
+  }).sort(function (a, b) {
+    return a.start < b.start ? -1 : a.start > b.start ? 1 : a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
+  });
+  var out = ['# The school calendar, written automatically from the school\'s Google Calendar',
+             '# (' + calendarId + ') by tools/email-to-notice/Code.gs.',
+             '# Don\'t edit this file: add, change or delete the event in Google Calendar instead.'];
+  if (!rows.length) out.push('[]');
+  rows.forEach(function (r) {
+    out.push('- start: ' + q(r.start));
+    if (r.end !== r.start) out.push('  end: ' + q(r.end));
+    out.push('  title: ' + q(r.title), '  type: ' + r.type);
+    if (r.note) out.push('  note: ' + q(r.note));
+  });
+  return out.join('\n') + '\n';
+}
+
+/* =====================================================================================================
  * GitHub
  * ===================================================================================================== */
 
@@ -359,6 +473,14 @@ function uniqueNoticePath_(day, slug) {
     if (!fileExists_(path)) return path;
   }
   throw new Error('Could not find a free file name for ' + slug);
+}
+
+/** A file's current text on the branch ('' if it doesn't exist). */
+function readRepoFile_(path) {
+  var repo = setting_('GITHUB_REPO'), branch = setting_('GITHUB_BRANCH');
+  var file = githubRequest_('GET', '/repos/' + repo + '/contents/' + encodePath_(path) + '?ref=' + encodeURIComponent(branch), null, true);
+  if (!file || !file.content) return '';
+  return Utilities.newBlob(Utilities.base64Decode(file.content.replace(/\n/g, ''))).getDataAsString('UTF-8');
 }
 
 function fileExists_(path) {
@@ -433,5 +555,6 @@ function encodePath_(path) {
 
 /* Lets the tests in tools/email-to-notice/test.js load this file in Node. Apps Script ignores it. */
 if (typeof module !== 'undefined') {
-  module.exports = { parseEmail_: parseEmail_, cleanBody_: cleanBody_, slugify_: slugify_, escapeText_: escapeText_, buildNoticeMarkdown_: buildNoticeMarkdown_, attachmentFileName_: attachmentFileName_ };
+  module.exports = { parseEmail_: parseEmail_, cleanBody_: cleanBody_, slugify_: slugify_, escapeText_: escapeText_, buildNoticeMarkdown_: buildNoticeMarkdown_, attachmentFileName_: attachmentFileName_,
+    eventTypeFor_: eventTypeFor_, cleanEventTitle_: cleanEventTitle_, eventNote_: eventNote_, buildEventsYaml_: buildEventsYaml_, calendarWindow_: calendarWindow_ };
 }
