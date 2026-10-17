@@ -1,4 +1,6 @@
 # The school calendar, written automatically from the school's Google Calendar
 # (d3c7c1b045d5e3549c2d922ea51f7ef6fee7b122ac8150af10dea937bd07acf1@group.calendar.google.com) by tools/email-to-notice/Code.gs.
 # Don't edit this file: add, change or delete the event in Google Calendar instead.
-[]
+- start: "2026-10-21"
+  title: "Classes Resume"
+  type: event
