@@ -310,6 +310,7 @@ Phases 0–5 give a launch-ready core. Phases 6–7 can launch together or follo
 | 7 | Repo visibility | Public is fine. |
 | 8 | Official name | "Sri Sai Vidyanikethan E.M School, Adapur", matching Google Maps (16 October 2026). Udaya's naming rule ("…E.M. High School, Adapur" in footers) should be updated to match. |
 | 9 | Board, type, district | Andhra Pradesh State Board; co-educational; YSR Kadapa district. |
+| 10 | Events | From the school's public Google Calendar, synced into `_data/events.yml` by the Apps Script on every change (17 October 2026). Type by `[tag]`, else event colour. Pages CMS edits notices only. |
 
 **Still to confirm during Phase 5:** that the GitHub organisation (`Sri-Sai-Vidyanikethan-EM-High-School`) allows fine-grained tokens for its repos. An org owner may need to approve the token once.
 

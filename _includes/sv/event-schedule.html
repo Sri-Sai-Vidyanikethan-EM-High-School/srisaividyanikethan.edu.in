@@ -1,11 +1,13 @@
 {%- comment -%}
   EventSchedule — holidays, exams, events and meetings grouped under month headings.
   Params: events (list, oldest first), title, more_url + more_label (link in the header), download_url (printable PDF),
+          subscribe_url (the public Google Calendar: "Add to your calendar", opens in a new tab),
           upcoming (true on Home: site.js hides events that have ended since the last build).
 {%- endcomment -%}
 <div class="sv-sched"{% if include.upcoming %} data-upcoming{% endif %}>
   <div class="sv-board__head"><h3 class="heading-2">{% include sv/icon.html name="calendar-days" px=24 %}<span>{{ include.title | default: "School calendar" }}</span></h3>
-    {%- if include.download_url %}<a class="sv-link label" href="{{ include.download_url | relative_url }}">{% include sv/icon.html name="download" px=16 %} Download PDF</a>
+    {%- if include.subscribe_url %}<a class="sv-link label" href="{{ include.subscribe_url }}" target="_blank" rel="noopener">{% include sv/icon.html name="calendar-check" px=16 %} Add to your calendar</a>
+    {%- elsif include.download_url %}<a class="sv-link label" href="{{ include.download_url | relative_url }}">{% include sv/icon.html name="download" px=16 %} Download PDF</a>
     {%- elsif include.more_url %}<a class="sv-link label" href="{{ include.more_url | relative_url }}">{{ include.more_label | default: "Full calendar" }}</a>{% endif %}</div>
   {%- assign es_months = include.events | group_by_exp: "es_ev", "es_ev.start | date: '%B %Y'" %}
   {%- for es_month in es_months %}

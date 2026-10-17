@@ -1,9 +1,10 @@
-# Pages CMS (https://pagescms.org) — a browser editor for notices and the school calendar.
+# Pages CMS (https://pagescms.org) — a browser editor for notices.
+# (The school calendar comes from Google Calendar: tools/email-to-notice/Code.gs writes _data/events.yml.)
 # The headmistress signs in with her email address (no GitHub account); every save is a commit to this repository,
 # and GitHub Pages republishes the site about a minute later. Setup and use: docs/pages-cms.md
 #
-# The fields below match what the site's templates read (_layouts/notice.html, _includes/sv/notice-item.html,
-# _includes/data/events.html) and what the email script writes (tools/email-to-notice/Code.gs). Change them together.
+# The fields below match what the site's templates read (_layouts/notice.html, _includes/sv/notice-item.html)
+# and what the email script writes (tools/email-to-notice/Code.gs). Change them together.
 
 media:
   - name: notices
@@ -81,46 +82,3 @@ content:
         options:
           format: markdown
           media: notices
-
-  - name: calendar
-    label: School calendar
-    type: file
-    path: _data/events.yml
-    format: yaml
-    list: true
-    fields:
-      - name: title
-        label: What
-        type: string
-        required: true
-        description: e.g. "Dasara holidays", "Parent–teacher meeting".
-      - name: start
-        label: Date (or first day)
-        type: date
-        required: true
-        options:
-          format: "yyyy-MM-dd"
-      - name: end
-        label: Last day (for holidays and exams that run several days)
-        type: date
-        default: ""
-        options:
-          format: "yyyy-MM-dd"
-      - name: type
-        label: Type
-        type: select
-        required: true
-        options:
-          values:
-            - name: holiday
-              label: Holiday
-            - name: exam
-              label: Exam
-            - name: event
-              label: Event
-            - name: meeting
-              label: Meeting
-      - name: note
-        label: Note (optional)
-        type: string
-        description: Times or reopening dates, e.g. "9:30 am" or "school reopens 26 October".

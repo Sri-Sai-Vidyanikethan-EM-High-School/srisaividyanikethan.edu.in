@@ -1,9 +1,8 @@
-# Pages CMS: editing notices and the school calendar in a browser
+# Pages CMS: editing notices in a browser
 
-[Pages CMS](https://pagescms.org) is a free web editor for content stored in a GitHub repository. Its configuration is [`.pages.yml`](../.pages.yml) at the root of this repository. The headmistress signs in **with her email address, no GitHub account needed**, and sees two things:
+[Pages CMS](https://pagescms.org) is a free web editor for content stored in a GitHub repository. Its configuration is [`.pages.yml`](../.pages.yml) at the root of this repository. The headmistress signs in **with her email address, no GitHub account needed**, and sees **Notices**: every notice, newest first. She can add, edit or delete one, attach PDFs or photos, and format the text (bold, lists, links).
 
-- **Notices:** every notice, newest first. She can add, edit or delete one, attach PDFs or photos, and format the text (bold, lists, links).
-- **School calendar:** the list of holidays, exams, events and meetings shown on the home page ("Coming up") and on the Notices page.
+The school calendar (holidays, exams, events, meetings) is **not** edited here: it comes from the school's Google Calendar ([how-to-post-a-notice.md → Add an event](how-to-post-a-notice.md#add-an-event-to-the-school-calendar)).
 
 Each save is a commit to the repository; GitHub Pages republishes the site about a minute later. As a collaborator she can edit content and upload files, but she **can't change the site's code or settings**.
 
@@ -18,7 +17,7 @@ You need a GitHub account with admin access to this repository.
 3. Open the repository in Pages CMS and choose the branch:
    - before launch: **`redesign`** (this config only exists there until it's merged);
    - after launch: **`main`**: switch branches in Pages CMS once `redesign` is merged.
-4. Check that **Notices** and **School calendar** appear in the sidebar. If Pages CMS reports a configuration error, it names the line in `.pages.yml`.
+4. Check that **Notices** appears in the sidebar. If Pages CMS reports a configuration error, it names the line in `.pages.yml`.
 5. **Invite the headmistress:** in the repository's **Collaborators** settings in Pages CMS, add **ssvn.em.high.school@gmail.com**. She gets an email with a sign-in link.
 
 Pages CMS keeps collaborators in its own database, not in `.pages.yml`, so there's nothing to commit for this step.
@@ -45,17 +44,6 @@ Open it from the **Notices** list, edit, and **Save**, or use **Delete** to take
 
 Notices that came in by email can be edited here too. If you later reply to that notice's email thread, the email version replaces your edits, so for each notice use one or the other.
 
-### Update the school calendar
-
-**School calendar** shows every entry. For each one:
-
-- **What:** e.g. *Dasara holidays*.
-- **Date (or first day)**, and **Last day** for holidays or exams that run several days.
-- **Type:** Holiday, Exam, Event or Meeting. Each has its own colour and icon on the website.
-- **Note** (optional): a time or reopening date, e.g. *school reopens 26 October*.
-
-Order doesn't matter: the website sorts by date. Past events fade on the Notices page and drop off the home page by themselves. **Save** when done.
-
 ## Good to know
 
 - Everything on the website is **public**. Never include students' names, phone numbers or marks.
@@ -72,6 +60,5 @@ Order doesn't matter: the website sorts by date. Past events fade on the Notices
 | Urgent / Urgent until | `urgent`, `expires` (`yyyy-MM-dd`) | kumkum date tile; `site.js` drops it after `expires` |
 | Downloads | `attachments` (list of `/assets/notices/…` paths) | download cards on the notice page |
 | Notice text | the Markdown body | the notice page and RSS feed |
-| Calendar entries | `_data/events.yml`: `title`, `start`, `end`, `type`, `note` | `_includes/data/events.html` → EventSchedule |
 
 The templates treat empty strings (`""`, which Pages CMS writes for empty fields) as missing, and accept dates quoted or unquoted. If you add a field in `.pages.yml`, update the templates and `tools/email-to-notice/Code.gs` to match.

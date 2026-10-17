@@ -25,7 +25,13 @@ crumb: Notices
   <div class="sv-container">
     {% include sv/section-heading.html eyebrow="School calendar" title="Holidays, exams and events" %}
     <div class="sv-narrow">
-      {% include sv/event-schedule.html events=cal_events title="2026–27" %}
+      {%- comment %} The academic year runs June to May: "2026–27" from June 2026 to May 2027. {% endcomment %}
+      {%- assign ay_start = site.time | date: "%Y" | plus: 0 %}
+      {%- assign ay_month = site.time | date: "%m" | plus: 0 %}
+      {%- if ay_month < 6 %}{% assign ay_start = ay_start | minus: 1 %}{% endif %}
+      {%- assign ay_end = ay_start | plus: 1 | modulo: 100 %}
+      {%- capture ay_label %}{{ ay_start }}–{% if ay_end < 10 %}0{% endif %}{{ ay_end }}{% endcapture %}
+      {% include sv/event-schedule.html events=cal_events title=ay_label subscribe_url=site.data.site.calendar_subscribe_url %}
     </div>
   </div>
 </section>

@@ -48,9 +48,22 @@ Reply in the **same email thread** (to the "Published" email or to your own):
 
 You get a reply each time to confirm. You can change a notice this way for 30 days after first sending it; after that, ask the website maintainer.
 
+## Add an event to the school calendar
+
+Holidays, exams, events and meetings come from the school's **Google Calendar**, "Sri Sai Vidyanikethan E.M. High School Events". Signed in as the school account, in the Google Calendar app or at https://calendar.google.com:
+
+1. Create the event **in the school calendar** (not your personal one).
+2. **Holidays and exams:** tick **All day**; for several days, set the last day as the end date.
+   **Meetings and events at a time:** set the start time. It shows on the website, e.g. "9:30 am".
+3. Choose the type with the event's **colour**: **Banana** (yellow) = Holiday, **Sage** (green) = Exam, **Tangerine** (orange) = Event, **Graphite** (grey) = Meeting. Or write it in the title: `[Holiday] Dasara holidays`.
+4. Optional: the **first line of the description** shows under the event, e.g. *school reopens 26 October*.
+5. **Save.** The website updates in about 2 minutes. Changing or deleting the event updates the website the same way.
+
+Parents can add the same calendar to their own phones from the **Add to your calendar** link on the Notices page.
+
 ## Prefer a browser?
 
-You can also add, edit and delete notices, and update the school calendar, at **https://app.pagescms.org**. Sign in with the school email address. Step-by-step: [pages-cms.md](pages-cms.md).
+You can also add, edit and delete notices at **https://app.pagescms.org**. Sign in with the school email address. Step-by-step: [pages-cms.md](pages-cms.md).
 
 ## Good to know
 

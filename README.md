@@ -28,7 +28,7 @@ Open http://127.0.0.1:4000. The extra config and `--unpublished` show the **samp
 | Phone, email, address, office hours, links (booking, portal, admission form), social channels | `_data/site.yml` |
 | Header and footer menus | `_data/navigation.yml` |
 | Home-page text, facts, programmes, quick links, values, gallery | `_data/home.yml` |
-| School calendar (holidays, exams, events, meetings) | `_data/events.yml`, or in Pages CMS ([docs/pages-cms.md](docs/pages-cms.md)) |
+| School calendar (holidays, exams, events, meetings) | the school's Google Calendar; the script in [tools/email-to-notice/](tools/email-to-notice/README.md) writes it to `_data/events.yml` (don't edit that file) |
 | Notices | one Markdown file per notice in `_notices/`. The headmistress posts them by email ([docs/how-to-post-a-notice.md](docs/how-to-post-a-notice.md)); the script and its setup are in [tools/email-to-notice/](tools/email-to-notice/README.md). They can also be edited in Pages CMS (`.pages.yml`) |
 | Page frame (head, utility bar, header, footer) | `_includes/frame/` |
 | Udaya components | `_includes/sv/` — one file per component, cut from the design system's kit |

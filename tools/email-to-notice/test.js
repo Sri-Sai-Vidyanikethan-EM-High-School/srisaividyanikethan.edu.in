@@ -16,6 +16,7 @@ const REPO = '/repos/Sri-Sai-Vidyanikethan-EM-High-School/srisaividyanikethan.ed
 /* ---------- Fake world: a mailbox, Apps Script services and a GitHub repository ---------- */
 function makeWorld() {
   const props = { GITHUB_TOKEN: 'test-token', TOKEN_EXPIRES: '2027-10-15' };
+  const calendar = { accessible: true, events: [] };
   const sentAlerts = [];
   const threads = [];
   let msgSeq = 0;
@@ -40,7 +41,7 @@ function makeWorld() {
     const rest = p.slice(REPO.length);
     if (method === 'GET' && rest === '/git/ref/heads/main') return json(200, { object: { sha: gh.head } });
     if (method === 'GET' && rest.startsWith('/git/commits/')) return json(200, { tree: { sha: commits[rest.split('/').pop()].tree } });
-    if (method === 'GET' && rest.startsWith('/contents/')) return files()[rest.slice('/contents/'.length)] ? json(200, {}) : json(404, {});
+    if (method === 'GET' && rest.startsWith('/contents/')) { const s = files()[rest.slice('/contents/'.length)]; return s ? json(200, { content: blobs[s].toString('base64').replace(/(.{60})/g, '$1\n') }) : json(404, {}); } // GitHub wraps base64 at 60 chars
     if (method === 'POST' && rest === '/git/blobs') { const b = Buffer.from(body.content, 'base64'); const s = sha(b); blobs[s] = b; return json(201, { sha: s }); }
     if (method === 'POST' && rest === '/git/trees') {
       const t = Object.assign({}, trees[body.base_tree]);
@@ -83,9 +84,12 @@ function makeWorld() {
     URL, Buffer,
     Utilities: {
       Charset: { UTF_8: 'utf8' },
+      base64Decode: (s) => [...Buffer.from(s, 'base64')],
+      newBlob: (bytes) => ({ getDataAsString: () => Buffer.from(bytes).toString('utf8') }),
       base64Encode: (v) => Buffer.from(typeof v === 'string' ? Buffer.from(v, 'utf8') : Buffer.from(v.map((b) => b & 0xff))).toString('base64'),
       formatDate(d, tz, fmt) {
         if (fmt === 'yyyy-MM-dd HH:mm') return this.formatDate(d, tz, 'yyyy-MM-dd HH:mm:ss Z').slice(0, 16);
+        if (fmt === 'h:mm a') { const t = new Date(d.getTime() + 5.5 * 3600000), h = t.getUTCHours(); return `${h % 12 || 12}:${String(t.getUTCMinutes()).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; }
         const ist = new Date(d.getTime() + 5.5 * 3600000); const pad = (n) => String(n).padStart(2, '0');
         const ymd = `${ist.getUTCFullYear()}-${pad(ist.getUTCMonth() + 1)}-${pad(ist.getUTCDate())}`;
         if (fmt === 'yyyy-MM-dd') return ymd;
@@ -110,12 +114,25 @@ function makeWorld() {
       return { labelIds: m.sent ? ['SENT', 'INBOX'] : ['INBOX'] };
     } } } },
     UrlFetchApp: { fetch },
+    CalendarApp: { getCalendarById: (id) => (calendar.accessible && id === CALENDAR_ID ? { getEvents: () => calendar.events.map(fakeEvent) } : null) },
   };
   vm.createContext(ctx);
   vm.runInContext(CODE, ctx, { filename: 'Code.gs' });
 
   const file = (p) => { const s = files()[p]; return s ? blobs[s].toString('utf8') : null; };
-  return { ctx, props, gh, files, file, thread, message, sentAlerts, run: () => ctx.processNotices() };
+  return { ctx, props, gh, files, file, thread, message, sentAlerts, calendar, run: () => ctx.processNotices(), sync: () => ctx.syncCalendar() };
+}
+
+const CALENDAR_ID = 'd3c7c1b045d5e3549c2d922ea51f7ef6fee7b122ac8150af10dea937bd07acf1@group.calendar.google.com';
+// A stand-in for a CalendarApp event. All-day events: `start`/`end` are YYYY-MM-DD and `end` is the last day (inclusive).
+function fakeEvent(e) {
+  const ist = (d, t = '00:00') => new Date(`${d}T${t}:00+05:30`);
+  const endExclusive = e.allDay ? new Date(ist(e.end || e.start).getTime() + 86400000) : null;
+  return {
+    isAllDayEvent: () => !!e.allDay, getTitle: () => e.title, getColor: () => e.colour || '', getDescription: () => e.description || '',
+    getAllDayStartDate: () => ist(e.start), getAllDayEndDate: () => endExclusive,
+    getStartTime: () => ist(e.start, e.time), getEndTime: () => ist(e.endDay || e.start, e.endTime || e.time),
+  };
 }
 
 const lastReply = (t) => t.messages.filter((m) => m.body.includes('website-notice-robot')).pop().body;
@@ -267,4 +284,70 @@ test('a rejected token sends one alert and publishes once the token is fixed', (
   w.run();
   assert.equal(w.gh.commitMessages.length, 1);
   assert.match(lastReply(t), /^Published/);
+});
+
+/* ---------- Google Calendar → _data/events.yml ---------- */
+test('event type: a [tag] wins, then the colour, then "event"', () => {
+  const { ctx } = makeWorld();
+  assert.equal(ctx.eventTypeFor_('[Exam] FA-2', '5'), 'exam');            // tag beats Banana
+  assert.equal(ctx.eventTypeFor_('Dasara holidays', '5'), 'holiday');     // Banana
+  assert.equal(ctx.eventTypeFor_('Unit test', '10'), 'exam');             // Basil counts as exam too
+  assert.equal(ctx.eventTypeFor_('PTM', '8'), 'meeting');                 // Graphite
+  assert.equal(ctx.eventTypeFor_('[Photos] Sports day', '9'), 'event');   // unknown tag and colour
+  assert.equal(ctx.cleanEventTitle_('[Holiday]  Dasara  holidays', 'holiday'), 'Dasara holidays');
+  assert.equal(ctx.cleanEventTitle_('[Holiday]', 'holiday'), 'Holiday');
+});
+
+test('event note: time plus the first line of the description, as plain text', () => {
+  const { ctx } = makeWorld();
+  assert.equal(ctx.eventNote_('9:30 am', '<p>In the school hall &amp; library</p><p>Bring the report card</p>'), '9:30 am · In the school hall & library');
+  assert.equal(ctx.eventNote_('', ''), '');
+  assert.ok(ctx.eventNote_('', 'word '.repeat(40)).length <= 80);
+});
+
+test('calendar window: from 1 June of the current academic year', () => {
+  const { ctx } = makeWorld();
+  const oct = ctx.calendarWindow_(new Date(2026, 9, 17)), mar = ctx.calendarWindow_(new Date(2027, 2, 1));
+  assert.deepEqual([oct.from.getFullYear(), oct.from.getMonth(), oct.from.getDate()], [2026, 5, 1]);
+  assert.deepEqual([oct.to.getFullYear(), oct.to.getMonth()], [2028, 4]);
+  assert.deepEqual([mar.from.getFullYear(), mar.from.getMonth()], [2026, 5]);
+});
+
+test('sync writes events.yml from the calendar, only when something changed', () => {
+  const w = makeWorld();
+  w.calendar.events = [
+    { title: 'PTM', colour: '8', start: '2026-12-05', time: '09:30', endTime: '12:00', description: '<b>Classes I – X</b>' },
+    { title: 'Dasara holidays', colour: '5', allDay: true, start: '2026-10-19', end: '2026-10-24', description: 'School reopens 26 October' },
+    { title: '[Exam] Formative assessment 2', colour: '5', allDay: true, start: '2026-11-23', end: '2026-11-28' },
+    { title: "Children's Day", allDay: true, start: '2026-11-14' },
+  ];
+  w.sync();
+  const yml = w.file('_data/events.yml');
+  assert.equal(yml.split('\n').filter((l) => !l.startsWith('#')).join('\n'), [
+    '- start: "2026-10-19"', '  end: "2026-10-24"', '  title: "Dasara holidays"', '  type: holiday', '  note: "School reopens 26 October"',
+    '- start: "2026-11-14"', '  title: "Children\'s Day"', '  type: event',
+    '- start: "2026-11-23"', '  end: "2026-11-28"', '  title: "Formative assessment 2"', '  type: exam',
+    '- start: "2026-12-05"', '  title: "PTM"', '  type: meeting', '  note: "9:30 am · Classes I – X"', ''].join('\n'));
+  assert.equal(w.gh.commitMessages.length, 1);
+  if (process.env.NOTICE_OUT) fs.writeFileSync(path.join(process.env.NOTICE_OUT, 'events.yml'), yml);
+
+  w.sync(); // nothing changed
+  assert.equal(w.gh.commitMessages.length, 1);
+
+  w.calendar.events[0].time = '10:00';
+  w.sync();
+  assert.equal(w.gh.commitMessages.length, 2);
+  assert.match(w.file('_data/events.yml'), /note: "10:00 am · Classes I – X"/);
+
+  w.calendar.events = [];
+  w.sync();
+  assert.match(w.file('_data/events.yml'), /^\[\]$/m);
+  assert.deepEqual(w.gh.commitMessages.slice(-1), ['Update the school calendar from Google Calendar']);
+});
+
+test('a calendar this account cannot open fails clearly and commits nothing', () => {
+  const w = makeWorld();
+  w.calendar.accessible = false;
+  assert.throws(() => w.sync(), /cannot open the calendar/);
+  assert.equal(w.gh.commitMessages.length, 0);
 });
