@@ -164,12 +164,13 @@ subgraph group_presentation["Site presentation"]
 end
 
 subgraph group_publishing["Content publishing"]
-  node_email_tool["Email-to-notice script<br/>[Code.gs]"]
+  node_email_tool["Notices & calendar script<br/>[Code.gs]"]
 end
 
 node_visitor(("Site visitor"))
 node_headmistress(("Headmistress"))
 node_pages_cms["Pages CMS"]
+node_gcal["School Google Calendar"]
 
 node_visitor -->|"visits"| node_website
 node_home -->|"uses content"| node_home_content
@@ -178,7 +179,9 @@ node_events -->|"categorized by"| node_event_types
 node_notices -->|"categorized by"| node_notice_categories
 node_headmistress -->|"submits by email"| node_email_tool
 node_email_tool -->|"creates notices"| node_notices
-node_pages_cms -->|"edits events"| node_events
+node_headmistress -->|"adds events"| node_gcal
+node_gcal -->|"triggers sync"| node_email_tool
+node_email_tool -->|"writes events"| node_events
 node_pages_cms -->|"edits notices"| node_notices
 
 click node_home "https://github.com/sri-sai-vidyanikethan-em-high-school/srisaividyanikethan.edu.in/blob/main/index.html"
@@ -210,5 +213,5 @@ class node_website,node_home,node_admissions,node_contact,node_notices_page tone
 class node_home_content,node_site_details,node_events,node_notices,node_event_types,node_notice_categories,node_navigation toneAmber
 class node_page_frame,node_udaya,node_site_styles,node_udaya_styles,node_site_behavior toneMint
 class node_email_tool toneRose
-class node_visitor,node_headmistress,node_pages_cms toneIndigo
+class node_visitor,node_headmistress,node_pages_cms,node_gcal toneIndigo
 ```
